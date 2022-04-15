@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".SignUp">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="177dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/svn_gilroy_medium"
+        android:gravity="center"
+        android:text="Infinity Crypto - 1.1.1"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+    <TableLayout
+        android:layout_width="354dp"
+        android:layout_height="582dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:srcCompat="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
+                android:baselineAligned="false"
+                android:fontFamily="@font/svn_gilroy_bold"
+                android:gravity="center"
+                android:text="@string/SignUp"
+                android:textColor="@color/white"
+                android:textSize="35dp" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageView22"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_person" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName42"
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:hint="@string/Username"
+                android:inputType="textPersonName"
+                android:textColor="@color/white"
+                android:textColorHint="@color/colorGrey"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageView21"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_phone" />
+
+            <EditText
+                android:id="@+id/editTextPhone"
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:hint="Phone"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/colorGrey"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageView23"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_email" />
+
+            <EditText
+                android:id="@+id/editTextTextEmailAddress2"
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:hint="@string/Email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white"
+                android:textColorHint="@color/colorGrey"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageView24"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_date" />
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:hint="Birth"
+                android:inputType="date"
+                android:textColor="@color/white"
+                android:textColorHint="@color/colorGrey"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageView25"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_lock" />
+
+            <EditText
+                android:id="@+id/editTextTextPassword2"
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:hint="@string/Password"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/colorGrey"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageView26"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_lock" />
+
+            <EditText
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/colorGrey"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </TableRow>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:buttonTint="@color/white"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:minHeight="48dp"
+                android:text="Male"
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/radio_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:buttonTint="@color/white"
+                android:checked="true"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:minHeight="48dp"
+                android:text="Female"
+                android:textColor="@color/white" />
+
+        </RadioGroup>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/imageView27"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/vietnam"
+                android:layout_marginLeft="10dp"/>
+
+            <EditText
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:hint="Viet Nam"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/colorGrey"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </TableRow>
+
+        <Button
+            android:layout_width="412dp"
+            android:layout_height="59dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorBlueLogin"
+            android:fontFamily="@font/svn_gilroy_medium"
+            android:text="Sign In"
+            android:textColor="@color/white"
+            android:textSize="20dp">
+
+        </Button>
+
+        <TableLayout />
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
