@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/blackBackground"
     tools:context=".SignUp">
 
     <TextView
@@ -83,6 +83,7 @@
                 android:id="@+id/editTextTextPersonName42"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:fontFamily="@font/svn_gilroy_medium"
                 android:hint="@string/Username"
@@ -90,7 +91,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorGrey"
                 android:textSize="20dp"
-                android:layout_marginLeft="10dp"
                 tools:ignore="TouchTargetSizeCheck" />
         </TableRow>
 
@@ -110,6 +110,7 @@
                 android:id="@+id/editTextPhone"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:fontFamily="@font/svn_gilroy_medium"
                 android:hint="Phone"
@@ -118,7 +119,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorGrey"
                 android:textSize="20dp"
-                android:layout_marginLeft="10dp"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </TableRow>
@@ -139,6 +139,7 @@
                 android:id="@+id/editTextTextEmailAddress2"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:fontFamily="@font/svn_gilroy_medium"
                 android:hint="@string/Email"
@@ -146,7 +147,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorGrey"
                 android:textSize="20dp"
-                android:layout_marginLeft="10dp"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </TableRow>
@@ -167,6 +167,7 @@
                 android:id="@+id/editTextDate"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:fontFamily="@font/svn_gilroy_medium"
                 android:hint="Birth"
@@ -174,7 +175,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorGrey"
                 android:textSize="20dp"
-                android:layout_marginLeft="10dp"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </TableRow>
@@ -195,6 +195,7 @@
                 android:id="@+id/editTextTextPassword2"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:fontFamily="@font/svn_gilroy_medium"
                 android:hint="@string/Password"
@@ -202,7 +203,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorGrey"
                 android:textSize="20dp"
-                android:layout_marginLeft="10dp"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </TableRow>
@@ -222,6 +222,7 @@
             <EditText
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:fontFamily="@font/svn_gilroy_medium"
                 android:hint="Confirm Password"
@@ -229,7 +230,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorGrey"
                 android:textSize="20dp"
-                android:layout_marginLeft="10dp"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </TableRow>
@@ -274,13 +274,14 @@
                 android:id="@+id/imageView27"
                 android:layout_width="37dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/vietnam"
-                android:layout_marginLeft="10dp"/>
+                app:srcCompat="@drawable/vietnam" />
 
             <EditText
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:fontFamily="@font/svn_gilroy_medium"
                 android:hint="Viet Nam"
@@ -288,7 +289,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorGrey"
                 android:textSize="20dp"
-                android:layout_marginLeft="10dp"
                 tools:ignore="TouchTargetSizeCheck" />
         </TableRow>
 
