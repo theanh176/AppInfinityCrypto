@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1011153152603",
+    "project_id": "demoappinfinitycrypto",
+    "storage_bucket": "demoappinfinitycrypto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011153152603:android:fe7132f4221f361feead7e",
+        "android_client_info": {
+          "package_name": "com.example.appinfinitycrypto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011153152603-5r02vrgvf6aq4tjba1ramslieter8e6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIg2Yo35tud3MsxqZotfEU8lVniUfhmqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011153152603-5r02vrgvf6aq4tjba1ramslieter8e6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011153152603:android:225d234e6c917133eead7e",
+        "android_client_info": {
+          "package_name": "com.example.demoappinfinitycrypto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011153152603-5r02vrgvf6aq4tjba1ramslieter8e6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIg2Yo35tud3MsxqZotfEU8lVniUfhmqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011153152603-5r02vrgvf6aq4tjba1ramslieter8e6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

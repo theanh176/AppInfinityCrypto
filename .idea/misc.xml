@@ -3,10 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android Projects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_home_page.xml" value="0.25" />
-        <entry key="..\:/Android Projects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_loading_page.xml" value="0.25" />
-        <entry key="..\:/Android Projects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
-        <entry key="..\:/Android Projects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1215" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/drawable/button_login.xml" value="0.1215" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/drawable/ic_back.xml" value="0.2115" />
@@ -18,8 +14,10 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/drawable/ic_lock.xml" value="0.2115" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/drawable/ic_person.xml" value="0.2115" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/drawable/ic_phone.xml" value="0.2755" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/layout/activity_home_page.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/layout/activity_loading_page.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/layout/activity_main.xml" value="0.14629629629629629" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/layout/activity_sign_in.xml" value="0.21" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
       </map>
     </option>
@@ -29,5 +27,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.21" />
+      </ProjectState>
+    </option>
   </component>
 </project>

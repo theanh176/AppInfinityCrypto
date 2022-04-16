@@ -3,6 +3,7 @@ package com.example.appinfinitycrypto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,8 +11,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class LoadingPage extends AppCompatActivity {
 
+    Timer timer;
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -42,5 +47,20 @@ public class LoadingPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_page);
         setTranslucentStatusBar();
+
+        setTimer();
+
+    }
+
+    public void setTimer(){
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(LoadingPage.this, SignIn.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 3000);
     }
 }
