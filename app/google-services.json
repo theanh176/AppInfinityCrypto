@@ -1,62 +1,33 @@
 {
   "project_info": {
-    "project_number": "1011153152603",
-    "project_id": "demoappinfinitycrypto",
-    "storage_bucket": "demoappinfinitycrypto.appspot.com"
+    "project_number": "47300703805",
+    "project_id": "appinfinitycrypto",
+    "storage_bucket": "appinfinitycrypto.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1011153152603:android:fe7132f4221f361feead7e",
+        "mobilesdk_app_id": "1:47300703805:android:1558679cd462abbfea9c54",
         "android_client_info": {
           "package_name": "com.example.appinfinitycrypto"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1011153152603-5r02vrgvf6aq4tjba1ramslieter8e6f.apps.googleusercontent.com",
+          "client_id": "47300703805-0oce7esjkbr2lahlhoonqq57llb115so.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDIg2Yo35tud3MsxqZotfEU8lVniUfhmqs"
+          "current_key": "AIzaSyB82MIeT7qhFt3-uw7sFk5urx_-isb7e64"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1011153152603-5r02vrgvf6aq4tjba1ramslieter8e6f.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1011153152603:android:225d234e6c917133eead7e",
-        "android_client_info": {
-          "package_name": "com.example.demoappinfinitycrypto"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1011153152603-5r02vrgvf6aq4tjba1ramslieter8e6f.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDIg2Yo35tud3MsxqZotfEU8lVniUfhmqs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1011153152603-5r02vrgvf6aq4tjba1ramslieter8e6f.apps.googleusercontent.com",
+              "client_id": "47300703805-0oce7esjkbr2lahlhoonqq57llb115so.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
