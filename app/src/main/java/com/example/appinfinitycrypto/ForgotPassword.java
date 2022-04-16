@@ -5,18 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
-public class SignIn extends AppCompatActivity {
+public class ForgotPassword extends AppCompatActivity {
 
-    TextView signUp, ForgotPass;
+    View imgBackSignIn;
 
-    //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
@@ -41,34 +40,22 @@ public class SignIn extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_forgot_password);
         setTranslucentStatusBar();
 
-        signUp = findViewById(R.id.textSignUp);
-        ForgotPass = findViewById(R.id.textForgotPass);
-
-        SignUp();
-        ForgotPassword();
+        imgBackSignIn =findViewById(R.id.imgBackSignIn);
+        backSignUp();
     }
 
-    private void SignUp(){
-        signUp.setOnClickListener(new View.OnClickListener() {
+    private void backSignUp() {
+        imgBackSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignIn.this, SignUp.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void ForgotPassword(){
-        ForgotPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignIn.this, ForgotPassword.class);
+                Intent intent = new Intent(ForgotPassword.this, SignIn.class);
                 startActivity(intent);
             }
         });
