@@ -17,6 +17,7 @@ import java.util.TimerTask;
 public class LoadingPage extends AppCompatActivity {
 
     Timer timer;
+
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -42,6 +43,7 @@ public class LoadingPage extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public class LoadingPage extends AppCompatActivity {
 
     }
 
-    public void setTimer(){
+    public void setTimer() {
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
