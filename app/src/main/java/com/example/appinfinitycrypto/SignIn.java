@@ -41,36 +41,45 @@ public class SignIn extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         setTranslucentStatusBar();
 
-        signUp = findViewById(R.id.textSignUp);
-        ForgotPass = findViewById(R.id.textForgotPass);
-
-        SignUp();
-        ForgotPassword();
+        mapping();
+        event();
     }
 
-    private void SignUp(){
+    private void mapping(){
+        signUp = findViewById(R.id.textSignUp);
+        ForgotPass = findViewById(R.id.textForgotPass);
+    }
+
+    private void event(){
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignIn.this, SignUp.class);
-                startActivity(intent);
+                SignUp();
+            }
+        });
+
+        ForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ForgotPassword();
             }
         });
     }
 
+    private void SignUp(){
+        Intent intent = new Intent(SignIn.this, SignUp.class);
+        startActivity(intent);
+    }
+
     private void ForgotPassword(){
-        ForgotPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignIn.this, ForgotPassword.class);
-                startActivity(intent);
-            }
-        });
+        Intent intent = new Intent(SignIn.this, ForgotPassword.class);
+        startActivity(intent);
     }
 }

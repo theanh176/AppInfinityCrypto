@@ -150,6 +150,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/colorBlueLogin"
+            android:background="@drawable/border_radius"
             android:fontFamily="@font/svn_gilroy_medium"
             android:text="Sign In"
             android:textColor="@color/white"
