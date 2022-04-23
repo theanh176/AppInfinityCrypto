@@ -109,7 +109,7 @@ public class SignIn extends AppCompatActivity {
         final String pass = editTextPass.getText().toString();
 
         if(phone.isEmpty()||pass.isEmpty()){
-            Toast.makeText(SignIn.this, "Please enter Username and Password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignIn.this, "Please enter Phone or Email and Password", Toast.LENGTH_SHORT).show();
         }else{
             database.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
