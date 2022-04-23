@@ -1,5 +1,6 @@
 package com.example.appinfinitycrypto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -10,11 +11,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignIn extends AppCompatActivity {
-
-    TextView signUp, ForgotPass;
+    DatabaseReference database = FirebaseDatabase.getInstance().getReferenceFromUrl("https://appinfinitycrypto-default-rtdb.firebaseio.com/");
+    TextView textsignUp, textForgotPass;
+    EditText editTextPhone, editTextPass;
+    Button buttonSignIn;
 
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -53,22 +65,31 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void mapping(){
-        signUp = findViewById(R.id.textSignUp);
-        ForgotPass = findViewById(R.id.textForgotPass);
+        textsignUp = findViewById(R.id.textSignUp);
+        textForgotPass = findViewById(R.id.textForgotPass);
+        editTextPhone = findViewById(R.id.edtPhoneSignIn);
+        editTextPass = findViewById(R.id.edtPasswordSignIn);
+        buttonSignIn = findViewById(R.id.btnSignIn);
     }
 
     private void event(){
-        signUp.setOnClickListener(new View.OnClickListener() {
+        textsignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SignUp();
             }
         });
 
-        ForgotPass.setOnClickListener(new View.OnClickListener() {
+        textForgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ForgotPassword();
+            }
+        });
+        buttonSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SignInAccount();
             }
         });
     }
@@ -81,5 +102,39 @@ public class SignIn extends AppCompatActivity {
     private void ForgotPassword(){
         Intent intent = new Intent(SignIn.this, ForgotPassword.class);
         startActivity(intent);
+    }
+
+    private void SignInAccount(){
+        final String phone = editTextPhone.getText().toString();
+        final String pass = editTextPass.getText().toString();
+
+        if(phone.isEmpty()||pass.isEmpty()){
+            Toast.makeText(SignIn.this, "Please enter Username and Password", Toast.LENGTH_SHORT).show();
+        }else{
+            database.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.hasChild(phone)){
+                        final String getPass = snapshot.child(phone).child("pass").getValue(String.class);
+                        if(getPass.equals(pass)){
+                            Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(SignIn.this,HomePage.class);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
     }
 }

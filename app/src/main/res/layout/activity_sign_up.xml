@@ -80,14 +80,14 @@
                 app:srcCompat="@drawable/ic_person" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName42"
+                android:id="@+id/edtUsernameSignup"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:backgroundTint="@color/colorGrey"
                 android:ems="10"
                 android:fontFamily="@font/svn_gilroy_medium"
-                android:hint="@string/Username"
+                android:hint="Full Name"
                 android:inputType="textPersonName"
                 android:textColor="@color/white"
                 android:textColorHint="@color/colorGrey"
@@ -108,7 +108,7 @@
                 app:srcCompat="@drawable/ic_phone" />
 
             <EditText
-                android:id="@+id/editTextPhone"
+                android:id="@+id/edtPhoneSignup"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -138,7 +138,7 @@
                 app:srcCompat="@drawable/ic_email" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress2"
+                android:id="@+id/edtEmailSignup"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -167,7 +167,7 @@
                 app:srcCompat="@drawable/ic_date" />
 
             <EditText
-                android:id="@+id/editTextDate"
+                android:id="@+id/edtBirthSignup"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -196,7 +196,7 @@
                 app:srcCompat="@drawable/ic_lock" />
 
             <EditText
-                android:id="@+id/editTextTextPassword2"
+                android:id="@+id/edtPassSignup"
                 android:layout_width="259dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -225,6 +225,7 @@
                 app:srcCompat="@drawable/ic_lock" />
 
             <EditText
+                android:id="@+id/edtConfPassSignup"
                 android:layout_width="296dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -241,13 +242,14 @@
         </TableRow>
 
         <RadioGroup
+            android:checkedButton="@id/radio_Male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radio_a"
+                android:id="@+id/radio_Male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -258,12 +260,11 @@
                 android:textColor="@color/white" />
 
             <RadioButton
-                android:id="@+id/radio_b"
+                android:id="@+id/radio_Female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:buttonTint="@color/white"
-                android:checked="true"
                 android:fontFamily="@font/svn_gilroy_medium"
                 android:minHeight="48dp"
                 android:text="Female"
@@ -284,7 +285,7 @@
                 app:srcCompat="@drawable/ic_location" />
 
             <com.hbb20.CountryCodePicker
-                android:id="@+id/ccp"
+                android:id="@+id/ccpCountrySignup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -297,13 +298,14 @@
         </TableRow>
 
         <Button
+            android:id="@+id/btnSignup"
             android:layout_width="412dp"
             android:layout_height="59dp"
             android:layout_gravity="center"
-            android:backgroundTint="@color/colorBlueLogin"
             android:background="@drawable/border_radius"
+            android:backgroundTint="@color/colorBlueLogin"
             android:fontFamily="@font/svn_gilroy_medium"
-            android:text="Sign In"
+            android:text="Sign Up"
             android:textColor="@color/white"
             android:textSize="20dp">
 

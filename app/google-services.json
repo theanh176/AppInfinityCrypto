@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "47300703805",
+    "firebase_url": "https://appinfinitycrypto-default-rtdb.firebaseio.com",
     "project_id": "appinfinitycrypto",
     "storage_bucket": "appinfinitycrypto.appspot.com"
   },
