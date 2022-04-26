@@ -12,4 +12,8 @@
     <string name="ConfirmEmailAddress">Confirm Email Address</string>
     <string name="SignUp">Sign Up</string>
     <string name="registrationPage">Registration Page</string>
+    <string name="full_name">Full name</string>
+    <string name="todo">TODO</string>
+    <string name="sap_xep">sap xep</string>
+    <string name="search">Search…</string>
 </resources>

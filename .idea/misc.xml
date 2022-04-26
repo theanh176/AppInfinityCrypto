@@ -29,6 +29,21 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/layout/activity_sign_up.xml" value="0.3125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/AppInfinityCrypto/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.209" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/drawable/border_radius.xml" value="0.1875" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/drawable/ic_lock.xml" value="0.1875" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/drawable/ic_person.xml" value="0.1875" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/drawable/ic_phone.xml" value="0.1875" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/drawable/ic_radio.xml" value="0.1875" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/drawable/ic_search.xml" value="0.2215" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_forgot_password.xml" value="0.12183383991894631" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_home_page.xml" value="0.264" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_loading_page.xml" value="0.12183383991894631" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_main.xml" value="0.12183383991894631" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_market.xml" value="0.4" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_profile_user.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_sign_in.xml" value="0.144" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
+        <entry key="..\:/Users/NguyenHuuHieu/AndroidStudioProjects/Projects/AppInfinityCrypto/app/src/main/res/layout/item_currency.xml" value="0.4" />
       </map>
     </option>
   </component>
