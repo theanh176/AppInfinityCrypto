@@ -119,7 +119,8 @@ public class SignIn extends AppCompatActivity {
                         if(getPass.equals(pass)){
                             Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(SignIn.this, Home.class);
+                            Intent intent = new Intent(SignIn.this,activity_profile_user.class);
+                            intent.putExtra("phone", phone);
                             startActivity(intent);
                         }else{
                             Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
