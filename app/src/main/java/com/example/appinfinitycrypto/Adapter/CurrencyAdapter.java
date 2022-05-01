@@ -2,6 +2,7 @@ package com.example.appinfinitycrypto.Adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,39 +55,24 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         }
         holder.currencyNameTextView.setText(dataItem.getName());
         holder.currencySymbolTextView.setText(dataItem.getSymbol());
-        holder.currencyChangeTextView.setText( dataItem.getQuote().getUsd().getPercent_change_24h() + "%");
+        if (dataItem.getQuote().getUsd().getPercent_change_24h() < 0) {
+            holder.currencyChangeTextView.setTextColor(Color.RED);
+            holder.currencyChangeTextView.setText("-" + String.format("$%.2f",dataItem.getQuote().getUsd().getPercent_change_24h()) + "%");
+            holder.currencyChangeImageView.setImageResource(R.drawable.caret_down_red);
+        } else{
+            holder.currencyChangeTextView.setTextColor(Color.GREEN);
+            holder.currencyChangeTextView.setText("+" + String.format("$%.2f",dataItem.getQuote().getUsd().getPercent_change_24h()) + "%");
+            holder.currencyChangeImageView.setImageResource(R.drawable.caret_up_green);
+        }
+
         holder.currencyPriceTextView.setText(String.format("$%.2f", dataItem.getQuote().getUsd().getPrice()));
-//        holder.currencyChartImageView.loadUrl("https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" + dataItem.getId() + ".png");
 
         LoadImage loadImage = new LoadImage(holder.currencyImageView);
+//        CAN TAO MOT LOP CHE DU LIEU
         loadImage.execute("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png");
         LoadImage loadImageChart = new LoadImage(holder.currencyChartImageView);
+        //        CAN TAO MOT LOP CHE DU LIEU
         loadImageChart.execute("https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" + dataItem.getId() + ".png");
-
-
-//        String urlChart = null;d()));
-//        urlChart = "https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" + dataItem.getId() + ".png";
-//        LoadImage loadImageChart = new LoadImage(holder.currencyChartImageView);
-//        loadImageChart.execute(urlChart);
-//        Log.w("idddddddddđ", String.valueOf(dataItem.getI
-//        try {
-//            is = new URL("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png").openConnection().getInputStream();
-//            Bitmap bitmap = BitmapFactory.decodeStream(is);
-//            Log.w("image currency", bitmap.toString());
-//            holder.currencyImageView.setImageBitmap(bitmap);
-//        }  catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            URL url = new URL("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png");
-//            InputStream input = new BufferedInputStream(url.openStream());
-//            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-//            Log.e("Bitmap", "returned");
-//            holder.currencyImageView.setImageBitmap(myBitmap);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Log.e("Exception", e.getMessage());
-//        }
 
     }
 
@@ -110,7 +96,8 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
                 } else {
                     List<DataItem> list = new ArrayList<>();
                     for (DataItem dataItem: mDataItemOld) {
-                        if (dataItem.getName().toLowerCase().contains(strSearch.toLowerCase())) {
+                        if (dataItem.getName().toLowerCase().contains(strSearch.toLowerCase()) ||
+                                dataItem.getSymbol().toLowerCase().contains(strSearch.toLowerCase())) {
                             list.add(dataItem);
                         }
                     }
@@ -150,6 +137,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             currencyChartImageView = itemView.findViewById(R.id.currencyChartImageView);
             currencyChangeImageView = itemView.findViewById(R.id.currencyChangeImageView);
         }
+
     }
 
     private class LoadImage extends AsyncTask<String, Void, Bitmap> {
