@@ -1,5 +1,6 @@
 package com.example.appinfinitycrypto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -14,24 +15,32 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class SignUp extends AppCompatActivity {
 
-    private DatabaseReference database;
     EditText editTextDate, editTextUsername, editTextPassword, editTextConfPassword, editTextEmail, editTextPhone;
     RadioButton radioButtonMale, radioButtonFemale;
     CountryCodePicker ccpCountry;
     View imgBackSignUp;
     Button btnSignup;
+    ProgressBar progressBar;
 
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -93,7 +102,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void mapping(){
-        imgBackSignUp = findViewById(R.id.imgBackSignIn);
+        imgBackSignUp = findViewById(R.id.imgBackVerifi);
         editTextUsername = findViewById(R.id.edtUsernameSignup);
         editTextPhone = findViewById(R.id.edtPhoneSignup);
         editTextEmail = findViewById(R.id.edtEmailSignup);
@@ -104,10 +113,12 @@ public class SignUp extends AppCompatActivity {
         radioButtonFemale = findViewById(R.id.radio_Female);
         ccpCountry = findViewById(R.id.ccpCountrySignup);
         btnSignup = findViewById(R.id.btnSignup);
+        progressBar = findViewById(R.id.progessBar);
     }
 
     private void backSignUp() {
         Intent intent = new Intent(SignUp.this, SignIn.class);
+        intent.putExtra("checkSignIn","");
         startActivity(intent);
     }
 
@@ -146,53 +157,76 @@ public class SignUp extends AppCompatActivity {
         final String pass = editTextPassword.getText().toString();
         final String confpass = editTextConfPassword.getText().toString();
         sex();
-        final String country = ccpCountry.getSelectedCountryEnglishName();
 
         if(name.isEmpty()||phone.isEmpty()||email.isEmpty()||date.isEmpty()||pass.isEmpty()||confpass.isEmpty()){
             Toast.makeText(SignUp.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-        }
-        else if(!pass.equals(confpass)){
-            Toast.makeText(SignUp.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            database = FirebaseDatabase.getInstance().getReference("Account");
+        }else{
 
-            Account account = new Account(name, email, date, pass, country, sex());
-            database.child(phone).setValue(account);
-
-            Toast.makeText(SignUp.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-
-            editTextUsername.setText("");
-            editTextPhone.setText("");
-            editTextEmail.setText("");
-            editTextDate.setText("");
-            editTextPassword.setText("");
-            editTextConfPassword.setText("");
-            radioButtonMale.setChecked(true);
-            ccpCountry.setCountryForNameCode("VN");
+            FirebaseDatabase.getInstance().getReferenceFromUrl("https://appinfinitycrypto-default-rtdb.firebaseio.com/").child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(!snapshot.hasChild(phone)){  //Kiểm tra sự tồn tại
+                        if(!pass.equals(confpass)){
+                            editTextPhone.setText("");
+                            Toast.makeText(SignUp.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            sendOTP();
+                        }
+                    }else{
+                        editTextPhone.setText("");
+                        Toast.makeText(SignUp.this, "Phone number already in use, please enter another phone number", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(SignUp.this, "onCancelled", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
-
-    public static class Account{
-        public String name;
-        public String email;
-        public String date;
-        public String pass;
-        public String country;
-        public String sex;
-
-        public Account(String name, String email, String date, String pass, String country, String sex) {
-            this.name = name;
-            this.email = email;
-            this.date = date;
-            this.pass = pass;
-            this.country = country;
-            this.sex = sex;
+    private void sendOTP() {
+        if(editTextPhone.getText().toString().trim().isEmpty()){
+            Toast.makeText(SignUp.this, "Enter Phone Or Email", Toast.LENGTH_SHORT).show();
+            return;
         }
+        progressBar.setVisibility(View.VISIBLE);
+        btnSignup.setVisibility(View.INVISIBLE);
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                "+84" + editTextPhone.getText().toString(),
+                60,
+                TimeUnit.SECONDS,
+                SignUp.this,
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                        progressBar.setVisibility(View.GONE);
+                        btnSignup.setVisibility(View.VISIBLE);
+                    }
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+                        progressBar.setVisibility(View.GONE);
+                        btnSignup.setVisibility(View.VISIBLE);
+                        Toast.makeText(SignUp.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        progressBar.setVisibility(View.GONE);
+                        btnSignup.setVisibility(View.VISIBLE);
+                        Intent intent = new Intent(getApplicationContext(), SendCodeEmail.class);
+                        intent.putExtra("name", editTextUsername.getText().toString());
+                        intent.putExtra("phone", editTextPhone.getText().toString());
+                        intent.putExtra("email", editTextEmail.getText().toString());
+                        intent.putExtra("date", editTextDate.getText().toString());
+                        intent.putExtra("pass", editTextPassword.getText().toString());
+                        intent.putExtra("sex", sex());
+                        intent.putExtra("country", ccpCountry.getSelectedCountryEnglishName());
+                        intent.putExtra("checkSendCode", "");
+                        intent.putExtra("verificationId", verificationId);
+                        startActivity(intent);
 
-        public Account(){
-
-        }
-
+                    }
+                }
+        );
     }
 }
