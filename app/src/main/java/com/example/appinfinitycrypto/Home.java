@@ -25,7 +25,6 @@ import com.example.appinfinitycrypto.Model.TopGainer;
 import com.example.appinfinitycrypto.Model.TopLoser;
 
 public class Home extends AppCompatActivity {
-
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -120,6 +119,5 @@ public class Home extends AppCompatActivity {
 
         DiscoverAdapter discoverAdapter = new DiscoverAdapter(discoverList);
         discoverRecyclerView.setAdapter(discoverAdapter);
-
     }
 }
