@@ -26,7 +26,7 @@
             android:exported="true" />
         <activity
             android:name=".activity_profile_user"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity_market"
             android:exported="true" />
