@@ -49,10 +49,10 @@ public class TopCoinAdapter extends RecyclerView.Adapter<TopCoinAdapter.TopCoinV
             return;
         }
         holder.name.setText(dataItem.getName());
-//        holder.price.setText(String.format("$%.2f", dataItem.getQuote().getUsd().getPrice()));
+        holder.price.setText(String.format("$%.2f", dataItem.getQuote().getUsd().getPrice()));
         LoadImage loadImage = new LoadImage(holder.mImageView);
         // CAN TAO MOT LOP CHE DU LIEU
-//        loadImage.execute("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png");
+        loadImage.execute("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png");
 //        holder.name.setText(topCoinList.get(position).getName());
 //        holder.price.setText(topCoinList.get(position).getPrize());
 //        holder.mImageView.setImageResource(topCoinList.get(position).getImage());
@@ -60,7 +60,7 @@ public class TopCoinAdapter extends RecyclerView.Adapter<TopCoinAdapter.TopCoinV
 
     @Override
     public int getItemCount() {
-        if(mDataItem == null) {
+        if(mDataItem != null) {
             return mDataItem.size();
         }
         return 0;

@@ -75,8 +75,8 @@ public class Home extends AppCompatActivity {
 
         // top coin recycler view
         topCoinRecyclerView = findViewById(R.id.topCoinRecyclerView);
-        topCoinRecyclerView.setHasFixedSize(true);
-        topCoinRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        topCoinRecyclerView.setHasFixedSize(true);
+//        topCoinRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         dataItems = new ArrayList<>();
 
         ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap",1,10,"tokens","USD").enqueue(new Callback<Market>() {
@@ -87,9 +87,12 @@ public class Home extends AppCompatActivity {
 //                CAN XOA DI
                 Market market = response.body();
                 Log.w("Source code","chay thanh cong");
-               // Log.w("Xinchao",market.getData().get(1).getName());
+//                Log.w("Xinchao",response.body().getData().get(1).getName());
 
                 DataItem item;
+                if (market == null) {
+                    System.out.println("market null size");
+                }
                 if (market != null) {
                     Log.w("Source code",market.getData().get(1).getName());
 
