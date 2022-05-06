@@ -1,6 +1,7 @@
 package com.example.appinfinitycrypto.Api;
 
 import com.example.appinfinitycrypto.Model.Market;
+import com.example.appinfinitycrypto.Model.TopCoin;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,6 +22,13 @@ public interface ApiCoinMarket {
 
     @GET("v1/cryptocurrency/listings/latest")
     Call<Market> convertUsdToVnd(@Query("CMC_PRO_API_KEY") String CMC_PRO_API_KEY,
+                                 @Query("sort") String sort,
+                                 @Query("start") int start,
+                                 @Query("limit") int limit,
+                                 @Query("cryptocurrency_type") String cryptocurrency_type,
+                                 @Query("convert") String convert);
+
+    Call<TopCoin> convertUsdToVndTop(@Query("CMC_PRO_API_KEY") String CMC_PRO_API_KEY,
                                  @Query("sort") String sort,
                                  @Query("start") int start,
                                  @Query("limit") int limit,

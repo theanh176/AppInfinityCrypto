@@ -7,9 +7,6 @@ public class Market {
     private Status status;
     private List<DataItem> data;
 
-    public Market() {
-    }
-
     public Market(Status status, List<DataItem> data) {
         this.status = status;
         this.data = data;
