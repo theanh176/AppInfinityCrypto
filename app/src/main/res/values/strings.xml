@@ -16,4 +16,5 @@
     <string name="todo">TODO</string>
     <string name="sap_xep">sap xep</string>
     <string name="search">Search…</string>
+    <string name="default_web_client_id1"/>
 </resources>

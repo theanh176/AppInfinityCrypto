@@ -13,14 +13,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
 
 public class SignIn extends AppCompatActivity {
     DatabaseReference database = FirebaseDatabase.getInstance().getReferenceFromUrl("https://appinfinitycrypto-default-rtdb.firebaseio.com/");
@@ -28,6 +36,10 @@ public class SignIn extends AppCompatActivity {
     EditText editTextPhone, editTextPass;
     Button buttonSignIn;
 
+    ImageView imgGoogle, imgFacebook;
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
+    private static final int RC_SIGN_IN = 100;
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -70,6 +82,8 @@ public class SignIn extends AppCompatActivity {
         editTextPhone = findViewById(R.id.edtPhoneSignIn);
         editTextPass = findViewById(R.id.edtPasswordSignIn);
         buttonSignIn = findViewById(R.id.btnSignIn);
+        imgGoogle = findViewById(R.id.imgvGoogle);
+        imgFacebook = findViewById(R.id.imgvFacebook);
     }
 
     private void event(){
@@ -92,6 +106,60 @@ public class SignIn extends AppCompatActivity {
                 SignInAccount();
             }
         });
+
+        getPhonePass();
+        createRequest();
+
+        imgGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signInWithGG();
+            }
+        });
+
+        imgFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //signInWithFB();
+            }
+        });
+
+    }
+
+    //SignIn Google
+    private void createRequest() {
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gsc = GoogleSignIn.getClient(this, gso);
+
+    }
+
+    private void signInWithGG(){
+        Intent signInIntent = gsc.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                try {
+                    task.getResult(ApiException.class);
+                    HomeActivity();
+                } catch (ApiException e) {
+                    Toast.makeText(this, "Error",Toast.LENGTH_SHORT).show();
+                }
+        }
+    }
+
+    private void HomeActivity() {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), Home.class);
+        startActivity(intent);
     }
 
     private void SignUp(){
@@ -119,7 +187,7 @@ public class SignIn extends AppCompatActivity {
                         if(getPass.equals(pass)){
                             Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(SignIn.this,activity_profile_user.class);
+                            Intent intent = new Intent(SignIn.this,Home.class);
                             intent.putExtra("phone", phone);
                             startActivity(intent);
                         }else{
@@ -136,6 +204,28 @@ public class SignIn extends AppCompatActivity {
                 }
             });
 
+        }
+    }
+
+    private void getPhonePass(){
+        if(getIntent().getStringExtra("checkSignIn").isEmpty()){
+            editTextPhone.setText("");
+            editTextPass.setText("");
+        }
+        if(!getIntent().getStringExtra("checkSignIn").isEmpty()){
+            editTextPhone.setText(String.format(
+                    "%s", getIntent().getStringExtra("phone")
+            ));
+            if(getIntent().getStringExtra("checkSignIn2").isEmpty()){
+                editTextPass.setText(String.format(
+                        "%s", getIntent().getStringExtra("changepass")
+                ));
+            }
+            if(!getIntent().getStringExtra("checkSignIn2").isEmpty()){
+                editTextPass.setText(String.format(
+                        "%s", getIntent().getStringExtra("pass")
+                ));
+            }
         }
     }
 }

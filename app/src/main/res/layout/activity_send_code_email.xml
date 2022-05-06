@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blackBackground"
+    tools:context=".SendCodeEmail">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="177dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/svn_gilroy_medium"
+        android:gravity="center"
+        android:text="Infinity Crypto - 1.1.1"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+    <TableLayout
+        android:layout_width="354dp"
+        android:layout_height="582dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginBottom="50dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgBackVerifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                app:srcCompat="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="285dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:baselineAligned="false"
+                android:fontFamily="@font/svn_gilroy_bold"
+                android:gravity="center"
+                android:text="Authenticate"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+
+        </TableRow>
+
+        <TableLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="285dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="10dp"
+                android:baselineAligned="false"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:gravity="center"
+                android:text="OTP Verification"
+                android:textColor="@color/white"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="285dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:baselineAligned="false"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:gravity="center"
+                android:text="Enter the OTP send to"
+                android:textColor="@color/colorGrey"
+                android:textSize="15dp" />
+            <TextView
+                android:id="@+id/textViewPhone"
+                android:layout_width="285dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="40dp"
+                android:baselineAligned="false"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtcode1"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/colorGrey"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="LabelFor">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edtcode2"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/colorGrey"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="LabelFor">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edtcode3"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/colorGrey"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="LabelFor">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edtcode4"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/colorGrey"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="LabelFor">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edtcode5"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/colorGrey"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="LabelFor">
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/edtcode6"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/colorGrey"
+                android:gravity="center"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="LabelFor">
+
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginBottom="80dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="Didn't receive the OTP"
+                android:textColor="@color/colorGrey"
+                android:layout_gravity="center">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/textResend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="RESEND CODE"
+                android:textColor="@color/colorBlueLogin">
+
+            </TextView>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnVerify"
+                android:layout_width="345dp"
+                android:layout_height="59dp"
+                android:layout_gravity="center"
+                android:background="@drawable/border_radius"
+                android:backgroundTint="@color/colorBlueLogin"
+                android:fontFamily="@font/svn_gilroy_medium"
+                android:text="Verify"
+                android:textColor="@color/white"
+                android:textSize="20dp">
+
+            </Button>
+            <ProgressBar
+                android:id="@+id/progessBar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:visibility="gone">
+
+            </ProgressBar>
+        </FrameLayout>
+
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

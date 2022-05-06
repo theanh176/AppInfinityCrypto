@@ -60,6 +60,7 @@ public class LoadingPage extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(LoadingPage.this, SignIn.class);
+                intent.putExtra("checkSignIn","");
                 startActivity(intent);
                 finish();
             }
