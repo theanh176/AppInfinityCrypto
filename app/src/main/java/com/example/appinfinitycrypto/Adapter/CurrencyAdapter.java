@@ -55,6 +55,8 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         }
         holder.currencyNameTextView.setText(dataItem.getName());
         holder.currencySymbolTextView.setText(dataItem.getSymbol());
+        holder.currencyPriceTextView.setText(String.format("$%.2f", dataItem.getQuote().getUsd().getPrice()));
+
         if (dataItem.getQuote().getUsd().getPercent_change_24h() < 0) {
             holder.currencyChangeTextView.setTextColor(Color.RED);
             holder.currencyChangeTextView.setText("-" + String.format("$%.2f",dataItem.getQuote().getUsd().getPercent_change_24h()) + "%");
@@ -65,13 +67,9 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             holder.currencyChangeImageView.setImageResource(R.drawable.caret_up_green);
         }
 
-        holder.currencyPriceTextView.setText(String.format("$%.2f", dataItem.getQuote().getUsd().getPrice()));
-
         LoadImage loadImage = new LoadImage(holder.currencyImageView);
-//        CAN TAO MOT LOP CHE DU LIEU
         loadImage.execute("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png");
         LoadImage loadImageChart = new LoadImage(holder.currencyChartImageView);
-        //        CAN TAO MOT LOP CHE DU LIEU
         loadImageChart.execute("https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" + dataItem.getId() + ".png");
 
     }

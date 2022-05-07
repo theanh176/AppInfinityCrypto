@@ -52,38 +52,38 @@ public class activity_market extends AppCompatActivity {
 
 
 //        https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=fac03ee8-101c-4a60-86c3-b38e63d5f955&sort=market_cap&start=1&limit=100&cryptocurrency_type=tokens&convert=USD
-        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap",1,10,"tokens","USD").enqueue(new Callback<Market>() {
-            @Override
-            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
-//                CAN XOA DI
-                Toast.makeText(activity_market.this, "Call Api Successful", Toast.LENGTH_SHORT).show();
-//                CAN XOA DI
-                Log.w("Xinchao","Chạy thành công");
-                Market market = response.body();
-//                DataItem item;
-                if (market != null) {
-                    Log.w("Source code",market.getData().get(1).getName());
-
-
-                    for (int i = 0; i < market.getData().size(); i++) {
-                        dataItems.add((DataItem) market.getData().get(i));
-                    }
-                    currencyAdapter = new CurrencyAdapter(dataItems);
-//                    RecyclerView cần có một LayoutManager, ta tạo một LayoutManager
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_market.this);
-                    rcvCurrency.setLayoutManager(linearLayoutManager);
-                    rcvCurrency.setAdapter(currencyAdapter);
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
-                Toast.makeText(activity_market.this, "Call Api Error", Toast.LENGTH_SHORT).show();
-                Log.w("Xinchao","Chạy thất bại");
-            }
-        });
+//        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap",1,10,"tokens","USD").enqueue(new Callback<Market>() {
+//            @Override
+//            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
+////                CAN XOA DI
+//                Toast.makeText(activity_market.this, "Call Api Successful", Toast.LENGTH_SHORT).show();
+////                CAN XOA DI
+//                Log.w("Xinchao","Chạy thành công");
+//                Market market = response.body();
+////                DataItem item;
+//                if (market != null) {
+//                    Log.w("Source code",market.getData().get(1).getName());
+//
+//
+//                    for (int i = 0; i < market.getData().size(); i++) {
+//                        dataItems.add((DataItem) market.getData().get(i));
+//                    }
+//                    currencyAdapter = new CurrencyAdapter(dataItems);
+////                    RecyclerView cần có một LayoutManager, ta tạo một LayoutManager
+//                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_market.this);
+//                    rcvCurrency.setLayoutManager(linearLayoutManager);
+//                    rcvCurrency.setAdapter(currencyAdapter);
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
+//                Toast.makeText(activity_market.this, "Call Api Error", Toast.LENGTH_SHORT).show();
+//                Log.w("Xinchao","Chạy thất bại");
+//            }
+//        });
 
         sapxep.setOnClickListener(new View.OnClickListener() {
             @Override
