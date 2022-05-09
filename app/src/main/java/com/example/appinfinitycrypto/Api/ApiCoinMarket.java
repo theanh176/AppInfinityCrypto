@@ -28,6 +28,7 @@ public interface ApiCoinMarket {
                                  @Query("cryptocurrency_type") String cryptocurrency_type,
                                  @Query("convert") String convert);
 
+//    https://pro-api.coinmarketcap.com/v1/cryptocurrency/trending/gainers-losers?CMC_PRO_API_KEY=fac03ee8-101c-4a60-86c3-b38e63d5f955&sort_dir=asc
     @GET("v1/cryptocurrency/trending/gainers-losers")
     Call<Market> convertUsdToVndGainer(@Query("CMC_PRO_API_KEY") String CMC_PRO_API_KEY, @Query("sort_dir") String sort_dir);
 }
