@@ -16,5 +16,12 @@
     <string name="todo">TODO</string>
     <string name="sap_xep">sap xep</string>
     <string name="search">Search…</string>
+
+    <string name="tab_market">Market</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_watchlist">Watch List</string>
+    <string name="tab_news">New</string>
+    <string name="account">Account</string>
+
     <string name="default_web_client_id1"/>
 </resources>

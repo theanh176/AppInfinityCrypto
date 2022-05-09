@@ -15,49 +15,34 @@
 
         <activity
             android:name=".NotificationActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false" >
         </activity>
         <activity
             android:name=".DiscoverActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false" >
         </activity>
         <activity
             android:name=".WatchListActivity"
             android:exported="false" />
         <activity
             android:name=".activity_profile_user"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".activity_market"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Home"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".SendCodeEmail"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ChangePassword"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ForgotPassword"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".LoadingPage"
             android:exported="true" >
@@ -69,18 +54,13 @@
         </activity>
         <activity
             android:name=".SignUp"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".SignIn"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false" >
         </activity>
 
         <meta-data

@@ -148,8 +148,8 @@ public class SignUp extends AppCompatActivity {
         }
         return sex;
     }
-
     private void registerAccount(){
+        // Khai báo firebase
         final String name = editTextUsername.getText().toString();
         final String phone = editTextPhone.getText().toString();
         final String email = editTextEmail.getText().toString();
@@ -212,19 +212,19 @@ public class SignUp extends AppCompatActivity {
                     @Override
                     public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         progressBar.setVisibility(View.GONE);
-//                        btnSignup.setVisibility(View.VISIBLE);
-//                        Intent intent = new Intent(getApplicationContext(), SendCodeEmail.class);
-//                        intent.putExtra("name", editTextUsername.getText().toString());
-//                        intent.putExtra("phone", editTextPhone.getText().toString());
-//                        intent.putExtra("email", editTextEmail.getText().toString());
-//                        intent.putExtra("date", editTextDate.getText().toString());
-//                        intent.putExtra("pass", editTextPassword.getText().toString());
-//                        intent.putExtra("sex", sex());
-//                        intent.putExtra("country", ccpCountry.getSelectedCountryEnglishName());
-//                        intent.putExtra("checkSendCode", "");
-//                        intent.putExtra("verificationId", verificationId);
-//                        startActivity(intent);
-
+                        btnSignup.setVisibility(View.VISIBLE);
+                        // CHuyển qua sendotp
+                        Intent intent = new Intent(getApplicationContext(), SendCodeEmail.class);
+                        intent.putExtra("name", editTextUsername.getText().toString());
+                        intent.putExtra("phone", editTextPhone.getText().toString());
+                        intent.putExtra("email", editTextEmail.getText().toString());
+                        intent.putExtra("date", editTextDate.getText().toString());
+                        intent.putExtra("pass", editTextPassword.getText().toString());
+                        intent.putExtra("sex", sex());
+                        intent.putExtra("country", ccpCountry.getSelectedCountryEnglishName());
+                        intent.putExtra("checkSendCode", "");
+                        intent.putExtra("verificationId", verificationId);
+                        startActivity(intent);
                     }
                 }
         );

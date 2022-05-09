@@ -253,6 +253,7 @@ public class SendCodeEmail extends AppCompatActivity {
 
                             if(task.isSuccessful()){
                                 if(getIntent().getStringExtra("checkSendCode").isEmpty()){
+                                    //Khai báo lên firebase
                                     String name = getIntent().getStringExtra("name");
                                     String phone = getIntent().getStringExtra("phone");
                                     String email = getIntent().getStringExtra("email");
@@ -264,6 +265,7 @@ public class SendCodeEmail extends AppCompatActivity {
                                     database = FirebaseDatabase.getInstance().getReference("Account");
 
                                     Account account = new Account(name, email, date, pass, country, sex);
+                                    // Đưa lên firebase
                                     database.child(phone).setValue(account);
 
                                     Toast.makeText(SendCodeEmail.this, "User registered successfully", Toast.LENGTH_SHORT).show();
