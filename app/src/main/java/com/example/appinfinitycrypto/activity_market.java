@@ -60,7 +60,7 @@ public class activity_market extends AppCompatActivity {
 //                CAN XOA DI
                 Log.w("Xinchao","Chạy thành công");
                 Market market = response.body();
-                DataItem item;
+//                DataItem item;
                 if (market != null) {
                     Log.w("Source code",market.getData().get(1).getName());
 

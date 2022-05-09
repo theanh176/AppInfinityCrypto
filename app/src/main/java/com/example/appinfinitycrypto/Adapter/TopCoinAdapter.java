@@ -25,11 +25,7 @@ public class TopCoinAdapter extends RecyclerView.Adapter<TopCoinAdapter.TopCoinV
 
     private List<DataItem> mDataItem;
     private List<DataItem> mDataItemOld;
-//    private List<TopCoin> topCoinList;
 
-//    public TopCoinAdapter(List<TopCoin> topCoinList) {
-//        this.topCoinList = topCoinList;
-//    }
     public TopCoinAdapter(List<DataItem> mDataItem) {
     this.mDataItem = mDataItem;
     this.mDataItemOld = mDataItem;
@@ -48,35 +44,30 @@ public class TopCoinAdapter extends RecyclerView.Adapter<TopCoinAdapter.TopCoinV
         if (dataItem == null) {
             return;
         }
-        holder.name.setText(dataItem.getName());
-//        holder.price.setText(String.format("$%.2f", dataItem.getQuote().getUsd().getPrice()));
+        holder.symbol.setText(dataItem.getSymbol());
+        holder.price.setText(String.format("$%.2f", dataItem.getQuote().getUsd().getPrice()));
         LoadImage loadImage = new LoadImage(holder.mImageView);
-        // CAN TAO MOT LOP CHE DU LIEU
-//        loadImage.execute("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png");
-//        holder.name.setText(topCoinList.get(position).getName());
-//        holder.price.setText(topCoinList.get(position).getPrize());
-//        holder.mImageView.setImageResource(topCoinList.get(position).getImage());
+        loadImage.execute("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png");
     }
 
     @Override
     public int getItemCount() {
-        if(mDataItem == null) {
+        if(mDataItem != null) {
             return mDataItem.size();
         }
         return 0;
-//        return topCoinList.size();
     }
 
     public class TopCoinViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView name;
+        private TextView symbol;
         private TextView price;
         private ImageView mImageView;
 
         public TopCoinViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            name = itemView.findViewById(R.id.watchlist_signname);
+            symbol = itemView.findViewById(R.id.watchlist_signname);
             price = itemView.findViewById(R.id.watchlist_prize);
             mImageView = itemView.findViewById(R.id.watchlist_img);
         }

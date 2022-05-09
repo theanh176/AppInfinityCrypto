@@ -18,7 +18,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.appinfinitycrypto.Adapter.CurrencyAdapter;
 import com.example.appinfinitycrypto.Adapter.DiscoverAdapter;
 import com.example.appinfinitycrypto.Adapter.TopCoinAdapter;
 import com.example.appinfinitycrypto.Adapter.TopGainerAdapter;
@@ -27,7 +26,6 @@ import com.example.appinfinitycrypto.Api.ApiCoinMarket;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.Discover;
 import com.example.appinfinitycrypto.Model.Market;
-import com.example.appinfinitycrypto.Model.TopCoin;
 import com.example.appinfinitycrypto.Model.TopGainer;
 import com.example.appinfinitycrypto.Model.TopLoser;
 
@@ -39,6 +37,8 @@ public class Home extends AppCompatActivity {
 
     private List<DataItem> dataItems;
     private TopCoinAdapter topCoinAdapter;
+    private TopGainerAdapter topGainerAdapter;
+    private TopLoserAdapter topLoserAdapter;
 
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -67,6 +67,7 @@ public class Home extends AppCompatActivity {
     }
 
     private RecyclerView topCoinRecyclerView, topGainerRecyclerView, topLoserRecyclerView, discoverRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,70 +77,67 @@ public class Home extends AppCompatActivity {
         // top coin recycler view
         topCoinRecyclerView = findViewById(R.id.topCoinRecyclerView);
         topCoinRecyclerView.setHasFixedSize(true);
-        topCoinRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        topCoinRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
         dataItems = new ArrayList<>();
 
-        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap",1,10,"tokens","USD").enqueue(new Callback<Market>() {
+        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 10, "all", "USD").enqueue(new Callback<Market>() {
             @Override
             public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
-//                CAN XOA DI
-                Toast.makeText(Home.this, "Call Api Successful", Toast.LENGTH_SHORT).show();
-//                CAN XOA DI
+
                 Market market = response.body();
-                Log.w("Source code","chay thanh cong");
-               // Log.w("Xinchao",market.getData().get(1).getName());
-
                 DataItem item;
+
+                if (market == null) {
+                    System.out.println("market null size");
+                }
+
                 if (market != null) {
-                    Log.w("Source code",market.getData().get(1).getName());
-
-
                     for (int i = 0; i < market.getData().size(); i++) {
                         dataItems.add((DataItem) market.getData().get(i));
                     }
                     topCoinAdapter = new TopCoinAdapter(dataItems);
-//                    RecyclerView cần có một LayoutManager, ta tạo một LayoutManager
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Home.this);
-                    topCoinRecyclerView.setLayoutManager(linearLayoutManager);
                     topCoinRecyclerView.setAdapter(topCoinAdapter);
                 }
-
-
             }
 
             @Override
             public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
                 Toast.makeText(Home.this, "Call Api Error", Toast.LENGTH_SHORT).show();
-                Log.w("Xinchao","Chạy thất bại");
             }
         });
-
-//        List<TopCoin> topCoinList = new ArrayList<>();
-//
-//        topCoinList.add(new TopCoin(R.drawable.bitcoin, "BTC", "$9999"));
-//        topCoinList.add(new TopCoin(R.drawable.bitcoin, "ETH", "$7778"));
-//        topCoinList.add(new TopCoin(R.drawable.bitcoin, "ONUS", "$10000"));
-//        topCoinList.add(new TopCoin(R.drawable.bitcoin, "RUN", "$9876"));
-//        topCoinList.add(new TopCoin(R.drawable.bitcoin, "ANM", "$2.1"));
-//
-//        TopCoinAdapter topCoinAdapter = new TopCoinAdapter(topCoinList);
-//        topCoinRecyclerView.setAdapter(topCoinAdapter);
 
         // top gainer recycler view
         topGainerRecyclerView = findViewById(R.id.topGainerRecyclerView);
         topGainerRecyclerView.setHasFixedSize(true);
-        topGainerRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        topGainerRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
+        dataItems = new ArrayList<>();
 
-        List<TopGainer> topGainerList = new ArrayList<>();
+        ApiCoinMarket.apiCoinMarket.convertUsdToVndGainer("fac03ee8-101c-4a60-86c3-b38e63d5f955", "asc").enqueue(new Callback<Market>() {
+            @Override
+            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
 
-        topGainerList.add(new TopGainer(R.drawable.bitcoin, "Bitcoin", "BTC"));
-        topGainerList.add(new TopGainer(R.drawable.bitcoin, "Ethereum", "ETH"));
-        topGainerList.add(new TopGainer(R.drawable.bitcoin, "Ethereum", "ETH"));
-        topGainerList.add(new TopGainer(R.drawable.bitcoin, "Ethereum", "ETH"));
-        topGainerList.add(new TopGainer(R.drawable.bitcoin, "Ethereum", "ETH"));
+                Market market = response.body();
+                DataItem item;
 
-        TopGainerAdapter topGainerAdapter = new TopGainerAdapter(topGainerList);
-        topGainerRecyclerView.setAdapter(topGainerAdapter);
+                if (market == null) {
+                    System.out.println("topGainer null size");
+                }
+
+                if (market != null) {
+                    Log.w("Source code", market.getData().get(1).getName());
+                    for (int i = 0; i < market.getData().size(); i++) {
+                        dataItems.add((DataItem) market.getData().get(i));
+                    }
+                    topGainerAdapter = new TopGainerAdapter(dataItems);
+                    topGainerRecyclerView.setAdapter(topGainerAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
+                Toast.makeText(Home.this, "Call Api Error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // top loser recycler view
         topLoserRecyclerView = findViewById(R.id.topLoserRecyclerView);
