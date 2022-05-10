@@ -52,7 +52,7 @@ public class activity_market extends AppCompatActivity {
 
 
 //        https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=fac03ee8-101c-4a60-86c3-b38e63d5f955&sort=market_cap&start=1&limit=100&cryptocurrency_type=tokens&convert=USD
-        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap",1,10,"tokens","USD").enqueue(new Callback<Market>() {
+        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap", 1,10,"tokens","USD").enqueue(new Callback<Market>() {
             @Override
             public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
 //                CAN XOA DI

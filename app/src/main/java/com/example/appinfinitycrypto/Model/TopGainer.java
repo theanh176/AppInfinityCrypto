@@ -5,9 +5,9 @@ import java.util.List;
 public class TopGainer {
 
     private Status status;
-    private List<DataItem> data;
+    private List<DataItem_Gainer> data;
 
-    public TopGainer(Status status, List<DataItem> data) {
+    public TopGainer(Status status, List<DataItem_Gainer> data) {
         this.status = status;
         this.data = data;
     }
@@ -20,11 +20,11 @@ public class TopGainer {
         this.status = status;
     }
 
-    public List<DataItem> getData() {
+    public List<DataItem_Gainer> getData() {
         return data;
     }
 
-    public void setData(List<DataItem> data) {
+    public void setData(List<DataItem_Gainer> data) {
         this.data = data;
     }
 

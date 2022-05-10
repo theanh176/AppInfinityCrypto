@@ -12,21 +12,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appinfinitycrypto.Model.DataItem;
+import com.example.appinfinitycrypto.Model.DataItem_Gainer;
 import com.example.appinfinitycrypto.R;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import com.example.appinfinitycrypto.Model.TopCoin;
-
 public class TopGainerAdapter extends RecyclerView.Adapter<TopGainerAdapter.TopGainerViewHolder> {
 
-    private List<DataItem> mDataItem;
-    private List<DataItem> mDataItemOld;
+    private List<DataItem_Gainer> mDataItem;
+    private List<DataItem_Gainer> mDataItemOld;
 
-    public TopGainerAdapter(List<DataItem> mDataItem) {
+    public TopGainerAdapter(List<DataItem_Gainer> mDataItem) {
         this.mDataItem = mDataItem;
         this.mDataItemOld = mDataItem;
     }
@@ -40,7 +38,7 @@ public class TopGainerAdapter extends RecyclerView.Adapter<TopGainerAdapter.TopG
 
     @Override
     public void onBindViewHolder(@NonNull TopGainerViewHolder holder, int position) {
-        DataItem dataItem = mDataItem.get(position);
+        DataItem_Gainer dataItem = mDataItem.get(position);
         if (dataItem == null) {
             return;
         }

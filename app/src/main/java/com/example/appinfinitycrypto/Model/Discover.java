@@ -5,6 +5,9 @@ public class Discover {
     private String title;
     private String day;
 
+    public Discover() {
+    }
+
     public Discover(int image, String title, String day) {
         this.image = image;
         this.title = title;

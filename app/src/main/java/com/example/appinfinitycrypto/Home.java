@@ -24,6 +24,8 @@ import com.example.appinfinitycrypto.Adapter.TopGainerAdapter;
 import com.example.appinfinitycrypto.Adapter.TopLoserAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
 import com.example.appinfinitycrypto.Model.DataItem;
+import com.example.appinfinitycrypto.Model.DataItem_Gainer;
+import com.example.appinfinitycrypto.Model.DataItem_Loser;
 import com.example.appinfinitycrypto.Model.Discover;
 import com.example.appinfinitycrypto.Model.Market;
 import com.example.appinfinitycrypto.Model.TopGainer;
@@ -36,6 +38,9 @@ import retrofit2.Response;
 public class Home extends AppCompatActivity {
 
     private List<DataItem> dataItems;
+    private List<DataItem_Gainer> dataItem_Gainers;
+    private List<DataItem_Loser> dataItem_Losers;
+
     private TopCoinAdapter topCoinAdapter;
     private TopGainerAdapter topGainerAdapter;
     private TopLoserAdapter topLoserAdapter;
@@ -80,7 +85,7 @@ public class Home extends AppCompatActivity {
         topCoinRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
         dataItems = new ArrayList<>();
 
-        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 10, "all", "USD").enqueue(new Callback<Market>() {
+        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 5, "all", "USD").enqueue(new Callback<Market>() {
             @Override
             public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
 
@@ -110,31 +115,30 @@ public class Home extends AppCompatActivity {
         topGainerRecyclerView = findViewById(R.id.topGainerRecyclerView);
         topGainerRecyclerView.setHasFixedSize(true);
         topGainerRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
-        dataItems = new ArrayList<>();
+        dataItem_Gainers = new ArrayList<>();
 
-        ApiCoinMarket.apiCoinMarket.convertUsdToVndGainer("fac03ee8-101c-4a60-86c3-b38e63d5f955", "asc").enqueue(new Callback<Market>() {
+        ApiCoinMarket.apiCoinMarket.convertUsdToVndGainer("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", 1, 5, "all", "USD").enqueue(new Callback<TopGainer>() {
             @Override
-            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
+            public void onResponse(@NonNull Call<TopGainer> call, @NonNull Response<TopGainer> response) {
 
-                Market market = response.body();
-                DataItem item;
+                TopGainer topGainer = response.body();
+                DataItem_Gainer item_gainer;
 
-                if (market == null) {
-                    System.out.println("topGainer null size");
+                if (topGainer == null) {
+                    System.out.println("top gainer null size");
                 }
 
-                if (market != null) {
-                    Log.w("Source code", market.getData().get(1).getName());
-                    for (int i = 0; i < market.getData().size(); i++) {
-                        dataItems.add((DataItem) market.getData().get(i));
+                if (topGainer != null) {
+                    for (int i = 0; i < topGainer.getData().size(); i++) {
+                        dataItem_Gainers.add((DataItem_Gainer) topGainer.getData().get(i));
                     }
-                    topGainerAdapter = new TopGainerAdapter(dataItems);
+                    topGainerAdapter = new TopGainerAdapter(dataItem_Gainers);
                     topGainerRecyclerView.setAdapter(topGainerAdapter);
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<TopGainer> call, @NonNull Throwable t) {
                 Toast.makeText(Home.this, "Call Api Error", Toast.LENGTH_SHORT).show();
             }
         });
@@ -142,18 +146,34 @@ public class Home extends AppCompatActivity {
         // top loser recycler view
         topLoserRecyclerView = findViewById(R.id.topLoserRecyclerView);
         topLoserRecyclerView.setHasFixedSize(true);
-        topLoserRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        topLoserRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
+        dataItem_Losers = new ArrayList<>();
 
-        List<TopLoser> topLoserList = new ArrayList<>();
+        ApiCoinMarket.apiCoinMarket.convertUsdToVndLoser("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", "asc", 1, 5, "all", "USD").enqueue(new Callback<TopLoser>() {
+            @Override
+            public void onResponse(@NonNull Call<TopLoser> call, @NonNull Response<TopLoser> response) {
 
-        topLoserList.add(new TopLoser(R.drawable.bitcoin, "Bitcoin", "BTC"));
-        topLoserList.add(new TopLoser(R.drawable.bitcoin, "Ethereum", "ETH"));
-        topLoserList.add(new TopLoser(R.drawable.bitcoin, "Ethereum", "ETH"));
-        topLoserList.add(new TopLoser(R.drawable.bitcoin, "Ethereum", "ETH"));
-        topLoserList.add(new TopLoser(R.drawable.bitcoin, "Ethereum", "ETH"));
+                TopLoser topLoser = response.body();
+                DataItem_Loser item_loser;
 
-        TopLoserAdapter topLoserAdapter = new TopLoserAdapter(topLoserList);
-        topLoserRecyclerView.setAdapter(topLoserAdapter);
+                if (topLoser == null) {
+                    System.out.println("top loser null size");
+                }
+
+                if (topLoser != null) {
+                    for (int i = 0; i < topLoser.getData().size(); i++) {
+                        dataItem_Losers.add((DataItem_Loser) topLoser.getData().get(i));
+                    }
+                    topLoserAdapter = new TopLoserAdapter(dataItem_Losers);
+                    topLoserRecyclerView.setAdapter(topLoserAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<TopLoser> call, @NonNull Throwable t) {
+                Toast.makeText(Home.this, "Call Api Error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // discover recycler view
         discoverRecyclerView = findViewById(R.id.notificationRecyclerView);
