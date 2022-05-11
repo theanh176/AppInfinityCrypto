@@ -32,14 +32,21 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
 
     @Override
     public void onBindViewHolder(@NonNull DiscoverViewHolder holder, int position) {
+        Discover discover = discoverList.get(position);
+        if(discover==null){
+            return;
+        }
         holder.title.setText(discoverList.get(position).getTitle());
         holder.day.setText(discoverList.get(position).getDay());
-        holder.mImageView.setImageResource(discoverList.get(position).getImage());
+//        holder.mImageView.setImageResource(discoverList.get(position).getImage());
     }
 
     @Override
     public int getItemCount() {
-        return discoverList.size();
+        if(discoverList!=null){
+            return discoverList.size();
+        }
+        return 0;
     }
 
     public class DiscoverViewHolder extends RecyclerView.ViewHolder {
@@ -52,7 +59,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
 
             title = itemView.findViewById(R.id.discover_title);
             day = itemView.findViewById(R.id.discover_day);
-            mImageView = itemView.findViewById(R.id.discover_img);
+//            mImageView = itemView.findViewById(R.id.discover_img);
         }
     }
 }

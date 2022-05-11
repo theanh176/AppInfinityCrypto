@@ -261,10 +261,11 @@ public class SendCodeEmail extends AppCompatActivity {
                                     String pass = getIntent().getStringExtra("pass");
                                     String sex = getIntent().getStringExtra("sex");
                                     String country = getIntent().getStringExtra("country");
+                                    String rule = getIntent().getStringExtra("rule");
 
                                     database = FirebaseDatabase.getInstance().getReference("Account");
 
-                                    Account account = new Account(name, email, date, pass, country, sex);
+                                    Account account = new Account(name, phone, email, date, pass, country, sex, rule);
                                     // Đưa lên firebase
                                     database.child(phone).setValue(account);
 

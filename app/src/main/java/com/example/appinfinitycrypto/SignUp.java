@@ -157,7 +157,6 @@ public class SignUp extends AppCompatActivity {
         final String pass = editTextPassword.getText().toString();
         final String confpass = editTextConfPassword.getText().toString();
         sex();
-
         if(name.isEmpty()||phone.isEmpty()||email.isEmpty()||date.isEmpty()||pass.isEmpty()||confpass.isEmpty()){
             Toast.makeText(SignUp.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
         }else{
@@ -213,6 +212,7 @@ public class SignUp extends AppCompatActivity {
                     public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         progressBar.setVisibility(View.GONE);
                         btnSignup.setVisibility(View.VISIBLE);
+                        final String rule = "user";
                         // CHuyển qua sendotp
                         Intent intent = new Intent(getApplicationContext(), SendCodeEmail.class);
                         intent.putExtra("name", editTextUsername.getText().toString());
@@ -221,6 +221,7 @@ public class SignUp extends AppCompatActivity {
                         intent.putExtra("date", editTextDate.getText().toString());
                         intent.putExtra("pass", editTextPassword.getText().toString());
                         intent.putExtra("sex", sex());
+                        intent.putExtra("rule", rule);
                         intent.putExtra("country", ccpCountry.getSelectedCountryEnglishName());
                         intent.putExtra("checkSendCode", "");
                         intent.putExtra("verificationId", verificationId);

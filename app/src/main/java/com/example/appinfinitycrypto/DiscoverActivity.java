@@ -60,6 +60,7 @@ public class DiscoverActivity extends AppCompatActivity {
     private TextView discover_day, discover_title;
     private ImageView discover_img;
 
+    DatabaseReference database;
     private RecyclerView discoverRecyclerView;
     private List<Discover> discoverList;
     private DiscoverAdapter discoverAdapter;
@@ -84,16 +85,18 @@ public class DiscoverActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("Discover");
+//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//        DatabaseReference databaseReference = firebaseDatabase.getReference("Discover");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        database = FirebaseDatabase.getInstance().getReference("Discover");
+        database.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Discover discover = dataSnapshot.getValue(Discover.class);
                     discoverList.add(discover);
+                    System.out.println("Hello World");
                 }
                 discoverAdapter.notifyDataSetChanged();
             }

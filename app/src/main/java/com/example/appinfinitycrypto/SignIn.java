@@ -40,6 +40,7 @@ public class SignIn extends AppCompatActivity {
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     private static final int RC_SIGN_IN = 100;
+
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -76,7 +77,7 @@ public class SignIn extends AppCompatActivity {
         event();
     }
 
-    private void mapping(){
+    private void mapping() {
         textsignUp = findViewById(R.id.textSignUp);
         textForgotPass = findViewById(R.id.textForgotPass);
         editTextPhone = findViewById(R.id.edtPhoneSignIn);
@@ -86,7 +87,7 @@ public class SignIn extends AppCompatActivity {
         imgFacebook = findViewById(R.id.imgvFacebook);
     }
 
-    private void event(){
+    private void event() {
         textsignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +138,7 @@ public class SignIn extends AppCompatActivity {
 
     }
 
-    private void signInWithGG(){
+    private void signInWithGG() {
         Intent signInIntent = gsc.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -147,12 +148,12 @@ public class SignIn extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                try {
-                    task.getResult(ApiException.class);
-                    HomeActivity();
-                } catch (ApiException e) {
-                    Toast.makeText(this, "Error",Toast.LENGTH_SHORT).show();
-                }
+            try {
+                task.getResult(ApiException.class);
+                HomeActivity();
+            } catch (ApiException e) {
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -162,38 +163,52 @@ public class SignIn extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void SignUp(){
+    private void SignUp() {
         Intent intent = new Intent(SignIn.this, SignUp.class);
         startActivity(intent);
     }
 
-    private void ForgotPassword(){
+    private void ForgotPassword() {
         Intent intent = new Intent(SignIn.this, ForgotPassword.class);
         startActivity(intent);
     }
 
-    private void SignInAccount(){
+    private void SignInAccount() {
         final String phone = editTextPhone.getText().toString();
         final String pass = editTextPass.getText().toString();
 
-        if(phone.isEmpty()||pass.isEmpty()){
+        if (phone.isEmpty() || pass.isEmpty()) {
             Toast.makeText(SignIn.this, "Please enter Phone or Email and Password", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             database.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.hasChild(phone)){
+                    if (snapshot.hasChild(phone)) {
                         final String getPass = snapshot.child(phone).child("pass").getValue(String.class);
-                        if(getPass.equals(pass)){
-                            Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
+                        final String getRule = snapshot.child(phone).child("rule").getValue(String.class);
+                        if (getRule.equals("user")) {
+                            if (getPass.equals(pass)) {
+                                Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(SignIn.this,Home.class);
-                            intent.putExtra("phone", phone);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignIn.this, activity_market.class);
+                                intent.putExtra("phone", phone);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }else{
+                        else if (getRule.equals("admin")) {
+                            if (getPass.equals(pass)) {
+                                Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(SignIn.this, Admin.class);
+                                intent.putExtra("phone", phone);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    } else {
                         Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -207,21 +222,21 @@ public class SignIn extends AppCompatActivity {
         }
     }
 
-    private void getPhonePass(){
-        if(getIntent().getStringExtra("checkSignIn").isEmpty()){
+    private void getPhonePass() {
+        if (getIntent().getStringExtra("checkSignIn").isEmpty()) {
             editTextPhone.setText("");
             editTextPass.setText("");
         }
-        if(!getIntent().getStringExtra("checkSignIn").isEmpty()){
+        if (!getIntent().getStringExtra("checkSignIn").isEmpty()) {
             editTextPhone.setText(String.format(
                     "%s", getIntent().getStringExtra("phone")
             ));
-            if(getIntent().getStringExtra("checkSignIn2").isEmpty()){
+            if (getIntent().getStringExtra("checkSignIn2").isEmpty()) {
                 editTextPass.setText(String.format(
                         "%s", getIntent().getStringExtra("changepass")
                 ));
             }
-            if(!getIntent().getStringExtra("checkSignIn2").isEmpty()){
+            if (!getIntent().getStringExtra("checkSignIn2").isEmpty()) {
                 editTextPass.setText(String.format(
                         "%s", getIntent().getStringExtra("pass")
                 ));
