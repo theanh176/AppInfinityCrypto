@@ -23,5 +23,5 @@
     <string name="tab_news">New</string>
     <string name="account">Account</string>
 
-    <string name="default_web_client_id1"/>
+    <string name="default_web_client_id1" />
 </resources>

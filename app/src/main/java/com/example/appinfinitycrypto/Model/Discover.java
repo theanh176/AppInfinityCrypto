@@ -3,12 +3,20 @@ package com.example.appinfinitycrypto.Model;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Discover {
     private String Type;
     private String Message;
-    private ArrayList<String> Promoted;
-    private ArrayList<DataNew> Data;
+    private List<String> Promoted;
+    private List<DataNew> Data;
+
+    public Discover(String type, String message, List<String> promoted, List<DataNew> data) {
+        this.Type = type;
+        this.Message = message;
+        this.Promoted = promoted;
+        this.Data = data;
+    }
 
     public String getType() {
         return Type;
@@ -26,7 +34,7 @@ public class Discover {
         Message = message;
     }
 
-    public ArrayList<String> getPromoted() {
+    public List<String> getPromoted() {
         return Promoted;
     }
 
@@ -34,11 +42,11 @@ public class Discover {
         Promoted = promoted;
     }
 
-    public ArrayList<DataNew> getData() {
+    public List<DataNew> getData() {
         return Data;
     }
 
-    public void setData(ArrayList<DataNew> data) {
+    public void setData(List<DataNew> data) {
         Data = data;
     }
 }
