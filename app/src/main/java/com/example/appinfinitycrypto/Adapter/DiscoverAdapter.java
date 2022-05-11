@@ -1,5 +1,8 @@
 package com.example.appinfinitycrypto.Adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,42 +12,45 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appinfinitycrypto.Model.DataItem_Gainer;
+import com.example.appinfinitycrypto.Model.DataNew;
 import com.example.appinfinitycrypto.R;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
-
-import com.example.appinfinitycrypto.Model.Discover;
 
 public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.DiscoverViewHolder> {
 
-    private List<Discover> discoverList;
+    private List<DataNew> mDataItem;
+    private List<DataNew> mDataItemOld;
 
-    public DiscoverAdapter(List<Discover> discoverList) {
-        this.discoverList = discoverList;
+    public DiscoverAdapter(List<DataNew> mDataItem) {
+        this.mDataItem = mDataItem;
+        this.mDataItemOld = mDataItem;
     }
 
     @NonNull
     @Override
     public DiscoverViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_discover_coin, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_coin, parent, false);
         return new DiscoverViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DiscoverViewHolder holder, int position) {
-        Discover discover = discoverList.get(position);
-        if(discover==null){
+        DataNew dataItem = mDataItem.get(position);
+        if (dataItem == null) {
             return;
         }
-        holder.title.setText(discoverList.get(position).getTitle());
-        holder.day.setText(discoverList.get(position).getDay());
-//        holder.mImageView.setImageResource(discoverList.get(position).getImage());
+        holder.title.setText(dataItem.getTitle());
+        holder.published_on.setText(dataItem.getPublished_on());
     }
 
     @Override
     public int getItemCount() {
-        if(discoverList!=null){
-            return discoverList.size();
+        if(mDataItem != null) {
+            return mDataItem.size();
         }
         return 0;
     }
@@ -52,14 +58,14 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.Discov
     public class DiscoverViewHolder extends RecyclerView.ViewHolder {
 
         private TextView title;
-        private TextView day;
-        private ImageView mImageView;
+        private TextView published_on;
+
         public DiscoverViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.discover_title);
-            day = itemView.findViewById(R.id.discover_day);
-//            mImageView = itemView.findViewById(R.id.discover_img);
+            published_on = itemView.findViewById(R.id.discover_day);
         }
     }
+
 }
