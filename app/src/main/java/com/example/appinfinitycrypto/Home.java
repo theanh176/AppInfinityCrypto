@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,9 +22,11 @@ import com.example.appinfinitycrypto.Adapter.TopCoinAdapter;
 import com.example.appinfinitycrypto.Adapter.TopGainerAdapter;
 import com.example.appinfinitycrypto.Adapter.TopLoserAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
+import com.example.appinfinitycrypto.Api.ApiNew;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.DataItem_Gainer;
 import com.example.appinfinitycrypto.Model.DataItem_Loser;
+import com.example.appinfinitycrypto.Model.DataNew;
 import com.example.appinfinitycrypto.Model.Discover;
 import com.example.appinfinitycrypto.Model.Market;
 import com.example.appinfinitycrypto.Model.TopGainer;
@@ -40,10 +41,12 @@ public class Home extends AppCompatActivity {
     private List<DataItem> dataItems;
     private List<DataItem_Gainer> dataItem_Gainers;
     private List<DataItem_Loser> dataItem_Losers;
+    private List<DataNew> dataNews;
 
     private TopCoinAdapter topCoinAdapter;
     private TopGainerAdapter topGainerAdapter;
     private TopLoserAdapter topLoserAdapter;
+    private DiscoverAdapter discoverAdapter;
 
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -176,17 +179,35 @@ public class Home extends AppCompatActivity {
         });
 
         // discover recycler view
-        discoverRecyclerView = findViewById(R.id.notificationRecyclerView);
+        discoverRecyclerView = findViewById(R.id.discoverRecyclerView);
         discoverRecyclerView.setHasFixedSize(true);
-        discoverRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        discoverRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
+        dataNews = new ArrayList<>();
 
-        List<Discover> discoverList = new ArrayList<>();
+        ApiNew.apiNew.convertUsdToVnd("283d7ecd8fc18b8a775b3feb651323c508943b922be9b5978fe299fe21f6f0d2").enqueue(new Callback<Discover>() {
+            @Override
+            public void onResponse(@NonNull Call<Discover> call, @NonNull Response<Discover> response) {
 
-        discoverList.add(new Discover(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022"));
-        discoverList.add(new Discover(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022"));
-        discoverList.add(new Discover(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022"));
+                Discover discover = response.body();
+                DataNew item_news;
 
-        DiscoverAdapter discoverAdapter = new DiscoverAdapter(discoverList);
-        discoverRecyclerView.setAdapter(discoverAdapter);
+                if (discover == null) {
+                    System.out.println("discover null size");
+                }
+
+                if (discover != null) {
+                    for (int i = 0; i < discover.getData().size(); i++) {
+                        dataNews.add((DataNew) discover.getData().get(i));
+                    }
+                    discoverAdapter = new DiscoverAdapter(dataNews);
+                    discoverRecyclerView.setAdapter(discoverAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Discover> call, @NonNull Throwable t) {
+                Toast.makeText(Home.this, "Call Api Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

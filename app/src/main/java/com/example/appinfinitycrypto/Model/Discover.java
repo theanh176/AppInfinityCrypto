@@ -1,28 +1,44 @@
 package com.example.appinfinitycrypto.Model;
 
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+
 public class Discover {
-    private int image;
-    private String title;
-    private String day;
+    private String Type;
+    private String Message;
+    private ArrayList<String> Promoted;
+    private ArrayList<DataNew> Data;
 
-    public Discover() {
+    public String getType() {
+        return Type;
     }
 
-    public Discover(int image, String title, String day) {
-        this.image = image;
-        this.title = title;
-        this.day = day;
+    public void setType(String type) {
+        Type = type;
     }
 
-    public int getImage() {
-        return image;
+    public String getMessage() {
+        return Message;
     }
 
-    public String getTitle() {
-        return title;
+    public void setMessage(String message) {
+        Message = message;
     }
 
-    public String getDay() {
-        return day;
+    public ArrayList<String> getPromoted() {
+        return Promoted;
+    }
+
+    public void setPromoted(ArrayList<String> promoted) {
+        Promoted = promoted;
+    }
+
+    public ArrayList<DataNew> getData() {
+        return Data;
+    }
+
+    public void setData(ArrayList<DataNew> data) {
+        Data = data;
     }
 }
