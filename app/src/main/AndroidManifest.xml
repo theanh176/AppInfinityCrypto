@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AppInfinityCrypto"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".NewsActivity"
+            android:exported="true" />
+        <activity
             android:name=".CoinDetailActivity"
             android:exported="true">
             <intent-filter>
@@ -23,7 +26,7 @@
         </activity>
         <activity
             android:name=".NotificationActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".WatchListActivity"
             android:exported="false" />
@@ -35,7 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".Home"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".SendCodeEmail"
             android:exported="false" />
@@ -62,7 +65,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

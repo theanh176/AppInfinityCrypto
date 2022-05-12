@@ -56,7 +56,7 @@ public class NotificationActivity extends AppCompatActivity {
         setTranslucentStatusBar();
 
         // notification recycler view
-        notificationRecyclerView = findViewById(R.id.notificationRecyclerView);
+        notificationRecyclerView = findViewById(R.id.discoverHomeRecyclerView);
         notificationRecyclerView.setHasFixedSize(true);
         notificationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 

@@ -9,13 +9,13 @@ public class Discover {
     private String Type;
     private String Message;
     private List<String> Promoted;
-    private List<DataNew> Data;
+    private List<DataNews> Data;
 
-    public Discover(String type, String message, List<String> promoted, List<DataNew> data) {
-        this.Type = type;
-        this.Message = message;
-        this.Promoted = promoted;
-        this.Data = data;
+    public Discover(String Type, String Message, List Promoted, List<DataNews> Data) {
+        this.Type = Type;
+        this.Message = Message;
+        this.Promoted = Promoted;
+        this.Data = Data;
     }
 
     public String getType() {
@@ -34,19 +34,22 @@ public class Discover {
         Message = message;
     }
 
-    public List<String> getPromoted() {
+    public List getPromoted() {
         return Promoted;
     }
 
-    public void setPromoted(ArrayList<String> promoted) {
+    public void setPromoted(List promoted) {
         Promoted = promoted;
     }
 
-    public List<DataNew> getData() {
+    public List<DataNews> getData() {
         return Data;
     }
 
-    public void setData(List<DataNew> data) {
+    public void setData(List<DataNews> data) {
         Data = data;
     }
-}
+};
+
+
+

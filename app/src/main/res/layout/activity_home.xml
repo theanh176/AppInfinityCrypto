@@ -287,7 +287,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/svn_gilroy_bold"
                     android:paddingHorizontal="10dp"
-                    android:text="Discover"
+                    android:text="News"
                     android:textColor="#ffffff"
                     android:textSize="24sp" />
 
@@ -306,11 +306,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notificationRecyclerView">
+                app:layout_constraintTop_toBottomOf="@+id/discoverHomeRecyclerView">
 
                 <TextView
+                    android:id="@+id/showAllNews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="70dp"
                     android:fontFamily="@font/svn_gilroy_medium"
                     android:paddingHorizontal="10dp"
                     android:text="Show All"
@@ -361,7 +363,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/notificationRecyclerView"
+                android:id="@+id/discoverHomeRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

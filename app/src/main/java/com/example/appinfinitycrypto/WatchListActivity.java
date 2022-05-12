@@ -55,7 +55,7 @@ public class WatchListActivity extends AppCompatActivity {
         setTranslucentStatusBar();
 
         // watch list recycler view
-        watchListRecyclerView = findViewById(R.id.notificationRecyclerView);
+        watchListRecyclerView = findViewById(R.id.discoverHomeRecyclerView);
         watchListRecyclerView.setHasFixedSize(true);
         watchListRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 

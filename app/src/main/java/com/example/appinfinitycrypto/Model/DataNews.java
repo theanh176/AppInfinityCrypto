@@ -1,11 +1,9 @@
 package com.example.appinfinitycrypto.Model;
 
-import java.util.List;
-
-public class DataNew {
+public class DataNews {
     private int id;
     private String guid;
-    private int published_on;
+    private String published_on;
     private String imageurl;
     private String title;
     private String url;
@@ -16,7 +14,37 @@ public class DataNew {
     private String upvotes;
     private String downvotes;
     private String lang;
-    private List<String> source_info;
+    private Source_info source_info;
+
+    public static class Source_info {
+        private String name;
+        private String lang;
+        private String img;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getLang() {
+            return lang;
+        }
+
+        public void setLang(String lang) {
+            this.lang = lang;
+        }
+
+        public String getImg() {
+            return img;
+        }
+
+        public void setImg(String img) {
+            this.img = img;
+        }
+    }
 
     public int getId() {
         return id;
@@ -34,11 +62,21 @@ public class DataNew {
         this.guid = guid;
     }
 
-    public int getPublished_on() {
-        return published_on;
+    public String getPublished_on() {
+
+        // Convert timestamp to date
+        String date = "";
+        try {
+            long time = Long.parseLong(published_on);
+            date = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date(time * 1000));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
-    public void setPublished_on(int published_on) {
+    public void setPublished_on(String published_on) {
         this.published_on = published_on;
     }
 
@@ -122,11 +160,11 @@ public class DataNew {
         this.lang = lang;
     }
 
-    public List<String> getSource_info() {
+    public Source_info getSource_info() {
         return source_info;
     }
 
-    public void setSource_info(List<String> source_info) {
+    public void setSource_info(Source_info source_info) {
         this.source_info = source_info;
     }
 }
