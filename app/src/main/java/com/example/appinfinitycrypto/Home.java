@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ import com.example.appinfinitycrypto.Api.ApiNew;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.DataItem_Gainer;
 import com.example.appinfinitycrypto.Model.DataItem_Loser;
-import com.example.appinfinitycrypto.Model.DataNew;
+import com.example.appinfinitycrypto.Model.DataNews;
 import com.example.appinfinitycrypto.Model.Discover;
 import com.example.appinfinitycrypto.Model.Market;
 import com.example.appinfinitycrypto.Model.TopGainer;
@@ -41,12 +43,14 @@ public class Home extends AppCompatActivity {
     private List<DataItem> dataItems;
     private List<DataItem_Gainer> dataItem_Gainers;
     private List<DataItem_Loser> dataItem_Losers;
-    private List<DataNew> dataNews;
+    private List<DataNews> dataNews;
 
     private TopCoinAdapter topCoinAdapter;
     private TopGainerAdapter topGainerAdapter;
     private TopLoserAdapter topLoserAdapter;
     private DiscoverAdapter discoverAdapter;
+
+    private TextView showAllNews;
 
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -74,7 +78,7 @@ public class Home extends AppCompatActivity {
         }
     }
 
-    private RecyclerView topCoinRecyclerView, topGainerRecyclerView, topLoserRecyclerView, discoverRecyclerView;
+    private RecyclerView topCoinRecyclerView, topGainerRecyclerView, topLoserRecyclerView, discoverHomeRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,28 +183,29 @@ public class Home extends AppCompatActivity {
         });
 
         // discover recycler view
-        discoverRecyclerView = findViewById(R.id.discoverRecyclerView);
-        discoverRecyclerView.setHasFixedSize(true);
-        discoverRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
+        discoverHomeRecyclerView = findViewById(R.id.discoverHomeRecyclerView);
+        discoverHomeRecyclerView.setHasFixedSize(true);
+        discoverHomeRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.VERTICAL, false));
         dataNews = new ArrayList<>();
+        showAllNews = findViewById(R.id.showAllNews);
 
         ApiNew.apiNew.convertUsdToVnd("283d7ecd8fc18b8a775b3feb651323c508943b922be9b5978fe299fe21f6f0d2").enqueue(new Callback<Discover>() {
             @Override
             public void onResponse(@NonNull Call<Discover> call, @NonNull Response<Discover> response) {
 
                 Discover discover = response.body();
-                DataNew item_news;
+                DataNews item_discover;
 
                 if (discover == null) {
                     System.out.println("discover null size");
                 }
 
                 if (discover != null) {
-                    for (int i = 0; i < discover.getData().size(); i++) {
-                        dataNews.add((DataNew) discover.getData().get(i));
+                    for (int i = 0; i < 3; i++) {
+                        dataNews.add((DataNews) discover.getData().get(i));
                     }
                     discoverAdapter = new DiscoverAdapter(dataNews);
-                    discoverRecyclerView.setAdapter(discoverAdapter);
+                    discoverHomeRecyclerView.setAdapter(discoverAdapter);
                 }
             }
 
@@ -209,5 +214,15 @@ public class Home extends AppCompatActivity {
                 Toast.makeText(Home.this, "Call Api Error", Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Click change activity
+        showAllNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, NewsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.appinfinitycrypto" >
+    package="com.example.appinfinitycrypto">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,12 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_new"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppInfinityCrypto"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".NewsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CoinDetailActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".NotificationActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".WatchListActivity"
             android:exported="false" />
@@ -28,8 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".Home"
-            android:exported="true" >
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".SendCodeEmail"
             android:exported="false" />
@@ -41,7 +50,7 @@
             android:exported="false" />
         <activity
             android:name=".LoadingPage"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,8 +65,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
