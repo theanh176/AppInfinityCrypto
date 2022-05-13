@@ -1,5 +1,6 @@
 package com.example.appinfinitycrypto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,9 +12,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.appinfinitycrypto.Adapter.WatchListAdapter;
 import com.example.appinfinitycrypto.Model.WatchList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +55,8 @@ public class WatchListActivity extends AppCompatActivity {
 
 
     private RecyclerView watchListRecyclerView;
+    private DatabaseReference database;
+    private WatchListAdapter watchListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,20 +68,9 @@ public class WatchListActivity extends AppCompatActivity {
         watchListRecyclerView.setHasFixedSize(true);
         watchListRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        List<WatchList> watchListList = new ArrayList<>();
+        // Get data watchlist from firebase
 
-        watchListList.add(new WatchList(R.drawable.bitcoin, R.drawable.ic_caret_up, R.drawable.dicover, R.drawable.ic_star_fill, "Bitcoin", "$9999", "99%", "BTC"));
-        watchListList.add(new WatchList(R.drawable.bitcoin, R.drawable.ic_caret_up, R.drawable.dicover, R.drawable.ic_star_fill, "Bitcoin", "$9999", "99%", "BTC"));
-        watchListList.add(new WatchList(R.drawable.bitcoin, R.drawable.ic_caret_up, R.drawable.dicover, R.drawable.ic_star_fill, "Bitcoin", "$9999", "99%", "BTC"));
-        watchListList.add(new WatchList(R.drawable.bitcoin, R.drawable.ic_caret_up, R.drawable.dicover, R.drawable.ic_star_fill, "Bitcoin", "$9999", "99%", "BTC"));
-        watchListList.add(new WatchList(R.drawable.bitcoin, R.drawable.ic_caret_up, R.drawable.dicover, R.drawable.ic_star_fill, "Bitcoin", "$9999", "99%", "BTC"));
-        watchListList.add(new WatchList(R.drawable.bitcoin, R.drawable.ic_caret_up, R.drawable.dicover, R.drawable.ic_star_fill, "Bitcoin", "$9999", "99%", "BTC"));
-        watchListList.add(new WatchList(R.drawable.bitcoin, R.drawable.ic_caret_up, R.drawable.dicover, R.drawable.ic_star_fill, "Bitcoin", "$9999", "99%", "BTC"));
-        watchListList.add(new WatchList(R.drawable.bitcoin, R.drawable.ic_caret_up, R.drawable.dicover, R.drawable.ic_star_fill, "Bitcoin", "$9999", "99%", "BTC"));
-        watchListList.add(new WatchList(R.drawable.bitcoin, R.drawable.ic_caret_up, R.drawable.dicover, R.drawable.ic_star_fill, "Bitcoin", "$9999", "99%", "BTC"));
 
-        WatchListAdapter watchListAdapter = new WatchListAdapter(watchListList);
-        watchListRecyclerView.setAdapter(watchListAdapter);
 
     }
 }

@@ -36,7 +36,6 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
         holder.img.setImageResource(watchListList.get(position).getImage());
         holder.change.setText(watchListList.get(position).getChange());
         holder.change_icon.setImageResource(watchListList.get(position).getImage_change());
-        holder.chart.setImageResource(watchListList.get(position).getChart());
         holder.sign_name.setText(watchListList.get(position).getSign_name());
         holder.star.setImageResource(watchListList.get(position).getStar());
     }
@@ -54,7 +53,6 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
         private TextView sign_name;
         private ImageView change_icon;
         private ImageView img;
-        private ImageView chart;
         private ImageView star;
 
         public WatchListViewHolder(@NonNull View itemView) {
@@ -66,7 +64,6 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
             sign_name = itemView.findViewById(R.id.watchlist_signname);
             change_icon = itemView.findViewById(R.id.watchlist_changelogo);
             img = itemView.findViewById(R.id.watchlist_img);
-            chart = itemView.findViewById(R.id.watchlist_chart);
             star = itemView.findViewById(R.id.watchlist_star);
         }
     }

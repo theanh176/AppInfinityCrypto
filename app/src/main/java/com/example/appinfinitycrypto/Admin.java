@@ -55,7 +55,7 @@ public class Admin extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast toast = Toast.makeText(Admin.this, "Get list data faild!!!", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(Admin.this, "Get list data faile!!!", Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
