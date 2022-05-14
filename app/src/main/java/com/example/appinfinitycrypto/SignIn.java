@@ -159,7 +159,7 @@ public class SignIn extends AppCompatActivity {
 
     private void HomeActivity() {
         finish();
-        Intent intent = new Intent(getApplicationContext(), Home.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
 

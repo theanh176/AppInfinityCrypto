@@ -12,39 +12,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppInfinityCrypto"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".Fragment.HomeFragment"
-            android:exported="false" />
-        <activity
-            android:name=".Navbar"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Fragment.HomeFragment"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".Navbar"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".ContactActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
         <activity
             android:name=".NewsActivity"
             android:exported="false" />
         <activity
             android:name=".CoinDetailActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
         <activity
             android:name=".NotificationActivity"
             android:exported="false" />
         <activity
             android:name=".WatchListActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".activity_profile_user"
             android:exported="false" />
@@ -80,7 +70,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Admin"
             android:exported="false" />
