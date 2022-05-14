@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AppInfinityCrypto"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Fragment.HomeFragment"
+            android:exported="false" />
+        <activity
+            android:name=".Navbar"
+            android:exported="false" />
+        <activity
             android:name=".ContactActivity"
             android:exported="true">
             <intent-filter>
@@ -74,7 +80,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Admin"
             android:exported="false" />

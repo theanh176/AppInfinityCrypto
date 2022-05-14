@@ -190,7 +190,7 @@ public class SignIn extends AppCompatActivity {
                             if (getPass.equals(pass)) {
                                 Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(SignIn.this, activity_market.class);
+                                Intent intent = new Intent(SignIn.this, MainActivity.class);
                                 intent.putExtra("phone", phone);
                                 startActivity(intent);
                             } else {
