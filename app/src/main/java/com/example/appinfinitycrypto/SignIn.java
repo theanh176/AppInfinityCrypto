@@ -189,10 +189,9 @@ public class SignIn extends AppCompatActivity {
                         if (getRule.equals("user")) {
                             if (getPass.equals(pass)) {
                                 Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
-
                                 Intent intent = new Intent(SignIn.this, MainActivity.class);
-                                intent.putExtra("phone", phone);
                                 startActivity(intent);
+                                ((MyApplication) SignIn.this.getApplication()).setSomeVariable(phone);
                             } else {
                                 Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                             }
@@ -202,7 +201,6 @@ public class SignIn extends AppCompatActivity {
                                 Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(SignIn.this, Admin.class);
-                                intent.putExtra("phone", phone);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();

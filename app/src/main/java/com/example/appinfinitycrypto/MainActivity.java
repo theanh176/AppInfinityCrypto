@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.account11:
                         fragment = new ProfileFragment();
+//                        String phone = getIntent().getStringExtra("phone");
+//                        intent.putExtra("phone", phone);
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
