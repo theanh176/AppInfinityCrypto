@@ -31,17 +31,20 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".ChangeProfile"
+            android:exported="false" />
+        <activity
             android:name=".NotificationActivity"
             android:exported="false" />
         <activity
             android:name=".WatchListActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity_profile_user"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity_market"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Home"
             android:exported="false" />
@@ -68,7 +71,7 @@
             android:exported="false" />
         <activity
             android:name=".SignIn"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

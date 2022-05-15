@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_700"
+    android:background="#1b222f"
     tools:context=".activity_market">
 
     <EditText
@@ -62,37 +62,42 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnsapxep"
-                    style="?attr/materialButtonOutlinedStyle"
+                    android:id="@+id/btnArrangeName"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:background="@drawable/button_radius"
+                    android:textColor="@color/white"
                     android:text="Tên"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <Button
+                    android:id="@+id/btnArrangePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/button_radius"
+                    android:textColor="@color/white"
+                    android:text="Giá"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <Button
+                    android:id="@+id/btnArrangePercent24h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_radius"
+                    android:text="%(24h)" />
+
+                <Button
+                    android:id="@+id/btnArrangePercent7D"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="sap xep 1"
-                    android:textColor="#4DB6AC" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="sap xep 2" />
-
-                <Button
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="sap xep 3"
-                    android:textColor="#4DB6AC" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="sap xep 4" />
+                    android:layout_height="30dp"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/button_radius"
+                    android:text="%(7d)"/>
 
             </LinearLayout>
         </HorizontalScrollView>
