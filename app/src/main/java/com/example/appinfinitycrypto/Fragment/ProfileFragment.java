@@ -1,23 +1,32 @@
 package com.example.appinfinitycrypto.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.appinfinitycrypto.ChangeProfile;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.activity_profile_user;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hbb20.CountryCodePicker;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +37,8 @@ public class ProfileFragment extends Fragment {
 
     private DatabaseReference ref;
     TextView txtFullNamePro, txtPhonePro, txtPasswordPro, txtEmailPro, txtBirthdayPro, txtGender;
+    TextView txtLogOut, txtChangePass, txtChangeProfile, txtWatchList;
+    CountryCodePicker ccpCountryPro;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,8 +91,55 @@ public class ProfileFragment extends Fragment {
         txtPhonePro = view.findViewById(R.id.txtPhoneProfile);
         txtBirthdayPro = view.findViewById(R.id.txtBirthDayProfile);
         txtGender = view.findViewById(R.id.txtGenderProfile);
+        ccpCountryPro = view.findViewById(R.id.ccpCountryProfile);
+
+        txtLogOut = view.findViewById(R.id.txtLogOut);
+        txtChangePass = view.findViewById(R.id.txtChangePassPro);
+        txtChangeProfile = view.findViewById(R.id.txtChangePro);
+        txtWatchList = view.findViewById(R.id.txtWatchlist_pro);
+
         LoadData();
+        LoadListener();
+        UpdateData();
+
         return view;
+    }
+
+    private void LoadListener(){
+
+        txtChangeProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Fragment fragment = new ChangeProfileFragment();
+                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
+                fm.add(R.id.fragment_profile, fragment);
+                fm.addToBackStack(null);
+                fm.commit();
+            }
+
+        });
+
+        txtChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        txtWatchList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        txtLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void LoadData(){
@@ -95,9 +153,48 @@ public class ProfileFragment extends Fragment {
                 txtFullNamePro.setText(account.getName());
                 txtEmailPro.setText(account.getEmail());
                 txtPasswordPro.setText(account.getPass());
-                txtPhonePro.setText(getActivity().getIntent().getStringExtra("phone"));
+                txtPhonePro.setText(account.getPhone());
                 txtBirthdayPro.setText(account.getDate());
                 txtGender.setText(account.getSex());
+                ccpCountryPro.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void UpdateData() {
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Account");
+        ref1.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Account account = snapshot.getValue(Account.class);
+                System.out.println(snapshot.child("name").getValue());
+                txtFullNamePro.setText(account.getName());
+                txtEmailPro.setText(account.getEmail());
+                txtPasswordPro.setText(account.getPass());
+                txtPhonePro.setText(account.getPhone());
+                txtBirthdayPro.setText(account.getDate());
+                txtGender.setText(account.getSex());
+                ccpCountryPro.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
 
             @Override

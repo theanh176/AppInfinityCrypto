@@ -56,7 +56,6 @@ public class activity_profile_user extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity_profile_user.this, ChangeProfile.class);
-                intent.putExtra("id", id);
                 intent.putExtra("fullName", txtFullNamePro.getText().toString());
                 intent.putExtra("email", txtEmailPro.getText().toString());
                 intent.putExtra("phone", txtPhonePro.getText().toString());

@@ -39,7 +39,12 @@ public class ChangeProfile extends AppCompatActivity {
         btnSaveChangePro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.getRef().setValue(createAccount());
+
+                databaseReference.child("name").setValue(createAccount().getName());
+                databaseReference.child("country").setValue(createAccount().getCountry());
+                databaseReference.child("email").setValue(createAccount().getEmail());
+                databaseReference.child("sex").setValue(createAccount().getSex());
+                databaseReference.child("date").setValue(createAccount().getDate());
 //                Đóng activity hiện tại
                 finish();
             }
@@ -86,8 +91,8 @@ public class ChangeProfile extends AppCompatActivity {
         editBirthday = findViewById(R.id.editBirthDayProfile);
         editCountry = findViewById(R.id.editCountryProfile);
 
-        btnSaveChangePro =findViewById(R.id.btnSaveChange);
-        btnBackChange = findViewById(R.id.btnBackChange);
+        btnSaveChangePro =findViewById(R.id.btSaveChange);
+        btnBackChange = findViewById(R.id.btBackChange);
 
         r_male = findViewById(R.id.radio_Male);
         r_female = findViewById(R.id.radio_Female);
@@ -107,8 +112,7 @@ public class ChangeProfile extends AppCompatActivity {
             gender = "Khác";
         }
         String country = editCountry.getText().toString();
-        String pass = getIntent().getStringExtra("pass");
-        Account account = new Account(name, email, birthDay, pass, country, gender);
+        Account account = new Account(name, email, birthDay, country, gender);
 
         return account;
     }

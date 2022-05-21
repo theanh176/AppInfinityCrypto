@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_change_profile"
     android:background="#1b222f"
     tools:context=".ChangeProfile">
 
     <TextView
-        android:id="@+id/txtChangeProfile"
+        android:id="@+id/labelChangeProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -30,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtChangeProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/labelChangeProfile" />
 
     <EditText
         android:id="@+id/editFullNameProfile"
@@ -43,7 +44,7 @@
         android:textSize="20dp"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="@+id/labelEmailProfile"
-        app:layout_constraintTop_toBottomOf="@+id/txtChangeProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/labelChangeProfile" />
 
     <TextView
         android:id="@+id/labelEmailProfile"
@@ -64,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="100dp"
+        android:inputType="textEmailAddress"
         android:text="hieu@gmai.com"
         android:textColor="@color/white"
         android:textSize="20dp"
@@ -91,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="100dp"
+        android:inputType="date"
         android:text="01/01/2022"
         android:textColor="@color/white"
         android:textSize="20dp"
@@ -122,25 +125,25 @@
         app:layout_constraintTop_toBottomOf="@+id/editBirthDayProfile">
 
         <RadioButton
-            android:id="@+id/radioMale"
+            android:id="@+id/radioMaleProChange"
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nam" />
+            android:text="Male" />
 
         <RadioButton
-            android:id="@+id/radioFemale"
+            android:id="@+id/radioFemaleProChange"
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nữ" />
+            android:text="Female" />
 
         <RadioButton
-            android:id="@+id/radioDifference"
+            android:id="@+id/radioDifferenceProChange"
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Khác" />
+            android:text="Difference" />
     </RadioGroup>
 
     <TextView
@@ -156,38 +159,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelGenderProfile" />
 
-    <EditText
-        android:id="@+id/editCountryProfile"
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccpCountryProfileChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="100dp"
         android:text="Việt Nam"
-        android:textColor="@color/white"
-        android:textSize="20dp"
+        app:ccp_textSize="20dp"
+        app:ccp_defaultLanguage="ENGLISH"
+        app:ccp_showPhoneCode="false"
+        app:ccp_showFullName="true"
+        app:ccp_defaultNameCode="VN"
+        app:ccp_contentColor="@color/white"
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="@+id/labelBirthDayProfile"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"/>
 
     <Button
-        android:id="@+id/btSaveChange"
+        android:id="@+id/btnSaveProChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.712"
-        app:layout_constraintStart_toEndOf="@+id/btBackChange"
-        app:layout_constraintTop_toBottomOf="@+id/editCountryProfile" />
+        app:layout_constraintStart_toEndOf="@+id/btnBackProChange"
+        app:layout_constraintTop_toBottomOf="@+id/ccpCountryProfileChange" />
 
     <Button
-        android:id="@+id/btBackChange"
+        android:id="@+id/btnBackProChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="44dp"
+        android:layout_marginTop="28dp"
         android:text="Back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCountryProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/ccpCountryProfileChange"
+        tools:layout_editor_absoluteX="32dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
