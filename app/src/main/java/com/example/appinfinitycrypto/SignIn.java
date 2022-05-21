@@ -192,16 +192,17 @@ public class SignIn extends AppCompatActivity {
                                 Intent intent = new Intent(SignIn.this, MainActivity.class);
                                 startActivity(intent);
                                 ((MyApplication) SignIn.this.getApplication()).setSomeVariable(phone);
+
                             } else {
                                 Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                             }
                         }
                         else if (getRule.equals("admin")) {
                             if (getPass.equals(pass)) {
-                                Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
-
-                                Intent intent = new Intent(SignIn.this, Admin.class);
+                                Intent intent = new Intent(SignIn.this, MainAdmin.class);
                                 startActivity(intent);
+                                ((MyApplication) SignIn.this.getApplication()).setSomeVariable(phone);
+
                             } else {
                                 Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                             }

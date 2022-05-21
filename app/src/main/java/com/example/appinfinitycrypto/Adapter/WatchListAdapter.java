@@ -3,12 +3,15 @@ package com.example.appinfinitycrypto.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.Model.WatchList;
 import com.example.appinfinitycrypto.R;
 

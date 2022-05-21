@@ -69,7 +69,7 @@ public class NewsActivity extends AppCompatActivity {
         // notification recycler view
         newsRecyclerView = findViewById(R.id.newsRecyclerView);
         newsRecyclerView.setHasFixedSize(true);
-        newsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        newsRecyclerView.setLayoutManager(new LinearLayoutManager(NewsActivity.this, LinearLayoutManager.VERTICAL, false));
 
         dataNews = new ArrayList<>();
 

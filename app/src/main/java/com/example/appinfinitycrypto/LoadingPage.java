@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,6 +21,7 @@ import java.util.TimerTask;
 public class LoadingPage extends AppCompatActivity {
 
     Timer timer;
+    private FirebaseAuth mFirebaseAuth;
 
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -52,7 +57,27 @@ public class LoadingPage extends AppCompatActivity {
 
         setTimer();
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
     }
+
+    // Lưu phiên đăng nhập
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+//        if (mFirebaseUser!=null){
+//            Toast.makeText(LoadingPage.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(LoadingPage.this, MainActivity.class);
+//            startActivity(intent);
+////            ((MyApplication) LoadingPage.this.getApplication()).setSomeVariable(phone);
+//        } else {
+//            startActivity(new Intent(this, SignIn.class));
+//            finish();
+//        }
+//    }
 
     public void setTimer() {
         timer = new Timer();

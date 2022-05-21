@@ -12,24 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_new"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppInfinityCrypto"
-        android:usesCleartextTraffic="true">
-<!--        <activity-->
-<!--            android:name=".Fragment.HomeFragment"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".Navbar"-->
-<!--            android:exported="false" />-->
+        android:usesCleartextTraffic="true"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false">
+        <activity
+            android:name=".MainAdmin"
+            android:exported="true" />
         <activity
             android:name=".ContactActivity"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".NewsActivity"
             android:exported="false" />
         <activity
+            android:name=".NewsActivity"
+            android:exported="true" />
+        <activity
             android:name=".CoinDetailActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".ChangeProfile"
             android:exported="false" />
@@ -38,10 +35,10 @@
             android:exported="false" />
         <activity
             android:name=".WatchListActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".activity_profile_user"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".activity_market"
             android:exported="true" />
@@ -71,10 +68,10 @@
             android:exported="false" />
         <activity
             android:name=".SignIn"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Admin"
             android:exported="false" />

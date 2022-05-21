@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.appinfinitycrypto.Adapter.AccountAdapter;
 import com.example.appinfinitycrypto.Model.Account;
+import com.example.appinfinitycrypto.my_interface.IClickItem;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,7 +67,17 @@ public class Admin extends AppCompatActivity {
         editTextSearch = findViewById(R.id.edit_search);
 
         accountList = new ArrayList<>();
-        accountAdapter = new AccountAdapter(accountList);
+        accountAdapter = new AccountAdapter(accountList, new IClickItem() {
+            @Override
+            public void onClickItemSetRule(String phone) {
+
+            }
+
+            @Override
+            public void onClickItemDelete(String phone) {
+
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerViewAccount.setLayoutManager(linearLayoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
