@@ -1,7 +1,9 @@
 package com.example.appinfinitycrypto.Adapter;
 
-import android.content.Context;
-import android.content.DialogInterface;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,90 +13,57 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appinfinitycrypto.Fragment.ListUserFragment;
 import com.example.appinfinitycrypto.Model.Account;
-import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.R;
-import com.example.appinfinitycrypto.my_interface.IClickItem;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.nio.file.DirectoryStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.MyViewHolder> implements Filterable {
+public class HomeAdminAdapter extends RecyclerView.Adapter<HomeAdminAdapter.MyViewHolder> implements Filterable {
     List<Account> accountList;
     List<Account> accountListOld;
-    private DatabaseReference database;
-    private IClickItem iClickItem;
 
-
-    public AccountAdapter(List<Account> accountList, IClickItem iClick) {
+    public HomeAdminAdapter(List<Account> accountList) {
         this.accountList = accountList;
         this.accountListOld = accountList;
-        this.iClickItem = iClick;
+
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_admin, parent, false);
-        return new MyViewHolder(view);
+    public HomeAdminAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_admin, parent, false);
+        return new HomeAdminAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HomeAdminAdapter.MyViewHolder holder, int position) {
         Account accounts = accountList.get(position);
         String name = accounts.getName();
         String phone = accounts.getPhone();
-        if(accounts==null){
+        Boolean check = accounts.getOnline();
+        if(accounts!=null){
+            if(check.equals(true)){
+                holder.imgCheck.setImageResource(R.drawable.ic_check);
+            }else {
+                holder.imgCheck.setImageResource(R.drawable.ic_check_no);
+            }
+        }else{
             return;
         }
+//        if(accounts==null){
+//            return;
+//        }
         holder.textFullName.setText(name);
         holder.textPhone.setText(phone);
-
-        holder.imgDeleteUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iClickItem.onClickItemDelete(phone);
-            }
-        });
-        holder.imgSetRule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iClickItem.onClickItemSetRule(phone);
-            }
-        });
     }
-
-
-//      Dialog
-//    private void dialogUpdateRule(String phone, int positionDia){
-//        AlertDialog.Builder dialogDelete = new AlertDialog.Builder(getActivity());
-//        dialogDelete.setMessage("Do you want the account deletion number registered by this phone number  " +phone+ " ?");
-//        dialogDelete.setPositiveButton("Yse", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                accountList.remove(positionDia);
-//                database = FirebaseDatabase.getInstance().getReference("Account");
-//                database.child(phone).child("rule").setValue("admin");
-//            }
-//        });
-//        dialogDelete.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//            }
-//        });
-//        dialogDelete.show();
-//    }
-//    private Context getActivity() {
-//        return null;
-//    }
 
     @Override
     public int getItemCount() {
@@ -137,14 +106,13 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textFullName, textPhone;
-        ImageView imgSetRule, imgDeleteUser;
+        ImageView imgCheck;
 
         public  MyViewHolder (@NonNull View itemView){
             super(itemView);
             textFullName = itemView.findViewById(R.id.fullname);
             textPhone = itemView.findViewById(R.id.phone);
-            imgDeleteUser = itemView.findViewById(R.id.imgViewDelete);
-            imgSetRule = itemView.findViewById(R.id.imgViewSetRule);
+            imgCheck = itemView.findViewById(R.id.check);
         }
     }
 }

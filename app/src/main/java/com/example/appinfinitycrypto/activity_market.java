@@ -36,7 +36,7 @@ import retrofit2.Response;
 public class activity_market extends AppCompatActivity {
 
     EditText txt;
-    Button sapxep;
+    Button btnArrangeName, btnArrangePrice, btnArrangePercent24h, btnArrangePercent7d;
     private RecyclerView rcvCurrency;
     private List<DataItem> dataItems;
     private CurrencyAdapter currencyAdapter;
@@ -46,7 +46,10 @@ public class activity_market extends AppCompatActivity {
         setContentView(R.layout.activity_market);
 
         txt = findViewById(R.id.edit_search);
-        sapxep = findViewById(R.id.btnsapxep);
+        btnArrangeName = findViewById(R.id.btnArrangeName);
+        btnArrangePrice = findViewById(R.id.btnArrangePrice);
+        btnArrangePercent24h = findViewById(R.id.btnArrangePercent24h);
+        btnArrangePercent7d = findViewById(R.id.btnArrangePercent7D);
         rcvCurrency = findViewById(R.id.rcv_market);
         dataItems = new ArrayList<>();
 
@@ -55,16 +58,8 @@ public class activity_market extends AppCompatActivity {
         ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap", 1,10,"tokens","USD").enqueue(new Callback<Market>() {
             @Override
             public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
-//                CAN XOA DI
-                Toast.makeText(activity_market.this, "Call Api Successful", Toast.LENGTH_SHORT).show();
-//                CAN XOA DI
-                Log.w("Xinchao","Chạy thành công");
                 Market market = response.body();
-//                DataItem item;
                 if (market != null) {
-                    Log.w("Source code",market.getData().get(1).getName());
-
-
                     for (int i = 0; i < market.getData().size(); i++) {
                         dataItems.add((DataItem) market.getData().get(i));
                     }
@@ -74,18 +69,14 @@ public class activity_market extends AppCompatActivity {
                     rcvCurrency.setLayoutManager(linearLayoutManager);
                     rcvCurrency.setAdapter(currencyAdapter);
                 }
-
-
             }
-
             @Override
             public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
                 Toast.makeText(activity_market.this, "Call Api Error", Toast.LENGTH_SHORT).show();
-                Log.w("Xinchao","Chạy thất bại");
             }
         });
 
-        sapxep.setOnClickListener(new View.OnClickListener() {
+        btnArrangeName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Collections.sort(dataItems, new Comparator<DataItem>() {
@@ -94,9 +85,52 @@ public class activity_market extends AppCompatActivity {
                         return t1.getName().compareToIgnoreCase(dataItem.getName());
                     }
                 });
-
                 Collections.reverse(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems);
+                rcvCurrency.setAdapter(currencyAdapter);
+            }
+        });
 
+        btnArrangePrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(dataItems, new Comparator<DataItem>() {
+                    @Override
+                    public int compare(DataItem dataItem, DataItem t1) {
+                        return Double.valueOf(t1.getQuote().getUsd().getPrice()).compareTo(dataItem.getQuote().getUsd().getPrice());
+                    }
+                });
+                Collections.reverse(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems);
+                rcvCurrency.setAdapter(currencyAdapter);
+            }
+        });
+
+        btnArrangePercent24h.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(dataItems, new Comparator<DataItem>() {
+                    @Override
+                    public int compare(DataItem dataItem, DataItem t1) {
+                        return Double.valueOf(t1.getQuote().getUsd().getPercent_change_24h()).compareTo(dataItem.getQuote().getUsd().getPercent_change_24h());
+                    }
+                });
+                Collections.reverse(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems);
+                rcvCurrency.setAdapter(currencyAdapter);
+            }
+        });
+
+        btnArrangePercent7d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(dataItems, new Comparator<DataItem>() {
+                    @Override
+                    public int compare(DataItem dataItem, DataItem t1) {
+                        return Double.valueOf(t1.getQuote().getUsd().getPercent_change_7d()).compareTo(dataItem.getQuote().getUsd().getPercent_change_7d());
+                    }
+                });
+                Collections.reverse(dataItems);
                 currencyAdapter = new CurrencyAdapter(dataItems);
                 rcvCurrency.setAdapter(currencyAdapter);
             }

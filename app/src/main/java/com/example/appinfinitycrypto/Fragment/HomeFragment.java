@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,7 +50,7 @@ import retrofit2.Response;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     private List<DataItem> dataItems;
     private List<DataItem_Gainer> dataItem_Gainers;
@@ -247,10 +248,11 @@ public class HomeFragment extends Fragment {
         showAllNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(requireActivity(), NewsActivity.class);
-                startActivity(intent);
+                NewsFragment fragment = new NewsFragment();
+                getFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
             }
         });
+
         return view;
 
     }

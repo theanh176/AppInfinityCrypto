@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/body_container"
-    tools:context=".MainActivity">
+    android:id="@+id/body_admin_container"
+    tools:context=".MainAdmin">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_bar"
+        android:id="@+id/bottom_admin_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FFFFFF"
+        android:background="#ffffff"
         android:elevation="16dp"
         app:abb_selectedIndex="0"
-        app:menu="@menu/clock_tabs"
+        app:menu="@menu/admin_tabs"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

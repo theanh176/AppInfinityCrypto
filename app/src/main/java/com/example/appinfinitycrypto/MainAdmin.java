@@ -1,7 +1,5 @@
 package com.example.appinfinitycrypto;
 
-import static androidx.navigation.Navigation.findNavController;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -16,21 +14,21 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.appinfinitycrypto.Fragment.HomeFragment;
-import com.example.appinfinitycrypto.Fragment.MarketFragment;
-import com.example.appinfinitycrypto.Fragment.NewsFragment;
-import com.example.appinfinitycrypto.Fragment.ProfileFragment;
-import com.example.appinfinitycrypto.Fragment.WatchListFragment;
+import com.example.appinfinitycrypto.Fragment.AccountAdminFragment;
+import com.example.appinfinitycrypto.Fragment.HomeAdminFragment;
+import com.example.appinfinitycrypto.Fragment.ListAdminFragment;
+import com.example.appinfinitycrypto.Fragment.ListUserFragment;
+import com.example.appinfinitycrypto.Fragment.StatisticalFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainAdmin extends AppCompatActivity {
 
     BottomNavigationView navigationView;
     private DatabaseReference database;
 
-//    Change the status bar color
+    //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
@@ -55,15 +53,17 @@ public class MainActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_admin);
+
         setTranslucentStatusBar();
 
-        navigationView = findViewById(R.id.bottom_bar);
-        getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new HomeFragment()).commit();
-        navigationView.setSelectedItemId(R.id.home11);
+        navigationView = findViewById(R.id.bottom_admin_bar);
+        getSupportFragmentManager().beginTransaction().replace(R.id.body_admin_container, new HomeAdminFragment()).commit();
+        navigationView.setSelectedItemId(R.id.homeadmin11);
 
         String phone = ((MyApplication) this.getApplication()).getSomeVariable();
         database = FirebaseDatabase.getInstance().getReference("Account");
@@ -72,29 +72,25 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                 Fragment fragment = null;
+                Fragment fragment = null;
                 switch (item.getItemId()){
-                    case R.id.home11:
-                        fragment = new HomeFragment();
+                    case R.id.homeadmin11:
+                        fragment = new HomeAdminFragment();
                         break;
-
-                    case R.id.market11:
-                        fragment = new MarketFragment();
+                    case R.id.listUser11:
+                        fragment = new ListUserFragment();
                         break;
-
-                    case R.id.watchlist11:
-                        fragment = new WatchListFragment();
+                    case R.id.listAdmin11:
+                        fragment = new ListAdminFragment();
                         break;
-
-                    case R.id.newspaper11:
-                        fragment = new NewsFragment();
+                    case R.id.statistical:
+                        fragment = new StatisticalFragment();
                         break;
-
-                    case R.id.account11:
-                        fragment = new ProfileFragment();
+                    case R.id.accountadmin11:
+                        fragment = new AccountAdminFragment();
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.body_admin_container, fragment).commit();
 
                 return true;
             }
@@ -116,45 +112,4 @@ public class MainActivity extends AppCompatActivity {
         database.child(phone).child("isOnline").setValue(false);
         Log.d("MainActivity Lifecycle", "===== onStop =====");
     }
-//@Override
-//protected void onStart() {
-//    super.onStart();
-//
-//    Log.d("MainActivity Lifecycle", "===== onStart =====");
-//}
-//
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//
-//        Log.d("MainActivity Lifecycle", "===== onRestart =====");
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        Log.d("MainActivity Lifecycle", "===== onResume =====");
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        Log.d("MainActivity Lifecycle", "===== onPause =====");
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//
-//        Log.d("MainActivity Lifecycle", "===== onStop =====");
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//
-//        Log.d("MainActivity Lifecycle", "===== onDestroy =====");
-//    }
 }
