@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import com.example.appinfinitycrypto.Model.TopCoin;
-
 public class TopCoinAdapter extends RecyclerView.Adapter<TopCoinAdapter.TopCoinViewHolder> {
 
     private List<DataItem> mDataItem;
@@ -67,8 +65,8 @@ public class TopCoinAdapter extends RecyclerView.Adapter<TopCoinAdapter.TopCoinV
         public TopCoinViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            symbol = itemView.findViewById(R.id.watchlist_signname);
-            price = itemView.findViewById(R.id.watchlist_prize);
+            symbol = itemView.findViewById(R.id.watchlist_symbol);
+            price = itemView.findViewById(R.id.watchlist_price);
             mImageView = itemView.findViewById(R.id.watchlist_img);
         }
     }

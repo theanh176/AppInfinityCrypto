@@ -65,8 +65,8 @@ public class TopGainerAdapter extends RecyclerView.Adapter<TopGainerAdapter.TopG
         public TopGainerViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            symbol = itemView.findViewById(R.id.watchlist_signname);
-            price = itemView.findViewById(R.id.watchlist_prize);
+            symbol = itemView.findViewById(R.id.watchlist_symbol);
+            price = itemView.findViewById(R.id.watchlist_price);
             mImageView = itemView.findViewById(R.id.watchlist_img);
         }
     }

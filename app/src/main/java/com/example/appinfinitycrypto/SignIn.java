@@ -189,7 +189,7 @@ public class SignIn extends AppCompatActivity {
                         if (getRule.equals("user")) {
                             if (getPass.equals(pass)) {
                                 Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SignIn.this, MainActivity.class);
+                                Intent intent = new Intent(SignIn.this, WatchListActivity.class);
                                 startActivity(intent);
                                 ((MyApplication) SignIn.this.getApplication()).setSomeVariable(phone);
                             } else {

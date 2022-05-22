@@ -40,12 +40,14 @@ public class activity_profile_user extends AppCompatActivity {
     }
 
     private void LoadData(){
-        ref = FirebaseDatabase.getInstance().getReference("Account").child(getIntent().getStringExtra("phone"));
+        String phone = ((MyApplication) this.getApplication()).getSomeVariable();
+
+        ref = FirebaseDatabase.getInstance().getReference("Account").child(phone);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Account account = snapshot.getValue(Account.class);
-                System.out.println(snapshot.child("name").getValue());
+                System.out.println(snapshot.child("watchlist").getValue());
                 txtFullNamePro.setText(account.getName());
                 txtEmailPro.setText(account.getEmail());
                 txtPasswordPro.setText(account.getPass());

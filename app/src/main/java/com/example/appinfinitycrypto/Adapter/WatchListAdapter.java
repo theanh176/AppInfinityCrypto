@@ -1,5 +1,10 @@
 package com.example.appinfinitycrypto.Adapter;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +14,32 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appinfinitycrypto.Model.WatchList;
+import com.example.appinfinitycrypto.Model.Account;
+import com.example.appinfinitycrypto.Model.DataItem;
+import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.WatchListActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.WatchListViewHolder> {
 
-    private List<WatchList> watchListList;
+    private final List<String> myList;
+    private String phone;
+    private List<DataItem> mDataItem;
 
-    public WatchListAdapter(List<WatchList> watchListList) {
-        this.watchListList = watchListList;
+    public WatchListAdapter(List<DataItem> mDataItem, String phone, List<String> myList) {
+        this.mDataItem = mDataItem;
+        this.phone = phone;
+        this.myList = myList;
     }
 
     @NonNull
@@ -30,41 +50,98 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WatchListAdapter.WatchListViewHolder holder, int position) {
-        holder.name.setText(watchListList.get(position).getName());
-        holder.prize.setText(watchListList.get(position).getPrize());
-        holder.img.setImageResource(watchListList.get(position).getImage());
-        holder.change.setText(watchListList.get(position).getChange());
-        holder.change_icon.setImageResource(watchListList.get(position).getImage_change());
-        holder.sign_name.setText(watchListList.get(position).getSign_name());
-        holder.star.setImageResource(watchListList.get(position).getStar());
+    public void onBindViewHolder(@NonNull WatchListViewHolder holder, int position) {
+        DataItem dataItem = mDataItem.get(position);
+        if (dataItem == null) {
+            return;
+        }
+        holder.symbol.setText(dataItem.getSymbol());
+        holder.price.setText(String.format("$%.2f", dataItem.getQuote().getUsd().getPrice()));
+        holder.name.setText(dataItem.getName());
+        if (dataItem.getQuote().getUsd().getPercent_change_24h() < 0) {
+            holder.change.setTextColor(Color.RED);
+            holder.change.setText("-" + String.format("$%.2f",dataItem.getQuote().getUsd().getPercent_change_24h()) + "%");
+            holder.mImageViewChange.setImageResource(R.drawable.caret_down_red);
+        } else{
+            holder.change.setTextColor(Color.GREEN);
+            holder.change.setText("+" + String.format("$%.2f",dataItem.getQuote().getUsd().getPercent_change_24h()) + "%");
+            holder.mImageViewChange.setImageResource(R.drawable.caret_up_green);
+        }
+
+        LoadImage loadImage = new LoadImage(holder.mImageView);
+        loadImage.execute("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png");
+        holder.star.setImageResource(R.drawable.ic_star_fill);
+
+
+        //click star set value to firebase
+        holder.star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Account").child(phone).child("watchlist").child(myList.get(position));
+                databaseReference.setValue(null);
+                mDataItem.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return watchListList.size();
+        if(mDataItem != null) {
+            return mDataItem.size();
+        }
+        return 0;
+    }
+
+    public int getPosition() {
+        return mDataItem.indexOf(mDataItem);
     }
 
     public class WatchListViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView symbol;
+        private TextView price;
+        private ImageView mImageView;
         private TextView name;
-        private TextView prize;
         private TextView change;
-        private TextView sign_name;
-        private ImageView change_icon;
-        private ImageView img;
+        private ImageView mImageViewChange;
         private ImageView star;
 
         public WatchListViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            name = itemView.findViewById(R.id.watchlist_signname);
-            prize = itemView.findViewById(R.id.watchlist_prize);
+            symbol = itemView.findViewById(R.id.watchlist_symbol);
+            price = itemView.findViewById(R.id.watchlist_price);
+            mImageView = itemView.findViewById(R.id.watchlist_img);
+            name = itemView.findViewById(R.id.watchlist_name);
             change = itemView.findViewById(R.id.watchlist_change);
-            sign_name = itemView.findViewById(R.id.watchlist_signname);
-            change_icon = itemView.findViewById(R.id.watchlist_changelogo);
-            img = itemView.findViewById(R.id.watchlist_img);
+            mImageViewChange = itemView.findViewById(R.id.watchlist_changelogo);
             star = itemView.findViewById(R.id.watchlist_star);
+        }
+    }
+
+    private class LoadImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView imageView;
+        public LoadImage(ImageView ivResult){
+            this.imageView = ivResult;
+        }
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            String urlLink = strings[0];
+            Bitmap bitmap = null;
+            try {
+                InputStream inputStream = new java.net.URL(urlLink).openStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
         }
     }
 }

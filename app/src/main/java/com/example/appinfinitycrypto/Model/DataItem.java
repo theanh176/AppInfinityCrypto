@@ -1,11 +1,9 @@
 package com.example.appinfinitycrypto.Model;
 
-import com.google.firebase.database.core.Platform;
-
 import java.util.List;
 
 public class DataItem {
-    private int id;
+    private String id;
     private String name;
     private String symbol;
     private String slug;
@@ -22,11 +20,11 @@ public class DataItem {
     private String last_updated;
     private Quote quote;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -102,14 +100,6 @@ public class DataItem {
         this.total_supply = total_supply;
     }
 
-//    public Platform getPlatform() {
-//        return platform;
-//    }
-//
-//    public void setPlatform(Platform platform) {
-//        this.platform = platform;
-//    }
-
     public int getCmc_rank() {
         return cmc_rank;
     }
@@ -149,4 +139,5 @@ public class DataItem {
     public void setQuote(Quote quote) {
         this.quote = quote;
     }
+
 }

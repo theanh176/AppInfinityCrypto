@@ -23,14 +23,14 @@
                 android:src="@drawable/bitcoin" />
 
             <LinearLayout
-                android:layout_width="120dp"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/watchlist_signname"
+                    android:id="@+id/watchlist_symbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/svn_gilroy_medium"
@@ -61,8 +61,8 @@
                     >
                     <ImageView
                         android:id="@+id/watchlist_changelogo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_caret_up" />
 
                     <TextView
@@ -77,7 +77,7 @@
 
 
                 <TextView
-                    android:id="@+id/watchlist_prize"
+                    android:id="@+id/watchlist_price"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/svn_gilroy_medium"
