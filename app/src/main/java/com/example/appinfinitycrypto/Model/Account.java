@@ -33,8 +33,8 @@ public class Account {
         return isOnline;
     }
 
-    public void setOnline(Boolean online) {
-        isOnline = online;
+    public void setOnline(Boolean isOnline) {
+        this.isOnline = isOnline;
     }
 
     public HashMap<String, Boolean> getWatchlist() {
@@ -117,7 +117,7 @@ public class Account {
         this.sex = sex;
     }
 
-    public Account(String name, String phone, String email, String date, String pass, String country, String sex, String rule, Boolean isOnline) {
+    public Account(String name, String phone, String email, String date, String pass, String country, String sex, String rule) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -126,7 +126,6 @@ public class Account {
         this.country = country;
         this.sex = sex;
         this.rule = rule;
-        this.isOnline = isOnline;
     }
 
     public Account(String name, String phone, String rule) {

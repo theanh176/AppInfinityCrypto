@@ -222,8 +222,7 @@ public class SignUp extends AppCompatActivity {
                         intent.putExtra("pass", editTextPassword.getText().toString());
                         intent.putExtra("sex", sex());
                         intent.putExtra("rule", rule);
-                        intent.putExtra("isOnline", false);
-                        intent.putExtra("country", ccpCountry.getSelectedCountryEnglishName());
+                        intent.putExtra("country", ccpCountry.getSelectedCountryCode());
                         intent.putExtra("checkSendCode", "");
                         intent.putExtra("verificationId", verificationId);
                         startActivity(intent);
