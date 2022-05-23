@@ -114,8 +114,6 @@ public class ChangeProfileFragment extends Fragment {
                     r_difference.setChecked(true);
                 }
                 ccpCountryProfileChange.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
-
-
             }
 
             @Override

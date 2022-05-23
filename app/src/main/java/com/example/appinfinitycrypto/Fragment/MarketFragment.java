@@ -41,8 +41,8 @@ import retrofit2.Response;
  */
 public class MarketFragment extends Fragment {
 
-    EditText txt;
-    Button sapxep;
+    EditText editSearchMarket;
+    Button btnArrangeName, btnArrangePrice, btnArrangePercent24h, btnArrangePercent7d;
     private RecyclerView rcvCurrency;
     private List<DataItem> dataItems;
     private CurrencyAdapter currencyAdapter;
@@ -93,10 +93,14 @@ public class MarketFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_market, container, false);
 
-        txt = view.findViewById(R.id.edit_search);
-        sapxep = view.findViewById(R.id.btnsapxep);
+        editSearchMarket = view.findViewById(R.id.edit_search_market);
+        btnArrangeName = view.findViewById(R.id.btnArrangeName);
+        btnArrangePrice = view.findViewById(R.id.btnArrangePrice);
+        btnArrangePercent24h = view.findViewById(R.id.btnArrangePercent24h);
+        btnArrangePercent7d = view.findViewById(R.id.btnArrangePercent7D);
         rcvCurrency = view.findViewById(R.id.rcv_market);
         dataItems = new ArrayList<>();
+
 
 //        https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=fac03ee8-101c-4a60-86c3-b38e63d5f955&sort=market_cap&start=1&limit=100&cryptocurrency_type=tokens&convert=USD
         ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap", 1,10,"tokens","USD").enqueue(new Callback<Market>() {
@@ -115,7 +119,7 @@ public class MarketFragment extends Fragment {
                     for (int i = 0; i < market.getData().size(); i++) {
                         dataItems.add((DataItem) market.getData().get(i));
                     }
-                    currencyAdapter = new CurrencyAdapter(dataItems);
+                    currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
 //                    RecyclerView cần có một LayoutManager, ta tạo một LayoutManager
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
                     rcvCurrency.setLayoutManager(linearLayoutManager);
@@ -132,7 +136,7 @@ public class MarketFragment extends Fragment {
             }
         });
 
-        sapxep.setOnClickListener(new View.OnClickListener() {
+        btnArrangeName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Collections.sort(dataItems, new Comparator<DataItem>() {
@@ -144,12 +148,57 @@ public class MarketFragment extends Fragment {
 
                 Collections.reverse(dataItems);
 
-                currencyAdapter = new CurrencyAdapter(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
 
-        txt.addTextChangedListener(new TextWatcher() {
+        btnArrangePrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(dataItems, new Comparator<DataItem>() {
+                    @Override
+                    public int compare(DataItem dataItem, DataItem t1) {
+                        return Double.valueOf(t1.getQuote().getUsd().getPrice()).compareTo(dataItem.getQuote().getUsd().getPrice());
+                    }
+                });
+                Collections.reverse(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
+                rcvCurrency.setAdapter(currencyAdapter);
+            }
+        });
+
+        btnArrangePercent24h.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(dataItems, new Comparator<DataItem>() {
+                    @Override
+                    public int compare(DataItem dataItem, DataItem t1) {
+                        return Double.valueOf(t1.getQuote().getUsd().getPercent_change_24h()).compareTo(dataItem.getQuote().getUsd().getPercent_change_24h());
+                    }
+                });
+                Collections.reverse(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
+                rcvCurrency.setAdapter(currencyAdapter);
+            }
+        });
+
+        btnArrangePercent7d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(dataItems, new Comparator<DataItem>() {
+                    @Override
+                    public int compare(DataItem dataItem, DataItem t1) {
+                        return Double.valueOf(t1.getQuote().getUsd().getPercent_change_7d()).compareTo(dataItem.getQuote().getUsd().getPercent_change_7d());
+                    }
+                });
+                Collections.reverse(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
+                rcvCurrency.setAdapter(currencyAdapter);
+            }
+        });
+
+        editSearchMarket.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 

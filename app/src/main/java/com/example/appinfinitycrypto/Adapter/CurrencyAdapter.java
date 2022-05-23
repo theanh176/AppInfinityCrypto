@@ -1,24 +1,30 @@
 package com.example.appinfinitycrypto.Adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.my_interface.ItemClickListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,10 +39,12 @@ import java.util.Locale;
 public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder> implements Filterable {
     private List<DataItem> mDataItem;
     private List<DataItem> mDataItemOld;
+    private Context context;
 
-    public CurrencyAdapter(List<DataItem> mDataItem) {
+    public CurrencyAdapter(List<DataItem> mDataItem, Context context) {
         this.mDataItem = mDataItem;
         this.mDataItemOld = mDataItem;
+        this.context = context;
     }
 
     @NonNull
@@ -71,6 +79,13 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         loadImage.execute("https://s2.coinmarketcap.com/static/img/coins/64x64/" + dataItem.getId() + ".png");
         LoadImage loadImageChart = new LoadImage(holder.currencyChartImageView);
         loadImageChart.execute("https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" + dataItem.getId() + ".png");
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongCLick) {
+                Toast.makeText(context, "" + mDataItem.get(position).getId() + " " + mDataItem.get(position).getSymbol(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -117,12 +132,17 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         };
     }
 
-    class CurrencyViewHolder extends RecyclerView.ViewHolder{
+    class CurrencyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         private TextView currencyNameTextView, currencySymbolTextView,
                 currencyPriceTextView,
                 currencyChangeTextView;
+        private CheckBox ckStar;
         private ImageView currencyImageView, currencyChartImageView, currencyChangeImageView;
+
+//        Khai báo interface xử lý sự kiện click recyclerview
+        private ItemClickListener itemClickListener;
+
         public CurrencyViewHolder(View itemView) {
             super(itemView);
 
@@ -134,8 +154,44 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             currencyChangeTextView = itemView.findViewById(R.id.currencyChangeTextView);
             currencyChartImageView = itemView.findViewById(R.id.currencyChartImageView);
             currencyChangeImageView = itemView.findViewById(R.id.currencyChangeImageView);
+            ckStar = itemView.findViewById(R.id.ckStar);
+
+            itemView.setOnClickListener(this);
+
+
+            ckStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(ckStar.isChecked()) {
+//                        ckStar.setBackgroundResource(R.drawable.ic_star_fill);
+                        Toast.makeText(itemView.getContext(), "Đã thêm vào Watchlist của bạn", Toast.LENGTH_SHORT).show();
+                    } else {
+//                        ckStar.setBackgroundResource(R.drawable.ic_star_outline);
+                        Toast.makeText(itemView.getContext(), "Đã xóa khỏi Watchlist của bạn", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            ckStar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
 
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            return false;
+        }
     }
 
     private class LoadImage extends AsyncTask<String, Void, Bitmap> {

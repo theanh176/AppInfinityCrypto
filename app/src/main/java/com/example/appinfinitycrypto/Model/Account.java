@@ -17,18 +17,18 @@ public class Account {
     public String rule;
     public HashMap<String, Boolean> watchlist;
 
-    public Account(DataSnapshot snapshot) {
-        HashMap<String, Object> hashMap = (HashMap<String, Object>) snapshot.getValue();
-        this.name = (String) hashMap.get("name");
-        this.phone = (String) hashMap.get("phone");
-        this.email = (String) hashMap.get("email");
-        this.date = (String) hashMap.get("date");
-        this.pass = (String) hashMap.get("pass");
-        this.country = (String) hashMap.get("country");
-        this.watchlist = (HashMap<String, Boolean>) hashMap.get("watchlist");
-        this.sex = (String) hashMap.get("sex");
-        this.rule = (String) hashMap.get("rule");
-    }
+//    public Account(DataSnapshot snapshot) {
+//        HashMap<String, Object> hashMap = (HashMap<String, Object>) snapshot.getValue();
+//        this.name = (String) hashMap.get("name");
+//        this.phone = (String) hashMap.get("phone");
+//        this.email = (String) hashMap.get("email");
+//        this.date = (String) hashMap.get("date");
+//        this.pass = (String) hashMap.get("pass");
+//        this.country = (String) hashMap.get("country");
+//        this.watchlist = (HashMap<String, Boolean>) hashMap.get("watchlist");
+//        this.sex = (String) hashMap.get("sex");
+//        this.rule = (String) hashMap.get("rule");
+//    }
 
     public String getName() {
         return name;
@@ -115,11 +115,11 @@ public class Account {
 
     }
 
-    public List<String> getWatchList() {
-        if (watchlist == null) {
-            return new ArrayList<>();
-        }
-        return new ArrayList<>(watchlist.keySet());
-
-    }
+//    public List<String> getWatchList() {
+//        if (watchlist == null) {
+//            return new ArrayList<>();
+//        }
+//        return new ArrayList<>(watchlist.keySet());
+//
+//    }
 }

@@ -48,16 +48,16 @@ public class HomeAdminAdapter extends RecyclerView.Adapter<HomeAdminAdapter.MyVi
         Account accounts = accountList.get(position);
         String name = accounts.getName();
         String phone = accounts.getPhone();
-        Boolean check = accounts.getOnline();
-        if(accounts!=null){
-            if(check.equals(true)){
-                holder.imgCheck.setImageResource(R.drawable.ic_check);
-            }else {
-                holder.imgCheck.setImageResource(R.drawable.ic_check_no);
-            }
-        }else{
-            return;
-        }
+//        Boolean check = accounts.getOnline();
+//        if(accounts!=null){
+//            if(check.equals(true)){
+//                holder.imgCheck.setImageResource(R.drawable.ic_check);
+//            }else {
+//                holder.imgCheck.setImageResource(R.drawable.ic_check_no);
+//            }
+//        }else{
+//            return;
+//        }
 //        if(accounts==null){
 //            return;
 //        }

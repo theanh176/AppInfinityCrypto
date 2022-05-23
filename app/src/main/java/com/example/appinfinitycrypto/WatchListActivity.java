@@ -95,8 +95,8 @@ public class WatchListActivity extends AppCompatActivity {
         ref.child(phone).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Account account = new Account(dataSnapshot);
-                    myList = account.getWatchList();
+//                    Account account = new Account(dataSnapshot);
+//                    myList = account.getWatchList();
              }
 
             @Override
@@ -143,7 +143,7 @@ public class WatchListActivity extends AppCompatActivity {
         ref.child(phone).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Account account = new Account(snapshot);
+//                Account account = new Account(snapshot);
             }
 
             @Override

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.appinfinitycrypto.Adapter.CurrencyAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
+import com.example.appinfinitycrypto.Fragment.MarketFragment;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.Market;
 
@@ -63,7 +64,7 @@ public class activity_market extends AppCompatActivity {
                     for (int i = 0; i < market.getData().size(); i++) {
                         dataItems.add((DataItem) market.getData().get(i));
                     }
-                    currencyAdapter = new CurrencyAdapter(dataItems);
+                    currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
 //                    RecyclerView cần có một LayoutManager, ta tạo một LayoutManager
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_market.this);
                     rcvCurrency.setLayoutManager(linearLayoutManager);
@@ -86,7 +87,7 @@ public class activity_market extends AppCompatActivity {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
@@ -101,7 +102,7 @@ public class activity_market extends AppCompatActivity {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
@@ -116,7 +117,7 @@ public class activity_market extends AppCompatActivity {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
@@ -131,7 +132,7 @@ public class activity_market extends AppCompatActivity {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems);
+                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });

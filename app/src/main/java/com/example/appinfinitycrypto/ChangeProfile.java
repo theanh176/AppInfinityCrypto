@@ -112,7 +112,7 @@ public class ChangeProfile extends AppCompatActivity {
             gender = "Khác";
         }
         String country = editCountry.getText().toString();
-        Account account = new Account(name, email, birthDay, country, gender);
+        Account account = new Account();
 
         return account;
     }
