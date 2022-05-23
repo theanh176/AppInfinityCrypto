@@ -19,6 +19,7 @@ import com.example.appinfinitycrypto.ChangeProfile;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.SignIn;
 import com.example.appinfinitycrypto.activity_profile_user;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -123,7 +124,11 @@ public class ProfileFragment extends Fragment {
         txtChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Fragment fragment = new ChangePasswordFragment();
+                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
+                fm.add(R.id.fragment_profile, fragment);
+                fm.addToBackStack(null);
+                fm.commit();
             }
         });
 
@@ -137,7 +142,10 @@ public class ProfileFragment extends Fragment {
         txtLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                Intent intent = new Intent(ProfileFragment.this.getContext(), SignIn.class);
+////                ((MyApplication) getActivity().getApplication()).setSomeVariable("");
+//                startActivity(intent);
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
     }
@@ -153,7 +161,7 @@ public class ProfileFragment extends Fragment {
                 txtFullNamePro.setText(account.getName());
                 txtEmailPro.setText(account.getEmail());
                 txtPasswordPro.setText(account.getPass());
-                txtPhonePro.setText(account.getPhone());
+                txtPhonePro.setText("*******" + account.getPhone().substring(7));
                 txtBirthdayPro.setText(account.getDate());
                 txtGender.setText(account.getSex());
                 ccpCountryPro.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
@@ -181,7 +189,7 @@ public class ProfileFragment extends Fragment {
                 txtFullNamePro.setText(account.getName());
                 txtEmailPro.setText(account.getEmail());
                 txtPasswordPro.setText(account.getPass());
-                txtPhonePro.setText(account.getPhone());
+                txtPhonePro.setText("*******" + account.getPhone().substring(7));
                 txtBirthdayPro.setText(account.getDate());
                 txtGender.setText(account.getSex());
                 ccpCountryPro.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
