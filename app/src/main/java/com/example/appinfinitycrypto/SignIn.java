@@ -41,6 +41,8 @@ public class SignIn extends AppCompatActivity {
     GoogleSignInClient gsc;
     private static final int RC_SIGN_IN = 100;
 
+    SessionManager sessionManager;
+
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -73,8 +75,19 @@ public class SignIn extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         setTranslucentStatusBar();
 
-        mapping();
-        event();
+        if(!DataLocalManager.getFirstInstall()){
+            mapping();
+            event();
+        }else{
+
+//            ((MyApplication) SignIn.this.getApplication()).setSomeVariable(DataLocalManager.getFirstInstall());
+
+            Intent intent = new Intent(SignIn.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+//        mapping();
+//        event();
     }
 
     private void mapping() {
@@ -94,7 +107,6 @@ public class SignIn extends AppCompatActivity {
                 SignUp();
             }
         });
-
         textForgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,11 +200,18 @@ public class SignIn extends AppCompatActivity {
                         final String getRule = snapshot.child(phone).child("rule").getValue(String.class);
                         if (getRule.equals("user")) {
                             if (getPass.equals(pass)) {
+
+
+                                DataLocalManager.setFirstInstall(true);
+                                DataLocalManager.setPhoneInstall(phone);
+
+
                                 Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SignIn.this, MainActivity.class);
-//                                Intent intent = new Intent(SignIn.this, WatchListActivity.class);
                                 startActivity(intent);
                                 ((MyApplication) SignIn.this.getApplication()).setSomeVariable(phone);
+
+                                finish();
 
                             } else {
                                 Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();

@@ -16,9 +16,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.appinfinitycrypto.ChangeProfile;
+import com.example.appinfinitycrypto.DataLocalManager;
+import com.example.appinfinitycrypto.MainActivity;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.SessionManager;
 import com.example.appinfinitycrypto.SignIn;
 import com.example.appinfinitycrypto.activity_profile_user;
 import com.google.firebase.database.ChildEventListener;
@@ -40,6 +43,7 @@ public class ProfileFragment extends Fragment {
     TextView txtFullNamePro, txtPhonePro, txtPasswordPro, txtEmailPro, txtBirthdayPro, txtGender;
     TextView txtLogOut, txtChangePass, txtChangeProfile, txtWatchList;
     CountryCodePicker ccpCountryPro;
+    SessionManager sessionManager;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -142,16 +146,26 @@ public class ProfileFragment extends Fragment {
         txtLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Huu Hieu
 //                Intent intent = new Intent(ProfileFragment.this.getContext(), SignIn.class);
 ////                ((MyApplication) getActivity().getApplication()).setSomeVariable("");
 //                startActivity(intent);
-                getActivity().getSupportFragmentManager().popBackStack();
+
+//                getActivity().getSupportFragmentManager().popBackStack();
+
+                // The Anh
+                DataLocalManager.setFirstInstall(false);
+                DataLocalManager.setPhoneInstall("");
+                Intent intent = new Intent(getActivity(), SignIn.class);
+                intent.putExtra("checkSignIn","");
+                startActivity(intent);
             }
         });
     }
 
     private void LoadData(){
-        String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+//        String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+        String phone = DataLocalManager.getPhoneInstall();
         ref = FirebaseDatabase.getInstance().getReference("Account").child(phone);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

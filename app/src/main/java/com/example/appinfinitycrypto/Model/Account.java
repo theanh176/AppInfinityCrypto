@@ -15,20 +15,37 @@ public class Account {
     public String country;
     public String sex;
     public String rule;
+    public Boolean isOnline;
     public HashMap<String, Boolean> watchlist;
 
-//    public Account(DataSnapshot snapshot) {
-//        HashMap<String, Object> hashMap = (HashMap<String, Object>) snapshot.getValue();
-//        this.name = (String) hashMap.get("name");
-//        this.phone = (String) hashMap.get("phone");
-//        this.email = (String) hashMap.get("email");
-//        this.date = (String) hashMap.get("date");
-//        this.pass = (String) hashMap.get("pass");
-//        this.country = (String) hashMap.get("country");
-//        this.watchlist = (HashMap<String, Boolean>) hashMap.get("watchlist");
-//        this.sex = (String) hashMap.get("sex");
-//        this.rule = (String) hashMap.get("rule");
-//    }
+    public Account(DataSnapshot snapshot) {
+        HashMap<String, Object> hashMap = (HashMap<String, Object>) snapshot.getValue();
+        this.name = (String) hashMap.get("name");
+        this.phone = (String) hashMap.get("phone");
+        this.email = (String) hashMap.get("email");
+        this.date = (String) hashMap.get("date");
+        this.pass = (String) hashMap.get("pass");
+        this.country = (String) hashMap.get("country");
+        this.watchlist = (HashMap<String, Boolean>) hashMap.get("watchlist");
+        this.sex = (String) hashMap.get("sex");
+        this.rule = (String) hashMap.get("rule");
+    }
+
+    public HashMap<String, Boolean> getWatchlist() {
+        return watchlist;
+    }
+
+    public void setWatchlist(HashMap<String, Boolean> watchlist) {
+        this.watchlist = watchlist;
+    }
+
+    public Boolean getOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(Boolean isOnline) {
+        this.isOnline = isOnline;
+    }
 
     public String getName() {
         return name;
@@ -105,6 +122,14 @@ public class Account {
         this.rule = rule;
     }
 
+    public Account(String name, String email, String date, String country, String sex) {
+        this.name = name;
+        this.email = email;
+        this.date = date;
+        this.country = country;
+        this.sex = sex;
+    }
+
     public Account(String name, String phone, String rule) {
         this.name = name;
         this.phone = phone;
@@ -120,6 +145,5 @@ public class Account {
 //            return new ArrayList<>();
 //        }
 //        return new ArrayList<>(watchlist.keySet());
-//
 //    }
 }

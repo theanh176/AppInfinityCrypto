@@ -116,45 +116,4 @@ public class MainActivity extends AppCompatActivity {
         database.child(phone).child("isOnline").setValue(false);
         Log.d("MainActivity Lifecycle", "===== onStop =====");
     }
-//@Override
-//protected void onStart() {
-//    super.onStart();
-//
-//    Log.d("MainActivity Lifecycle", "===== onStart =====");
-//}
-//
-//    @Override
-//    protected void onRestart() {
-//        super.onRestart();
-//
-//        Log.d("MainActivity Lifecycle", "===== onRestart =====");
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        Log.d("MainActivity Lifecycle", "===== onResume =====");
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        Log.d("MainActivity Lifecycle", "===== onPause =====");
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//
-//        Log.d("MainActivity Lifecycle", "===== onStop =====");
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//
-//        Log.d("MainActivity Lifecycle", "===== onDestroy =====");
-//    }
 }

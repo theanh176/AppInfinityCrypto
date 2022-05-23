@@ -2,13 +2,36 @@ package com.example.appinfinitycrypto.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.appinfinitycrypto.Adapter.WatchListAdapter;
+import com.example.appinfinitycrypto.Api.ApiCoinMarket;
+import com.example.appinfinitycrypto.Model.Account;
+import com.example.appinfinitycrypto.Model.DataItem;
+import com.example.appinfinitycrypto.Model.Market;
+import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.WatchListActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +39,13 @@ import com.example.appinfinitycrypto.R;
  * create an instance of this fragment.
  */
 public class WatchListFragment extends Fragment {
+
+    private List<DataItem> dataItems;
+    private WatchListAdapter watchListAdapter;
+    private RecyclerView watchListRecyclerView;
+    private List<String> myList;
+
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Account");
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +91,75 @@ public class WatchListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_watch_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_watch_list, container, false);
+
+        LoadData();
+        // watch list recycler view
+        watchListRecyclerView = view.findViewById(R.id.discoverHomeRecyclerView);
+        watchListRecyclerView.setHasFixedSize(true);
+        watchListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        dataItems = new ArrayList<>();
+        DataItem item;
+
+        // get data from firebase
+        String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+        ref.child(phone).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Account account = new Account(dataSnapshot);
+//                myList = account.getWatchList();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 100, "all", "USD").enqueue(new Callback<Market>() {
+            @Override
+            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
+
+                Market market = response.body();
+
+                if (market == null) {
+                    System.out.println("Market null size");
+                }
+
+                if (market != null) {
+                    for (int i = 0; i < market.getData().size(); i++) {
+                        // check if my list contains the coin
+                        for (int j = 0; j < myList.size(); j++) {
+                            if (market.getData().get(i).getSymbol().equals(myList.get(j))) {
+                                dataItems.add((DataItem) market.getData().get(i));
+                            }
+                        }
+                    }
+                    watchListAdapter = new WatchListAdapter(dataItems, phone, myList);
+                    watchListRecyclerView.setAdapter(watchListAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
+                Toast.makeText(getActivity(), "Call Api Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
+    }
+    private void LoadData(){
+        String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+        ref.child(phone).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Account account = new Account(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });;
     }
 }
