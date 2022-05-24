@@ -6,7 +6,8 @@ public class DataLocalManager {
 
     private static final String PREF_FIRST_INSTALL = "PREF_FIRST_INSTALL";
     private static final String PREF_FIRST_PHONE = "PREF_FIRST_PHONE";
-    private static final String PREF_FIRST_RULE = "PREF_FIRST_RULE";
+    private static final String PREF_FIRST_RULE_USER = "PREF_FIRST_RULE_USER";
+    private static final String PREF_FIRST_RULE_ADMIN = "PREF_FIRST_RULE_ADMIN";
     private static DataLocalManager instance;
     private SessionManager sessionManager;
 
@@ -39,11 +40,19 @@ public class DataLocalManager {
         return DataLocalManager.getInstance().sessionManager.getStringPhone(PREF_FIRST_PHONE);
     }
 
-    public static void setRuleInstall(Boolean isRule){
-        DataLocalManager.getInstance().sessionManager.putBooleanRule(PREF_FIRST_RULE, isRule);
+    public static void setRuleUserInstall(Boolean isRule){
+        DataLocalManager.getInstance().sessionManager.putBooleanRuleUser(PREF_FIRST_RULE_USER, isRule);
     }
 
-    public static boolean getRuleInstall(){
-        return DataLocalManager.getInstance().sessionManager.getBooleanRule(PREF_FIRST_RULE);
+    public static boolean getRuleUserInstall(){
+        return DataLocalManager.getInstance().sessionManager.getBooleanRuleUser(PREF_FIRST_RULE_USER);
+    }
+
+    public static void setRuleAdminInstall(Boolean isRule){
+        DataLocalManager.getInstance().sessionManager.putBooleanRuleAdmin(PREF_FIRST_RULE_ADMIN, isRule);
+    }
+
+    public static boolean getRuleAdminInstall(){
+        return DataLocalManager.getInstance().sessionManager.getBooleanRuleAdmin(PREF_FIRST_RULE_ADMIN);
     }
 }

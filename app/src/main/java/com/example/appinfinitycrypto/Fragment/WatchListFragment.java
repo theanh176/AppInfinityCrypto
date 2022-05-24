@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.appinfinitycrypto.Adapter.WatchListAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
+import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.Market;
@@ -103,7 +104,7 @@ public class WatchListFragment extends Fragment {
         DataItem item;
 
         // get data from firebase
-        String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+        String phone = DataLocalManager.getPhoneInstall();
         ref.child(phone).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -150,7 +151,7 @@ public class WatchListFragment extends Fragment {
         return view;
     }
     private void LoadData(){
-        String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+        String phone = DataLocalManager.getPhoneInstall();;
         ref.child(phone).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

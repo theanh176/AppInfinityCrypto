@@ -41,14 +41,26 @@ public class SessionManager {
         return sharedPreferences.getString(key, "");
     }
 
-    public static void putBooleanRule(String key, boolean value){
+    public static void putBooleanRuleUser(String key, boolean value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, value);
         editor.apply();
     }
 
-    public static boolean getBooleanRule(String key){
+    public static boolean getBooleanRuleUser(String key){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(key, false);
+    }
+
+    public static void putBooleanRuleAdmin(String key, boolean value){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
+
+    public static boolean getBooleanRuleAdmin(String key){
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(key, false);
     }

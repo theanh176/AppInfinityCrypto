@@ -161,7 +161,8 @@ public class ProfileFragment extends Fragment {
 
                 DataLocalManager.setFirstInstall(false);
                 DataLocalManager.setPhoneInstall("");
-                DataLocalManager.setFirstInstall(false);
+                DataLocalManager.setRuleUserInstall(false);
+                DataLocalManager.setRuleAdminInstall(false);
 
                 Intent intent = new Intent(getActivity(), SignIn.class);
                 intent.putExtra("checkSignIn","");

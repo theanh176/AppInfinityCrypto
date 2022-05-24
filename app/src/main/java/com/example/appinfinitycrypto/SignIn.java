@@ -79,11 +79,11 @@ public class SignIn extends AppCompatActivity {
             mapping();
             event();
         }else{
-            if(!DataLocalManager.getRuleInstall()){
+            if(DataLocalManager.getRuleUserInstall()){
                 Intent intent = new Intent(SignIn.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-            }else{
+            }if(DataLocalManager.getRuleAdminInstall()){
                 Intent intent = new Intent(SignIn.this, MainAdmin.class);
                 startActivity(intent);
                 finish();
@@ -205,7 +205,7 @@ public class SignIn extends AppCompatActivity {
 
                                 DataLocalManager.setFirstInstall(true);
                                 DataLocalManager.setPhoneInstall(phone);
-                                DataLocalManager.setRuleInstall(true);
+                                DataLocalManager.setRuleUserInstall(true);
 
                                 Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SignIn.this, MainActivity.class);
@@ -222,6 +222,7 @@ public class SignIn extends AppCompatActivity {
 
                                 DataLocalManager.setFirstInstall(true);
                                 DataLocalManager.setPhoneInstall(phone);
+                                DataLocalManager.setRuleAdminInstall(true);
 
                                 Intent intent = new Intent(SignIn.this, MainAdmin.class);
                                 startActivity(intent);
