@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,239 +8,265 @@
     android:background="#1b222f"
     tools:context=".ChangeProfile">
 
-    <TableRow
-        android:id="@+id/tableRow"
-        android:layout_width="368dp"
-        android:layout_height="64dp"
-        android:layout_margin="20dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="77dp"
-            android:layout_height="49dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:id="@+id/tableRow"
+            android:layout_width="368dp"
+            android:layout_height="64dp"
+            android:layout_margin="20dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.051"
-            app:srcCompat="@drawable/infinity_crypto_logo" />
+            app:layout_constraintVertical_bias="0.0">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="77dp"
+                android:layout_height="49dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.047"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.051"
+                app:srcCompat="@drawable/infinity_crypto_logo" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/svn_gilroy_heavy"
+                android:text="Infinity Crypto"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.372"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.061" />
+
+        </TableRow>
+
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="210dp"
+            android:id="@+id/labelChangeProfile"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/svn_gilroy_heavy"
-            android:text="Infinity Crypto"
-            android:textColor="#ffffff"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="132dp"
+            android:text="Change Profile"
+            android:textColor="@color/white"
+            android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.372"
+            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TableLayout
+            android:id="@+id/layoutTbChangePro"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelChangeProfile"
+            tools:ignore="MissingConstraints">
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/labelFullNameProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Full Name"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelChangeProfile" />
+
+                <EditText
+                    android:id="@+id/editFullNameProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="@color/colorGrey"
+                    android:text="Nguyễn Hữu Hiếu"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintHorizontal_bias="0.444"
+                    app:layout_constraintStart_toStartOf="@+id/labelEmailProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/labelChangeProfile" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/labelEmailProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelFullNameProfile" />
+
+                <EditText
+                    android:id="@+id/editEmailProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="@color/colorGrey"
+                    android:inputType="textEmailAddress"
+                    android:text="hieu@gmai.com"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintHorizontal_bias="0.444"
+                    app:layout_constraintStart_toStartOf="@+id/labelEmailProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/editFullNameProfile" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/labelBirthDayProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BirthDay"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelEmailProfile" />
+
+                <EditText
+                    android:id="@+id/editBirthDayProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="@color/colorGrey"
+                    android:inputType="date"
+                    android:text="01/01/2022"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintHorizontal_bias="0.084"
+                    app:layout_constraintStart_toStartOf="@+id/labelBirthDayProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/editEmailProfile" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/labelGenderProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelBirthDayProfile" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="133dp"
+                    android:layout_height="97dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="@+id/labelGenderProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/editBirthDayProfile">
+
+                    <RadioButton
+                        android:id="@+id/radioMaleProChange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        android:id="@+id/radioFemaleProChange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        android:id="@+id/radioDifferenceProChange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Difference"
+                        android:textColor="@color/white" />
+                </RadioGroup>
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/labelCountryProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Country"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelGenderProfile" />
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccpCountryProfileChange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Việt Nam"
+                    app:ccp_contentColor="@color/white"
+                    app:ccp_defaultLanguage="ENGLISH"
+                    app:ccp_defaultNameCode="VN"
+                    app:ccp_showFullName="true"
+                    app:ccp_showPhoneCode="false"
+                    app:ccp_textSize="20dp"
+                    app:layout_constraintHorizontal_bias="0.084"
+                    app:layout_constraintStart_toStartOf="@+id/labelBirthDayProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/btnSaveProChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTbChangePro" />
+
+        <Button
+            android:id="@+id/btnBackProChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:text="Back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.061" />
-
-    </TableRow>
-
-    <TextView
-        android:id="@+id/labelChangeProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:text="Change Profile"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/labelFullNameProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Full Name"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelChangeProfile" />
-
-    <EditText
-        android:id="@+id/editFullNameProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="100dp"
-        android:backgroundTint="@color/colorGrey"
-        android:text="Nguyễn Hữu Hiếu"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="@+id/labelEmailProfile"
-        app:layout_constraintTop_toBottomOf="@+id/labelChangeProfile" />
-
-    <TextView
-        android:id="@+id/labelEmailProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Email"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelFullNameProfile" />
-
-    <EditText
-        android:id="@+id/editEmailProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="100dp"
-        android:inputType="textEmailAddress"
-        android:backgroundTint="@color/colorGrey"
-        android:text="hieu@gmai.com"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="@+id/labelEmailProfile"
-        app:layout_constraintTop_toBottomOf="@+id/editFullNameProfile" />
-
-
-    <TextView
-        android:id="@+id/labelBirthDayProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="BirthDay"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelEmailProfile" />
-
-    <EditText
-        android:id="@+id/editBirthDayProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="100dp"
-        android:inputType="date"
-        android:text="01/01/2022"
-        android:backgroundTint="@color/colorGrey"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintHorizontal_bias="0.084"
-        app:layout_constraintStart_toStartOf="@+id/labelBirthDayProfile"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailProfile" />
-
-    <TextView
-        android:id="@+id/labelGenderProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Gender"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelBirthDayProfile" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="133dp"
-        android:layout_height="97dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="@+id/labelGenderProfile"
-        app:layout_constraintTop_toBottomOf="@+id/editBirthDayProfile">
-
-        <RadioButton
-            android:id="@+id/radioMaleProChange"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Male" />
-
-        <RadioButton
-            android:id="@+id/radioFemaleProChange"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Female" />
-
-        <RadioButton
-            android:id="@+id/radioDifferenceProChange"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Difference" />
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/labelCountryProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
-        android:text="Country"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelGenderProfile" />
-
-    <com.hbb20.CountryCodePicker
-        android:id="@+id/ccpCountryProfileChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="100dp"
-        android:text="Việt Nam"
-        app:ccp_textSize="20dp"
-        app:ccp_defaultLanguage="ENGLISH"
-        app:ccp_showPhoneCode="false"
-        app:ccp_showFullName="true"
-        app:ccp_defaultNameCode="VN"
-        app:ccp_contentColor="@color/white"
-        app:layout_constraintHorizontal_bias="0.084"
-        app:layout_constraintStart_toStartOf="@+id/labelBirthDayProfile"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"/>
-
-    <Button
-        android:id="@+id/btnSaveProChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ccpCountryProfileChange" />
-
-    <Button
-        android:id="@+id/btnBackProChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:text="Back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
