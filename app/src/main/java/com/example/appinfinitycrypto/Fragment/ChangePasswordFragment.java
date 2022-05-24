@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
@@ -53,7 +54,7 @@ public class ChangePasswordFragment extends Fragment {
                 || editReenterPassword.getText().toString().isEmpty()) {
                     Toast.makeText(ChangePasswordFragment.this.getContext(), "Yêu cầu nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
-                    String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+                    String phone = DataLocalManager.getPhoneInstall();
                     ref = FirebaseDatabase.getInstance().getReference("Account").child(phone);
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override

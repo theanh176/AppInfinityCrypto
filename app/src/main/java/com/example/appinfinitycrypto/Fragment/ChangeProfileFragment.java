@@ -75,7 +75,7 @@ public class ChangeProfileFragment extends Fragment {
                     Toast.makeText(ChangeProfileFragment.this.getContext(), "Yêu cầu nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+                    String phone = DataLocalManager.getPhoneInstall();
                     ref = FirebaseDatabase.getInstance().getReference("Account").child(phone);
                     ref.child("name").setValue(editFullName.getText().toString());
                     ref.child("email").setValue(editEmail.getText().toString());
