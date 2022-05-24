@@ -10,8 +10,6 @@ public class SessionManager {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     private static final String NAME = "App InfinityCrypto";
-    private static final String KEY_LOGIN = "isLogin";
-    private static final String KEY_PHONE = "isPhone";
 
     public SessionManager(Context context){
         this.context = context;
@@ -43,15 +41,15 @@ public class SessionManager {
         return sharedPreferences.getString(key, "");
     }
 
-    public void SetLogin(boolean isLogin){
-        editor.putBoolean(KEY_LOGIN, isLogin);
-        editor.commit();
+    public static void putBooleanRule(String key, boolean value){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(key, value);
+        editor.apply();
     }
-    public void SetPhone(String isPhone){
-        editor.putString(KEY_PHONE, isPhone);
-        editor.commit();
-    }
-    public boolean Check(){
-        return preferences.getBoolean(KEY_LOGIN, false);
+
+    public static boolean getBooleanRule(String key){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(key, false);
     }
 }

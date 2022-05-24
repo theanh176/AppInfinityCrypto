@@ -18,6 +18,7 @@ import com.example.appinfinitycrypto.Fragment.AccountAdminFragment;
 import com.example.appinfinitycrypto.Fragment.HomeAdminFragment;
 import com.example.appinfinitycrypto.Fragment.ListAdminFragment;
 import com.example.appinfinitycrypto.Fragment.ListUserFragment;
+import com.example.appinfinitycrypto.Fragment.ProfileFragment;
 import com.example.appinfinitycrypto.Fragment.StatisticalFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -65,7 +66,7 @@ public class MainAdmin extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.body_admin_container, new HomeAdminFragment()).commit();
         navigationView.setSelectedItemId(R.id.homeadmin11);
 
-        String phone = ((MyApplication) this.getApplication()).getSomeVariable();
+        String phone = DataLocalManager.getPhoneInstall();
         database = FirebaseDatabase.getInstance().getReference("Account");
         database.child(phone).child("isOnline").setValue(true);
 
@@ -87,7 +88,7 @@ public class MainAdmin extends AppCompatActivity {
                         fragment = new StatisticalFragment();
                         break;
                     case R.id.accountadmin11:
-                        fragment = new AccountAdminFragment();
+                        fragment = new ProfileFragment();
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.body_admin_container, fragment).commit();
@@ -99,17 +100,21 @@ public class MainAdmin extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        String phone = ((MyApplication) this.getApplication()).getSomeVariable();
-        database = FirebaseDatabase.getInstance().getReference("Account");
-        database.child(phone).child("isOnline").setValue(true);
-        Log.d("MainActivity Lifecycle", "===== onRestart =====");
+        String phone = DataLocalManager.getPhoneInstall();
+        if(!phone.isEmpty()){
+            database = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+            database.child("isOnline").setValue(true);
+            Log.d("MainActivity Lifecycle", "===== onRestart =====");
+        }
     }
     @Override
     protected void onStop() {
         super.onStop();
-        String phone = ((MyApplication) this.getApplication()).getSomeVariable();
-        database = FirebaseDatabase.getInstance().getReference("Account");
-        database.child(phone).child("isOnline").setValue(false);
-        Log.d("MainActivity Lifecycle", "===== onStop =====");
+        String phone = DataLocalManager.getPhoneInstall();
+        if(!phone.isEmpty()){
+            database = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+            database.child("isOnline").setValue(false);
+            Log.d("MainActivity Lifecycle", "===== onStop =====");
+        }
     }
 }

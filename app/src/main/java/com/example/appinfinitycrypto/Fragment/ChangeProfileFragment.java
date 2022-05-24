@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
@@ -95,7 +96,8 @@ public class ChangeProfileFragment extends Fragment {
     }
 
     private void LoadData() {
-        String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+//        String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
+        String phone = DataLocalManager.getPhoneInstall();
         ref = FirebaseDatabase.getInstance().getReference("Account").child(phone);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

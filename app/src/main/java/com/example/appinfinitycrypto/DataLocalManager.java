@@ -6,6 +6,7 @@ public class DataLocalManager {
 
     private static final String PREF_FIRST_INSTALL = "PREF_FIRST_INSTALL";
     private static final String PREF_FIRST_PHONE = "PREF_FIRST_PHONE";
+    private static final String PREF_FIRST_RULE = "PREF_FIRST_RULE";
     private static DataLocalManager instance;
     private SessionManager sessionManager;
 
@@ -36,5 +37,13 @@ public class DataLocalManager {
 
     public static String getPhoneInstall(){
         return DataLocalManager.getInstance().sessionManager.getStringPhone(PREF_FIRST_PHONE);
+    }
+
+    public static void setRuleInstall(Boolean isRule){
+        DataLocalManager.getInstance().sessionManager.putBooleanRule(PREF_FIRST_RULE, isRule);
+    }
+
+    public static boolean getRuleInstall(){
+        return DataLocalManager.getInstance().sessionManager.getBooleanRule(PREF_FIRST_RULE);
     }
 }

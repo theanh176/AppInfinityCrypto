@@ -140,6 +140,10 @@ public class Account {
 
     }
 
+
+
+
+
 //    public List<String> getWatchList() {
 //        if (watchlist == null) {
 //            return new ArrayList<>();

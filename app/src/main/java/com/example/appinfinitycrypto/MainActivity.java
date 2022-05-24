@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new HomeFragment()).commit();
         navigationView.setSelectedItemId(R.id.home11);
 
-        String phone = ((MyApplication) this.getApplication()).getSomeVariable();
+        String phone = DataLocalManager.getPhoneInstall();
         database = FirebaseDatabase.getInstance().getReference("Account");
         database.child(phone).child("isOnline").setValue(true);
 
@@ -103,17 +103,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        String phone = ((MyApplication) this.getApplication()).getSomeVariable();
-        database = FirebaseDatabase.getInstance().getReference("Account");
-        database.child(phone).child("isOnline").setValue(true);
-        Log.d("MainActivity Lifecycle", "===== onRestart =====");
+        String phone = DataLocalManager.getPhoneInstall();
+        if(!phone.isEmpty()){
+            database = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+            database.child("isOnline").setValue(true);
+            Log.d("MainActivity Lifecycle", "===== onRestart =====");
+        }
     }
     @Override
     protected void onStop() {
         super.onStop();
-        String phone = ((MyApplication) this.getApplication()).getSomeVariable();
-        database = FirebaseDatabase.getInstance().getReference("Account");
-        database.child(phone).child("isOnline").setValue(false);
-        Log.d("MainActivity Lifecycle", "===== onStop =====");
+        String phone = DataLocalManager.getPhoneInstall();
+        if(!phone.isEmpty()){
+            database = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+            database.child("isOnline").setValue(false);
+            Log.d("MainActivity Lifecycle", "===== onStop =====");
+        }
     }
 }

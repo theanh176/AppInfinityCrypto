@@ -79,15 +79,16 @@ public class SignIn extends AppCompatActivity {
             mapping();
             event();
         }else{
-
-//            ((MyApplication) SignIn.this.getApplication()).setSomeVariable(DataLocalManager.getFirstInstall());
-
-            Intent intent = new Intent(SignIn.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            if(!DataLocalManager.getRuleInstall()){
+                Intent intent = new Intent(SignIn.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Intent intent = new Intent(SignIn.this, MainAdmin.class);
+                startActivity(intent);
+                finish();
+            }
         }
-//        mapping();
-//        event();
     }
 
     private void mapping() {
@@ -204,12 +205,11 @@ public class SignIn extends AppCompatActivity {
 
                                 DataLocalManager.setFirstInstall(true);
                                 DataLocalManager.setPhoneInstall(phone);
-
+                                DataLocalManager.setRuleInstall(true);
 
                                 Toast.makeText(SignIn.this, "Successfully Sign In", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SignIn.this, MainActivity.class);
                                 startActivity(intent);
-                                ((MyApplication) SignIn.this.getApplication()).setSomeVariable(phone);
 
                                 finish();
 
@@ -219,12 +219,18 @@ public class SignIn extends AppCompatActivity {
                         }
                         else if (getRule.equals("admin")) {
                             if (getPass.equals(pass)) {
+
+                                DataLocalManager.setFirstInstall(true);
+                                DataLocalManager.setPhoneInstall(phone);
+
                                 Intent intent = new Intent(SignIn.this, MainAdmin.class);
                                 startActivity(intent);
-                                ((MyApplication) SignIn.this.getApplication()).setSomeVariable(phone);
+
+                                finish();
 
                             } else {
                                 Toast.makeText(SignIn.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                                System.out.println("Hello World");
                             }
                         }
                     } else {

@@ -107,7 +107,7 @@ public class WatchListFragment extends Fragment {
         ref.child(phone).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Account account = new Account(dataSnapshot);
+//                Account account = new Account(dataSnapshot);
 //                myList = account.getWatchList();
             }
 
@@ -154,7 +154,7 @@ public class WatchListFragment extends Fragment {
         ref.child(phone).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Account account = new Account(snapshot);
+//                Account account = new Account(snapshot);
             }
 
             @Override

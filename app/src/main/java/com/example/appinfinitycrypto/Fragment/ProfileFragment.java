@@ -43,7 +43,7 @@ public class ProfileFragment extends Fragment {
     TextView txtFullNamePro, txtPhonePro, txtPasswordPro, txtEmailPro, txtBirthdayPro, txtGender;
     TextView txtLogOut, txtChangePass, txtChangeProfile, txtWatchList;
     CountryCodePicker ccpCountryPro;
-    SessionManager sessionManager;
+    private DatabaseReference database;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -154,11 +154,19 @@ public class ProfileFragment extends Fragment {
 //                getActivity().getSupportFragmentManager().popBackStack();
 
                 // The Anh
+                String phone = DataLocalManager.getPhoneInstall();
+                database = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+                database.child("isOnline").setValue(false);
+                Log.d("MainActivity Lifecycle", "===== onStop =====");
+
                 DataLocalManager.setFirstInstall(false);
                 DataLocalManager.setPhoneInstall("");
+                DataLocalManager.setFirstInstall(false);
+
                 Intent intent = new Intent(getActivity(), SignIn.class);
                 intent.putExtra("checkSignIn","");
                 startActivity(intent);
+                getActivity().finish();
             }
         });
     }
