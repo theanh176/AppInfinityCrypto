@@ -106,10 +106,7 @@ public class MarketFragment extends Fragment {
         ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap", 1,10,"tokens","USD").enqueue(new Callback<Market>() {
             @Override
             public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
-//                CAN XOA DI
-                Toast.makeText(requireActivity(), "Call Api Successful", Toast.LENGTH_SHORT).show();
-//                CAN XOA DI
-                Log.w("Xinchao","Chạy thành công");
+
                 Market market = response.body();
 //                DataItem item;
                 if (market != null) {

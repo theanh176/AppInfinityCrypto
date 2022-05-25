@@ -22,9 +22,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appinfinitycrypto.DataLocalManager;
+import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.R;
 import com.example.appinfinitycrypto.my_interface.ItemClickListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,14 +39,17 @@ import java.io.InputStream;
 //import java.net.MalformedURLException;
 //import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder> implements Filterable {
     private List<DataItem> mDataItem;
     private List<DataItem> mDataItemOld;
     private Context context;
+    private DatabaseReference ref;
 
     public CurrencyAdapter(List<DataItem> mDataItem, Context context) {
         this.mDataItem = mDataItem;
@@ -80,13 +90,57 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         LoadImage loadImageChart = new LoadImage(holder.currencyChartImageView);
         loadImageChart.execute("https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/" + dataItem.getId() + ".png");
 
-        holder.setItemClickListener(new ItemClickListener() {
+        CheckWatchlistStar(holder.ckStar, dataItem);
+
+        holder.ckStar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view, int position, boolean isLongCLick) {
-                Toast.makeText(context, "" + mDataItem.get(position).getId() + " " + mDataItem.get(position).getSymbol(), Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                if(holder.ckStar.isChecked()) {
+                    String phone = DataLocalManager.getPhoneInstall();
+                    ref = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Account account = snapshot.getValue(Account.class);
+
+                            if (account.getWatchlist() == null) {
+                                HashMap<String, Boolean> wList = new HashMap<>();
+                                wList.put(dataItem.getSymbol(), true);
+                                ref.child("watchlist").setValue(wList);
+                            } else {
+                                account.getWatchlist().put(dataItem.getSymbol(), true);
+                                ref.child("watchlist").setValue(account.getWatchlist());
+                            }
+                            Toast.makeText(context, "Đã thêm vào Watchlist của bạn", Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }else {
+
+                    Toast.makeText(context, "Đã xóa khỏi Watchlist của bạn", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
+        holder.ckStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+
+            }
+        });
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongCLick) {
+
+                Toast.makeText(context, "" + mDataItem.get(position).getId() + " " + mDataItem.get(position).getSymbol(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     @Override
@@ -159,24 +213,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             itemView.setOnClickListener(this);
 
 
-            ckStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(ckStar.isChecked()) {
-//                        ckStar.setBackgroundResource(R.drawable.ic_star_fill);
-                        Toast.makeText(itemView.getContext(), "Đã thêm vào Watchlist của bạn", Toast.LENGTH_SHORT).show();
-                    } else {
-//                        ckStar.setBackgroundResource(R.drawable.ic_star_outline);
-                        Toast.makeText(itemView.getContext(), "Đã xóa khỏi Watchlist của bạn", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-            ckStar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                }
-            });
         }
 
         public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -216,5 +253,26 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         protected void onPostExecute(Bitmap bitmap) {
             imageView.setImageBitmap(bitmap);
         }
+    }
+
+    private void CheckWatchlistStar(CheckBox checkBox, DataItem dataItem){
+        String phone = DataLocalManager.getPhoneInstall();
+        ref = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Account account = snapshot.getValue(Account.class);
+
+                for(Map.Entry<String, Boolean> item: account.getWatchlist().entrySet()) {
+                    if(item.getKey().equals(dataItem.getSymbol())) {
+                        checkBox.setChecked(true);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
