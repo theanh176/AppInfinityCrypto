@@ -119,8 +119,23 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
                         }
                     });
                 }else {
+                    String phone = DataLocalManager.getPhoneInstall();
+                    ref = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Account account = snapshot.getValue(Account.class);
+                            HashMap<String, Boolean> wList = account.getWatchlist();
+                            wList.remove(dataItem.getSymbol(), true);
+                            ref.child("watchlist").setValue(wList);
+                            Toast.makeText(context, "Đã xóa khỏi Watchlist của bạn", Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    Toast.makeText(context, "Đã xóa khỏi Watchlist của bạn", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
 
             }
@@ -262,10 +277,11 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Account account = snapshot.getValue(Account.class);
-
-                for(Map.Entry<String, Boolean> item: account.getWatchlist().entrySet()) {
-                    if(item.getKey().equals(dataItem.getSymbol())) {
-                        checkBox.setChecked(true);
+                if (account.getWatchlist() != null) {
+                    for(Map.Entry<String, Boolean> item: account.getWatchlist().entrySet()) {
+                        if(item.getKey().equals(dataItem.getSymbol())) {
+                            checkBox.setChecked(true);
+                        }
                     }
                 }
             }
