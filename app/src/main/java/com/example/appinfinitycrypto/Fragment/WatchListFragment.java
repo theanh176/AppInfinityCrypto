@@ -12,12 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.appinfinitycrypto.Adapter.AccountAdminAdapter;
 import com.example.appinfinitycrypto.Adapter.WatchListAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
 import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.Market;
+import com.example.appinfinitycrypto.Model.WatchList;
+import com.example.appinfinitycrypto.Model.getWatchlist;
 import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
 import com.example.appinfinitycrypto.WatchListActivity;
@@ -28,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -45,6 +49,9 @@ public class WatchListFragment extends Fragment {
     private WatchListAdapter watchListAdapter;
     private RecyclerView watchListRecyclerView;
     private List<String> myList;
+    private DatabaseReference database;
+    private WatchListAdapter accountAdapter;
+    private List<WatchList> accountList;
 
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Account");
 
@@ -95,6 +102,7 @@ public class WatchListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_watch_list, container, false);
 
         LoadData();
+//        getListPhoneBooksRealtimeDB();
         // watch list recycler view
         watchListRecyclerView = view.findViewById(R.id.discoverHomeRecyclerView);
         watchListRecyclerView.setHasFixedSize(true);
@@ -108,8 +116,16 @@ public class WatchListFragment extends Fragment {
         ref.child(phone).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Account account = new Account(dataSnapshot);
-//                myList = account.getWatchList();
+                getWatchlist getwatchlist = new getWatchlist(dataSnapshot);
+                myList = getwatchlist.getWatchList();
+
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+////                    WatchList watchList = dataSnapshot.getValue(WatchList.class);
+//                    HashMap<String, Boolean> getRule = (HashMap<String, Boolean>) snapshot.child(phone).child("watchlist").getValue();
+//                    getRule.forEach((key, value) -> myList.add(key));
+//                }
+
+
             }
 
             @Override
@@ -150,6 +166,33 @@ public class WatchListFragment extends Fragment {
 
         return view;
     }
+
+//    private void getListPhoneBooksRealtimeDB() {
+//        String phone = DataLocalManager.getPhoneInstall();
+//        database = FirebaseDatabase.getInstance().getReference("Account");
+//        database.addValueEventListener(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                accountList.clear();
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    WatchList watchList = dataSnapshot.getValue(WatchList.class);
+//                    final String getRule = snapshot.child(phone).child("watchlist").child(dataSnapshot.getKey()).getValue(String.class);
+//                    if(getRule.equals("true")){
+//                        accountList.add(watchList);
+//                    }
+//                }
+//                accountAdapter.notifyDataSetChanged();
+//
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast toast = Toast.makeText(getActivity(), "Get list data faile!!!", Toast.LENGTH_SHORT);
+//                toast.show();
+//            }
+//        });
+//    }
+
     private void LoadData(){
         String phone = DataLocalManager.getPhoneInstall();;
         ref.child(phone).addListenerForSingleValueEvent(new ValueEventListener() {

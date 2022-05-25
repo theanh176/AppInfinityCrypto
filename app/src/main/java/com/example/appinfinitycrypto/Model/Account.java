@@ -140,15 +140,4 @@ public class Account {
     public Account(){
 
     }
-
-
-
-
-
-//    public List<String> getWatchList() {
-//        if (watchlist == null) {
-//            return new ArrayList<>();
-//        }
-//        return new ArrayList<>(watchlist.keySet());
-//    }
 }
