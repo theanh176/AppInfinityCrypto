@@ -8,8 +8,6 @@ public class USD {
     private double percent_change_24h;
     private double percent_change_7d;
     private double percent_change_30d;
-    private double percent_change_60d;
-    private double percent_change_90d;
     private Number market_cap;
     private double market_cap_dominance;
     private double fully_diluted_market_cap;
@@ -69,22 +67,6 @@ public class USD {
 
     public void setPercent_change_30d(double percent_change_30d) {
         this.percent_change_30d = percent_change_30d;
-    }
-
-    public double getPercent_change_60d() {
-        return percent_change_60d;
-    }
-
-    public void setPercent_change_60d(double percent_change_60d) {
-        this.percent_change_60d = percent_change_60d;
-    }
-
-    public double getPercent_change_90d() {
-        return percent_change_90d;
-    }
-
-    public void setPercent_change_90d(double percent_change_90d) {
-        this.percent_change_90d = percent_change_90d;
     }
 
     public Number getMarket_cap() {

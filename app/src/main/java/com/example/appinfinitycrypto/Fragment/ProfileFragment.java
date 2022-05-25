@@ -205,15 +205,15 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Account account = snapshot.getValue(Account.class);
-                System.out.println(snapshot.child("name").getValue());
-                txtFullNamePro.setText(account.getName());
-                txtEmailPro.setText(account.getEmail());
-                txtPasswordPro.setText(account.getPass());
-                txtPhonePro.setText("*******" + account.getPhone().substring(7));
-                txtBirthdayPro.setText(account.getDate());
-                txtGender.setText(account.getSex());
-                ccpCountryPro.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
+//                Account account = snapshot.getValue(Account.class);
+//                System.out.println(snapshot.child("name").getValue());
+//                txtFullNamePro.setText(account.getName());
+//                txtEmailPro.setText(account.getEmail());
+//                txtPasswordPro.setText(account.getPass());
+//                txtPhonePro.setText("*******" + account.getPhone().substring(7));
+//                txtBirthdayPro.setText(account.getDate());
+//                txtGender.setText(account.getSex());
+//                ccpCountryPro.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
             }
 
             @Override
