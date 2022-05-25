@@ -265,7 +265,7 @@ public class SendCodeEmail extends AppCompatActivity {
                                     String country = getIntent().getStringExtra("country");
                                     String rule = getIntent().getStringExtra("rule");
                                     Map<String, Boolean> watchlist =new HashMap<>();
-                                    watchlist.put("BTC", true);
+                                    watchlist.put("BTC", false);
 
                                     database = FirebaseDatabase.getInstance().getReference("Account");
 
