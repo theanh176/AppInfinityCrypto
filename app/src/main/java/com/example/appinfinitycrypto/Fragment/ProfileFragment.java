@@ -102,11 +102,9 @@ public class ProfileFragment extends Fragment {
         txtChangePass = view.findViewById(R.id.txtChangePassPro);
         txtChangeProfile = view.findViewById(R.id.txtChangePro);
         txtWatchList = view.findViewById(R.id.txtWatchlist_pro);
-
         LoadData();
         LoadListener();
         UpdateData();
-
         return view;
     }
 

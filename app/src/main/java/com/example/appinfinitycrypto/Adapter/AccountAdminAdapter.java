@@ -89,6 +89,12 @@ public class AccountAdminAdapter extends RecyclerView.Adapter<AccountAdminAdapte
                 iClickItem.onClickItemSetRule(phone);
             }
         });
+        holder.textFullName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

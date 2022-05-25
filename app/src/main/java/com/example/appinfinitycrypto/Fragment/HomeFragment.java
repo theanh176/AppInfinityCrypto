@@ -1,6 +1,7 @@
 package com.example.appinfinitycrypto.Fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -13,12 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.appinfinitycrypto.Adapter.DiscoverAdapter;
 import com.example.appinfinitycrypto.Adapter.TopCoinAdapter;
@@ -26,7 +29,9 @@ import com.example.appinfinitycrypto.Adapter.TopGainerAdapter;
 import com.example.appinfinitycrypto.Adapter.TopLoserAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
 import com.example.appinfinitycrypto.Api.ApiNew;
+import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.Home;
+import com.example.appinfinitycrypto.MainActivity;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.DataItem_Gainer;
 import com.example.appinfinitycrypto.Model.DataItem_Loser;
@@ -37,6 +42,9 @@ import com.example.appinfinitycrypto.Model.TopGainer;
 import com.example.appinfinitycrypto.Model.TopLoser;
 import com.example.appinfinitycrypto.NewsActivity;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.SignIn;
+import com.example.appinfinitycrypto.my_interface.IClickItem;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +60,8 @@ import retrofit2.Response;
  */
 public class HomeFragment extends Fragment{
 
+    private IClickItem iClickItem;
+
     private List<DataItem> dataItems;
     private List<DataItem_Gainer> dataItem_Gainers;
     private List<DataItem_Loser> dataItem_Losers;
@@ -63,6 +73,7 @@ public class HomeFragment extends Fragment{
     private DiscoverAdapter discoverAdapter;
 
     private TextView showAllNews;
+    private Context context;
 
     //    Change the status bar color
 
@@ -115,6 +126,7 @@ public class HomeFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        context = view.getContext();
         // top coin recycler view
         topCoinRecyclerView = view.findViewById(R.id.topCoinRecyclerView);
         topCoinRecyclerView.setHasFixedSize(true);
@@ -248,10 +260,15 @@ public class HomeFragment extends Fragment{
         showAllNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewsFragment fragment = new NewsFragment();
-                getFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
+//                NewsFragment fragment = new NewsFragment();
+//                getFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
+//                navigationView.setSelectedItemId(R.id.newspaper11);
+
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.changeNavItem();
             }
         });
+
 
         return view;
 

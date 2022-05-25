@@ -71,31 +71,6 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.MyViewHo
         });
     }
 
-
-//      Dialog
-//    private void dialogUpdateRule(String phone, int positionDia){
-//        AlertDialog.Builder dialogDelete = new AlertDialog.Builder(getActivity());
-//        dialogDelete.setMessage("Do you want the account deletion number registered by this phone number  " +phone+ " ?");
-//        dialogDelete.setPositiveButton("Yse", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                accountList.remove(positionDia);
-//                database = FirebaseDatabase.getInstance().getReference("Account");
-//                database.child(phone).child("rule").setValue("admin");
-//            }
-//        });
-//        dialogDelete.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//            }
-//        });
-//        dialogDelete.show();
-//    }
-//    private Context getActivity() {
-//        return null;
-//    }
-
     @Override
     public int getItemCount() {
         if(accountList!=null){

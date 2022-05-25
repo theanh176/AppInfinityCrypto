@@ -114,6 +114,7 @@ public class HomeAdminFragment extends Fragment {
                     accountList.add(account);
                 }
                 accountAdapter.notifyDataSetChanged();
+                accountList.size();
 //                accountList.clear();
 //                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 //                    Account account = dataSnapshot.getValue(Account.class);

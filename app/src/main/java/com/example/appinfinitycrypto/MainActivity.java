@@ -5,6 +5,7 @@ import static androidx.navigation.Navigation.findNavController;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.FragmentNavigator;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -19,6 +20,7 @@ import android.view.WindowManager;
 import com.example.appinfinitycrypto.Fragment.HomeFragment;
 import com.example.appinfinitycrypto.Fragment.MarketFragment;
 import com.example.appinfinitycrypto.Fragment.NewsFragment;
+import com.example.appinfinitycrypto.Fragment.NotSignInFragment;
 import com.example.appinfinitycrypto.Fragment.ProfileFragment;
 import com.example.appinfinitycrypto.Fragment.WatchListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView navigationView;
+    FragmentNavigator fragmentNavigator;
+
     private DatabaseReference database;
 
 //    Change the status bar color
@@ -64,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.bottom_bar);
         getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new HomeFragment()).commit();
         navigationView.setSelectedItemId(R.id.home11);
-
         String phone = DataLocalManager.getPhoneInstall();
         database = FirebaseDatabase.getInstance().getReference("Account");
         database.child(phone).child("isOnline").setValue(true);
@@ -91,8 +94,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.account11:
-                        fragment = new ProfileFragment();
+                        if(!DataLocalManager.getFirstInstall()){
+                            fragment = new NotSignInFragment();
+                        }else {
+                            fragment = new ProfileFragment();
+                        }
                         break;
+
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
 
@@ -100,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void changeNavItem() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new NewsFragment()).commit();
+        navigationView.setSelectedItemId(R.id.newspaper11);
+    }
+
     @Override
     protected void onRestart() {
         super.onRestart();

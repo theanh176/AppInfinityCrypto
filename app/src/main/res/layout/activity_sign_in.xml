@@ -149,7 +149,7 @@
         <Button
             android:id="@+id/btnSignIn"
             android:layout_width="412dp"
-            android:layout_height="59dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/border_radius"

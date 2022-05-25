@@ -304,7 +304,7 @@
             <Button
                 android:id="@+id/btnSignup"
                 android:layout_width="345dp"
-                android:layout_height="59dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/border_radius"
                 android:backgroundTint="@color/colorBlueLogin"
