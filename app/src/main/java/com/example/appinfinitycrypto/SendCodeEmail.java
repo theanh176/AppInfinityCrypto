@@ -30,6 +30,8 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class SendCodeEmail extends AppCompatActivity {
@@ -262,10 +264,12 @@ public class SendCodeEmail extends AppCompatActivity {
                                     String sex = getIntent().getStringExtra("sex");
                                     String country = getIntent().getStringExtra("country");
                                     String rule = getIntent().getStringExtra("rule");
+                                    Map<String, Boolean> watchlist =new HashMap<>();
+                                    watchlist.put("BTC", true);
 
                                     database = FirebaseDatabase.getInstance().getReference("Account");
 
-                                    Account account = new Account(name, phone, email, date, pass, country, sex, rule);
+                                    Account account = new Account(name, phone, email, date, pass, country, sex, rule, (HashMap) watchlist);
                                     // Đưa lên firebase
                                     database.child(phone).setValue(account);
 
