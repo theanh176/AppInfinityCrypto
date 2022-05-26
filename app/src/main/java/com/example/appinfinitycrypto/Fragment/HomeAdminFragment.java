@@ -180,7 +180,7 @@ public class HomeAdminFragment extends Fragment {
                 Account account = snapshot.getValue(Account.class);
                 textViewName.setText(account.getName());
                 textViewEmail.setText(account.getEmail());
-                textViewPhone.setText("*******" + account.getPhone().substring(7));
+                textViewPhone.setText(account.getPhone());
                 textViewBirth.setText(account.getDate());
                 textViewGender.setText(account.getSex());
                 countryDialog.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
