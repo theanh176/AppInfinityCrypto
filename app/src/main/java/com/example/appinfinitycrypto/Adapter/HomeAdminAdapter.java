@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appinfinitycrypto.Fragment.ListUserFragment;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.my_interface.IClickShowProfile;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,10 +30,12 @@ import java.util.List;
 public class HomeAdminAdapter extends RecyclerView.Adapter<HomeAdminAdapter.MyViewHolder> implements Filterable {
     List<Account> accountList;
     List<Account> accountListOld;
+    private IClickShowProfile iClickShowProfile;
 
-    public HomeAdminAdapter(List<Account> accountList) {
+    public HomeAdminAdapter(List<Account> accountList, IClickShowProfile iClick) {
         this.accountList = accountList;
         this.accountListOld = accountList;
+        this.iClickShowProfile =iClick;
 
     }
 
@@ -58,11 +61,17 @@ public class HomeAdminAdapter extends RecyclerView.Adapter<HomeAdminAdapter.MyVi
         }else{
             return;
         }
-//        if(accounts==null){
-//            return;
-//        }
+
         holder.textFullName.setText(name);
         holder.textPhone.setText(phone);
+
+        holder.textFullName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickShowProfile.onClickShowProfile(phone);
+            }
+        });
+
     }
 
     @Override

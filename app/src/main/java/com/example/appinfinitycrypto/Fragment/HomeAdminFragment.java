@@ -1,8 +1,12 @@
 package com.example.appinfinitycrypto.Fragment;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,22 +14,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appinfinitycrypto.Adapter.AccountAdapter;
 import com.example.appinfinitycrypto.Adapter.HomeAdminAdapter;
 import com.example.appinfinitycrypto.Admin;
+import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.my_interface.IClickShowProfile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hbb20.CountryCodePicker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +51,7 @@ public class HomeAdminFragment extends Fragment {
 
     private RecyclerView recyclerViewAccount;
     private EditText editTextSearch;
+    private TextView textViewTotal;
     private DatabaseReference database;
     private HomeAdminAdapter accountAdapter;
     private List<Account> accountList;
@@ -91,9 +104,15 @@ public class HomeAdminFragment extends Fragment {
 
         recyclerViewAccount = view.findViewById(R.id.recyclerViewAccount);
         editTextSearch = view.findViewById(R.id.edit_search);
+        textViewTotal = view.findViewById(R.id.textViewTotalOnline);
 
         accountList = new ArrayList<>();
-        accountAdapter = new HomeAdminAdapter(accountList);
+        accountAdapter = new HomeAdminAdapter(accountList, new IClickShowProfile() {
+            @Override
+            public void onClickShowProfile(String phone) {
+                openProfileDialog(Gravity.CENTER, phone);
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         recyclerViewAccount.setLayoutManager(linearLayoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
@@ -114,17 +133,6 @@ public class HomeAdminFragment extends Fragment {
                     accountList.add(account);
                 }
                 accountAdapter.notifyDataSetChanged();
-                accountList.size();
-//                accountList.clear();
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    Account account = dataSnapshot.getValue(Account.class);
-//                    final Boolean getRule = snapshot.child(dataSnapshot.getKey()).child("isOnline").getValue(Boolean.class);
-//                    if(getRule.equals(true)){
-//
-//                    }
-//                    accountList.add(account);
-//                }
-//                accountAdapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -133,9 +141,71 @@ public class HomeAdminFragment extends Fragment {
             }
         });
     }
+
+    private void openProfileDialog(int gravity, String phone){
+        final Dialog dialog =new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_profile);
+
+        Window window = dialog.getWindow();
+        if (window == null){
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+
+        if(Gravity.CENTER ==gravity){
+            dialog.setCancelable(false);
+        } else{
+            dialog.setCancelable(true);
+        }
+        TextView textViewName = dialog.findViewById(R.id.txtNameDialog);
+        TextView textViewEmail = dialog.findViewById(R.id.txtEmailDialog);
+        TextView textViewPhone = dialog.findViewById(R.id.txtPhoneDialog);
+        TextView textViewBirth = dialog.findViewById(R.id.txtBirthDayDialog);
+        TextView textViewGender = dialog.findViewById(R.id.txtGenderDialog);
+        CountryCodePicker countryDialog = dialog.findViewById(R.id.ccpCountryDialog);
+
+        Button btnClose = dialog.findViewById(R.id.btnCloseDialog);
+
+        database = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Account account = snapshot.getValue(Account.class);
+                textViewName.setText(account.getName());
+                textViewEmail.setText(account.getEmail());
+                textViewPhone.setText("*******" + account.getPhone().substring(7));
+                textViewBirth.setText(account.getDate());
+                textViewGender.setText(account.getSex());
+                countryDialog.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+
     private void event(){
         getListPhoneBooksRealtimeDB();
-
         editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {

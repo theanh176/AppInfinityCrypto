@@ -19,7 +19,6 @@ import com.example.appinfinitycrypto.Adapter.NotificationAdapter;
 import com.example.appinfinitycrypto.Api.ApiNew;
 import com.example.appinfinitycrypto.Model.DataNews;
 import com.example.appinfinitycrypto.Model.Discover;
-import com.example.appinfinitycrypto.Model.Notification;
 
 import java.util.ArrayList;
 import java.util.List;

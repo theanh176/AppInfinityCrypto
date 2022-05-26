@@ -144,12 +144,6 @@ public class ProfileFragment extends Fragment {
         txtLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Huu Hieu
-//                Intent intent = new Intent(ProfileFragment.this.getContext(), SignIn.class);
-////                ((MyApplication) getActivity().getApplication()).setSomeVariable("");
-//                startActivity(intent);
-
-//                getActivity().getSupportFragmentManager().popBackStack();
 
                 // The Anh
                 String phone = DataLocalManager.getPhoneInstall();
@@ -171,7 +165,6 @@ public class ProfileFragment extends Fragment {
     }
 
     private void LoadData(){
-//        String phone = ((MyApplication) getActivity().getApplication()).getSomeVariable();
         String phone = DataLocalManager.getPhoneInstall();
         ref = FirebaseDatabase.getInstance().getReference("Account").child(phone);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {

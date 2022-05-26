@@ -58,6 +58,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="72dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -86,8 +88,19 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewAccount"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="358dp" />
         </FrameLayout>
+
+        <TableRow
+            android:gravity="right">
+            <TextView
+                android:id="@+id/textViewTotalOnline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Online">
+            </TextView>
+        </TableRow>
 
 
     </TableLayout>

@@ -143,21 +143,6 @@ public class ListAdminFragment extends Fragment {
                     }
                 }
                 accountAdapter.notifyDataSetChanged();
-//                final String getRule = snapshot.child("rule").getValue(String.class);
-//                System.out.println(getRule);
-//                if(getRule.equals("user")){
-//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                        Account account = dataSnapshot.getValue(Account.class);
-//                        accountList.add(account);
-//                    }
-//                    accountAdapter.notifyDataSetChanged();
-//                }else{
-//                    Toast.makeText(getActivity(), "No Data", Toast.LENGTH_SHORT).show();
-//                }
-
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                        System.out.println(dataSnapshot.getKey());
-//                }
 
             }
             @Override
