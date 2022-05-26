@@ -78,7 +78,7 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
             @Override
             public void onClick(View v) {
 
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Account").child(phone).child("watchlist").child(myList.get(position));
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Account").child(phone).child("watchlist").child(dataItem.getSymbol());
                 databaseReference.setValue(null);
                 mDataItem.remove(position);
                 notifyDataSetChanged();

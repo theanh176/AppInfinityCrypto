@@ -18,7 +18,7 @@
 
             <ImageView
                 android:id="@+id/watchlist_img"
-                android:layout_width="50dp"
+                android:layout_width="45dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/bitcoin" />
 
@@ -36,7 +36,7 @@
                     android:fontFamily="@font/svn_gilroy_medium"
                     android:text="BTC"
                     android:textColor="#FFFFFF"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/watchlist_name"
@@ -46,7 +46,7 @@
                     android:orientation="vertical"
                     android:text="Bitcoin"
                     android:textColor="#FFFFFF"
-                    android:textSize="20dp" />
+                    android:textSize="16dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="120dp"
@@ -61,8 +61,8 @@
                     >
                     <ImageView
                         android:id="@+id/watchlist_changelogo"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:src="@drawable/ic_caret_up" />
 
                     <TextView
@@ -72,7 +72,7 @@
                         android:fontFamily="@font/svn_gilroy_medium"
                         android:text="99%"
                         android:textColor="#FFFFFF"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
                 </LinearLayout>
 
 
@@ -84,7 +84,7 @@
                     android:orientation="vertical"
                     android:text="$699"
                     android:textColor="#FFFFFF"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
             </LinearLayout>
 
 <!--            <ImageView-->

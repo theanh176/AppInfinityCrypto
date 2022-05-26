@@ -118,14 +118,6 @@ public class WatchListFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 getWatchlist getwatchlist = new getWatchlist(dataSnapshot);
                 myList = getwatchlist.getWatchList();
-
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-////                    WatchList watchList = dataSnapshot.getValue(WatchList.class);
-//                    HashMap<String, Boolean> getRule = (HashMap<String, Boolean>) snapshot.child(phone).child("watchlist").getValue();
-//                    getRule.forEach((key, value) -> myList.add(key));
-//                }
-
-
             }
 
             @Override
@@ -166,32 +158,6 @@ public class WatchListFragment extends Fragment {
 
         return view;
     }
-
-//    private void getListPhoneBooksRealtimeDB() {
-//        String phone = DataLocalManager.getPhoneInstall();
-//        database = FirebaseDatabase.getInstance().getReference("Account");
-//        database.addValueEventListener(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                accountList.clear();
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    WatchList watchList = dataSnapshot.getValue(WatchList.class);
-//                    final String getRule = snapshot.child(phone).child("watchlist").child(dataSnapshot.getKey()).getValue(String.class);
-//                    if(getRule.equals("true")){
-//                        accountList.add(watchList);
-//                    }
-//                }
-//                accountAdapter.notifyDataSetChanged();
-//
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast toast = Toast.makeText(getActivity(), "Get list data faile!!!", Toast.LENGTH_SHORT);
-//                toast.show();
-//            }
-//        });
-//    }
 
     private void LoadData(){
         String phone = DataLocalManager.getPhoneInstall();;

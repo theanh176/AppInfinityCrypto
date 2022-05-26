@@ -46,8 +46,6 @@ public class WatchListActivity extends AppCompatActivity {
     private List<String> myList;
 
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Account");
-    public DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("Account");
-
 
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
