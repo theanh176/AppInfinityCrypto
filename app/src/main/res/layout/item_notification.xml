@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/coin_radius">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -10,6 +12,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="#252f43"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,12 +34,20 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/notification_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/svn_gilroy_bold"
+                    android:text="ONUS"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
                     android:id="@+id/notification_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/svn_gilroy_medium"
-                    android:text="Bitcoin surges face-to-face above the $50,000 mark, gaining the attention of many investors."
-                    android:textColor="#000000"
+                    android:text="Bitcoin surges face-to-face above the $50,000 mark,..."
+                    android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
                 <TextView

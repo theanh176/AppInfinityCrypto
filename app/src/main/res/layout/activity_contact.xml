@@ -25,6 +25,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -42,6 +43,7 @@
             android:src="@drawable/ic_location" />
 
         <TextView
+            android:id="@+id/contact_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -70,6 +72,7 @@
             android:src="@drawable/ic_mail" />
 
         <TextView
+            android:id="@+id/contact_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -159,15 +162,15 @@
             android:src="@drawable/ic_call" />
 
         <TextView
+            android:id="@+id/contact_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/svn_gilroy_medium"
-            android:text="Hotline: +1 (800) 123-4567"
+            android:text="+1 (800) 123-4567"
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

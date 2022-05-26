@@ -1,24 +1,45 @@
 package com.example.appinfinitycrypto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appinfinitycrypto.Adapter.NotificationAdapter;
-import com.example.appinfinitycrypto.Model.Notification;
+import com.example.appinfinitycrypto.Model.DataItem_Notify;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationActivity extends AppCompatActivity {
+
+    private static final String CHANNEL_ID = "channel_01";;
+    private DatabaseReference database;
+    private List<DataItem_Notify> notificationList = new ArrayList<>();
+    private NotificationAdapter notificationAdapter;
+    private RecyclerView notificationRecyclerView;
+    private TextView notify_title;
+    private NotificationManagerCompat notificationManagerCompat;
 
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -46,34 +67,84 @@ public class NotificationActivity extends AppCompatActivity {
         }
     }
 
-    private RecyclerView notificationRecyclerView;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         setTranslucentStatusBar();
+        LoadData();
 
-        // notification recycler view
-        notificationRecyclerView = findViewById(R.id.discoverHomeRecyclerView);
+
+        // Show data on recycler view
+        notificationRecyclerView = findViewById(R.id.notificationRecycleView);
         notificationRecyclerView.setHasFixedSize(true);
-        notificationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        notificationRecyclerView.setLayoutManager(new LinearLayoutManager(NotificationActivity.this, LinearLayoutManager.VERTICAL, false));
 
-        List<Notification> notificationList = new ArrayList<>();
-
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        notificationList.add(new Notification(R.drawable.dicover, "Prometeus Token (PROM) ONUS", "20/11/2022", "google.com"));
-        NotificationAdapter notificationAdapter = new NotificationAdapter(notificationList);
+        notificationAdapter = new NotificationAdapter(notificationList);
         notificationRecyclerView.setAdapter(notificationAdapter);
+
+        // click notify_title to show notification
+        notify_title = findViewById(R.id.notify_title);
+        notify_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notificationManagerCompat = NotificationManagerCompat.from(NotificationActivity.this);
+                Notification notification = new NotificationCompat.Builder(NotificationActivity.this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.facebook_icon)
+                        .setContentTitle("Notification")
+                        .setContentText("This is notification")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .build();
+                notificationManagerCompat.notify(1, notification);
+            }
+        });
     }
+
+
+    private void LoadData() {
+        database = FirebaseDatabase.getInstance().getReference("Notification");
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                notificationList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    DataItem_Notify notification = dataSnapshot.getValue(DataItem_Notify.class);
+                    notificationList.add(notification);
+                }
+                notificationAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast toast = Toast.makeText(NotificationActivity.this, "Get list data faile!!!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+    }
+
+    // Create notification channel
+    public void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "Channel Name",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+
+            channel.setDescription("Channel Description");
+            channel.enableLights(true);
+            channel.enableVibration(true);
+            channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        createNotificationChannel();
+    }
+
 }

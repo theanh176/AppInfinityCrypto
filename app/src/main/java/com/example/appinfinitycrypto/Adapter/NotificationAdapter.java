@@ -3,55 +3,60 @@ package com.example.appinfinitycrypto.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appinfinitycrypto.Model.DataItem_Notify;
 import com.example.appinfinitycrypto.R;
 
 import java.util.List;
 
-import com.example.appinfinitycrypto.Model.Notification;
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder>{
+    List<DataItem_Notify> notifyList;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> {
-
-    private List<Notification> notificationList;
-
-    public NotificationAdapter(List<Notification> notificationList) {
-        this.notificationList = notificationList;
+    public NotificationAdapter(List<DataItem_Notify> notifyList) {
+        this.notifyList = notifyList;
     }
 
     @NonNull
     @Override
-    public NotificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NotificationAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notification, parent, false);
-        return new NotificationViewHolder(view);
+        return new NotificationAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
-        holder.content.setText(notificationList.get(position).getContent());
-        holder.time.setText(notificationList.get(position).getTime());
-        holder.mIconView.setImageResource(notificationList.get(position).getIcon());
+    public void onBindViewHolder(@NonNull NotificationAdapter.MyViewHolder holder, int position) {
+        DataItem_Notify dataItem_notify = notifyList.get(position);
+        String content = dataItem_notify.getContent();
+        String time = dataItem_notify.getTime();
+        String title = dataItem_notify.getTitle();
+        Boolean isNotify = dataItem_notify.getNotify();
+
+        holder.txt_content.setText(content);
+        holder.txt_time.setText(time);
+        holder.txt_title.setText(title);
     }
 
     @Override
     public int getItemCount() {
-        return notificationList.size();
+        if(notifyList!=null){
+            return notifyList.size();
+        }
+        return 0;
     }
 
-    public class NotificationViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView content;
-        private TextView time;
-        private ImageView mIconView;
-        public NotificationViewHolder(@NonNull View itemView) {
+        TextView txt_content, txt_time, txt_title;
+
+        public  MyViewHolder (@NonNull View itemView){
             super(itemView);
-            content = itemView.findViewById(R.id.notification_content);
-            time = itemView.findViewById(R.id.notification_date);
-            mIconView = itemView.findViewById(R.id.notification_img);
+            txt_content = itemView.findViewById(R.id.notification_content);
+            txt_time = itemView.findViewById(R.id.notification_date);
+            txt_title = itemView.findViewById(R.id.notification_title);
         }
     }
 }
