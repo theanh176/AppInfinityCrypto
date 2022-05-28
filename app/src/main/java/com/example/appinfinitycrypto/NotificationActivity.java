@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,7 +40,6 @@ public class NotificationActivity extends AppCompatActivity {
     private List<DataItem_Notify> notificationList = new ArrayList<>();
     private NotificationAdapter notificationAdapter;
     private RecyclerView notificationRecyclerView;
-    private TextView notify_title;
     private NotificationManagerCompat notificationManagerCompat;
 
     //    Change the status bar color
@@ -83,23 +84,22 @@ public class NotificationActivity extends AppCompatActivity {
         notificationAdapter = new NotificationAdapter(notificationList);
         notificationRecyclerView.setAdapter(notificationAdapter);
 
-        // click notify_title to show notification
-        notify_title = findViewById(R.id.notify_title);
-        notify_title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                notificationManagerCompat = NotificationManagerCompat.from(NotificationActivity.this);
-                Notification notification = new NotificationCompat.Builder(NotificationActivity.this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.facebook_icon)
-                        .setContentTitle("Notification")
-                        .setContentText("This is notification")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .build();
-                notificationManagerCompat.notify(1, notification);
-            }
-        });
-    }
+//        //auto show notification
+        Intent fullScreenIntent = new Intent(this, NotificationActivity.class);
+        PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(this, 0,
+                fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        notificationManagerCompat = NotificationManagerCompat.from(NotificationActivity.this);
+        Notification notification = new NotificationCompat.Builder(NotificationActivity.this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.facebook_icon)
+                .setContentTitle("Notification")
+                .setContentText("This is notification")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setFullScreenIntent(fullScreenPendingIntent, true)
+                .build();
+        notificationManagerCompat.notify(1, notification);
+    }
 
     private void LoadData() {
         database = FirebaseDatabase.getInstance().getReference("Notification");
@@ -122,24 +122,24 @@ public class NotificationActivity extends AppCompatActivity {
         });
     }
 
-    // Create notification channel
-    public void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "Channel Name",
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
-
-            channel.setDescription("Channel Description");
-            channel.enableLights(true);
-            channel.enableVibration(true);
-            channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
+//    // Create notification channel
+//    public void createNotificationChannel() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            NotificationChannel channel = new NotificationChannel(
+//                    CHANNEL_ID,
+//                    "Channel Name",
+//                    NotificationManager.IMPORTANCE_DEFAULT
+//            );
+//
+//            channel.setDescription("Channel Description");
+//            channel.enableLights(true);
+//            channel.enableVibration(true);
+//            channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+//
+//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+//            notificationManager.createNotificationChannel(channel);
+//        }
+//    }
 
     @Override
     protected void onResume() {
