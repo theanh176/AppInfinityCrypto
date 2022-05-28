@@ -9,9 +9,9 @@
         android:icon="@drawable/ic_list_user"
         android:title="@string/tab_listUser" />
     <item
-        android:id="@+id/listAdmin11"
-        android:icon="@drawable/ic_list_manage_accounts"
-        android:title="@string/tab_listAdmin" />
+        android:id="@+id/feedback"
+        android:icon="@drawable/ic_baseline_feedback_24"
+        android:title="@string/tab_feedback" />
     <item
         android:id="@+id/statistical"
         android:icon="@drawable/ic_market"

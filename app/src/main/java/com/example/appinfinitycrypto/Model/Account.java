@@ -111,7 +111,7 @@ public class Account {
         this.phone = phone;
     }
 
-    public Account(String name, String phone, String email, String date, String pass, String country, String sex, String rule, HashMap watchlist) {
+    public Account(String name, String phone, String email, String date, String pass, String country, String sex, String rule) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -120,7 +120,6 @@ public class Account {
         this.country = country;
         this.sex = sex;
         this.rule = rule;
-        this.watchlist =watchlist;
     }
 
     public Account(String name, String email, String date, String country, String sex) {

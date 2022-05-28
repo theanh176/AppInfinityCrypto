@@ -15,11 +15,13 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.appinfinitycrypto.Fragment.AccountAdminFragment;
+import com.example.appinfinitycrypto.Fragment.FeedbackFragment;
 import com.example.appinfinitycrypto.Fragment.HomeAdminFragment;
 import com.example.appinfinitycrypto.Fragment.ListAdminFragment;
 import com.example.appinfinitycrypto.Fragment.ListUserFragment;
 import com.example.appinfinitycrypto.Fragment.ProfileFragment;
 import com.example.appinfinitycrypto.Fragment.StatisticalFragment;
+import com.example.appinfinitycrypto.Fragment.ViewHomeAdminFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -63,7 +65,7 @@ public class MainAdmin extends AppCompatActivity {
         setTranslucentStatusBar();
 
         navigationView = findViewById(R.id.bottom_admin_bar);
-        getSupportFragmentManager().beginTransaction().replace(R.id.body_admin_container, new HomeAdminFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.body_admin_container, new ViewHomeAdminFragment()).commit();
         navigationView.setSelectedItemId(R.id.homeadmin11);
 
         String phone = DataLocalManager.getPhoneInstall();
@@ -76,13 +78,13 @@ public class MainAdmin extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getItemId()){
                     case R.id.homeadmin11:
-                        fragment = new HomeAdminFragment();
+                        fragment = new ViewHomeAdminFragment();
                         break;
                     case R.id.listUser11:
-                        fragment = new ListUserFragment();
+                        fragment = new HomeAdminFragment();
                         break;
-                    case R.id.listAdmin11:
-                        fragment = new ListAdminFragment();
+                    case R.id.feedback:
+                        fragment = new FeedbackFragment();
                         break;
                     case R.id.statistical:
                         fragment = new StatisticalFragment();

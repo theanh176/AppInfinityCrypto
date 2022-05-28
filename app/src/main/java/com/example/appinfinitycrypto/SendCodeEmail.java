@@ -264,12 +264,10 @@ public class SendCodeEmail extends AppCompatActivity {
                                     String sex = getIntent().getStringExtra("sex");
                                     String country = getIntent().getStringExtra("country");
                                     String rule = getIntent().getStringExtra("rule");
-                                    Map<String, Boolean> watchlist =new HashMap<>();
-                                    watchlist.put("BTC", false);
 
                                     database = FirebaseDatabase.getInstance().getReference("Account");
 
-                                    Account account = new Account(name, phone, email, date, pass, country, sex, rule, (HashMap) watchlist);
+                                    Account account = new Account(name, phone, email, date, pass, country, sex, rule);
                                     // Đưa lên firebase
                                     database.child(phone).setValue(account);
 
