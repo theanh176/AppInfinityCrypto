@@ -141,10 +141,10 @@ public class NotificationActivity extends AppCompatActivity {
 //        }
 //    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        createNotificationChannel();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        createNotificationChannel();
+//    }
 
 }
