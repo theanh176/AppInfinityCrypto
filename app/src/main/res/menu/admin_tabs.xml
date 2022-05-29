@@ -13,9 +13,9 @@
         android:icon="@drawable/ic_baseline_feedback_24"
         android:title="@string/tab_feedback" />
     <item
-        android:id="@+id/statistical"
-        android:icon="@drawable/ic_market"
-        android:title="@string/tab_statistical" />
+        android:id="@+id/notification"
+        android:icon="@drawable/ic_notifications"
+        android:title="@string/tab_notification" />
     <item
         android:id="@+id/accountadmin11"
         android:icon="@drawable/ic_account"

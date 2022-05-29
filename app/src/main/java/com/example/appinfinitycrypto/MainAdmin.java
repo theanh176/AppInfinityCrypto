@@ -86,8 +86,8 @@ public class MainAdmin extends AppCompatActivity {
                     case R.id.feedback:
                         fragment = new FeedbackFragment();
                         break;
-                    case R.id.statistical:
-                        fragment = new StatisticalFragment();
+                    case R.id.notification:
+                        fragment = new NotificationFragment();
                         break;
                     case R.id.accountadmin11:
                         fragment = new ProfileFragment();

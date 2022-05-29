@@ -45,13 +45,6 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
         holder.textTitle.setText(title);
         holder.textDescription.setText(description);
 
-        holder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
     }
 
     @Override
@@ -71,7 +64,6 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
             super(itemView);
             textTitle = itemView.findViewById(R.id.titlefeedback);
             textDescription = itemView.findViewById(R.id.descfeedback);
-            imageViewDelete = itemView.findViewById(R.id.delete_feedback);
         }
     }
 }

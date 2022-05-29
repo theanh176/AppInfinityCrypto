@@ -21,10 +21,20 @@ public class MyApplication extends Application {
         this.someVariable = someVariable;
     }
 
-//    // set
+    private Integer someVariable1 = 0;
+
+    public Integer getSomeVariable1() {
+        return someVariable1;
+    }
+
+    public void setSomeVariable1(Integer someVariable) {
+        this.someVariable1 = someVariable;
+    }
+
+    // set
 //    ((MyApplication) this.getApplication()).setSomeVariable("foo");
-//
-//    // get
+
+    // get
 //    String s = ((MyApplication) this.getApplication()).getSomeVariable();
 
     @Override

@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appinfinitycrypto.ChangeProfile;
 import com.example.appinfinitycrypto.DataLocalManager;
@@ -164,11 +165,14 @@ public class ProfileFragment extends Fragment {
                 String date = java.time.LocalDate.now().toString();
 
                 database = FirebaseDatabase.getInstance().getReference("FeedBack");
-
-                FeedBack feedBack = new FeedBack(title,description,date);
-                // Đưa lên firebase
-                database.push().setValue(feedBack);
-                dialog.dismiss();
+                if(!title.isEmpty() || !description.isEmpty()){
+                    FeedBack feedBack = new FeedBack(title,description,date);
+                    // Đưa lên firebase
+                    database.push().setValue(feedBack);
+                    dialog.dismiss();
+                }else {
+                    Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

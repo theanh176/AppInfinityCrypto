@@ -87,7 +87,7 @@
 
 
             <Button
-                android:id="@+id/btnSendDialog"
+                android:id="@+id/btnSendDialogNotifi"
                 android:layout_width="412dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"

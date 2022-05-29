@@ -27,6 +27,7 @@
     <string name="tab_listUser">List User</string>
     <string name="tab_listAdmin">List Admin</string>
     <string name="tab_statistical">Statistical</string>
+    <string name="tab_notification">Notification</string>
     <string name="tab_feedback">FeedBack</string>
     <string name="account_admin">Account</string>
 
