@@ -76,6 +76,7 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    BottomNavigationView navigationView;
 
     private IClickItem iClickItem;
     private static final String CHANNEL_ID = "channel_01";;
@@ -257,6 +258,14 @@ public class HomeFragment extends Fragment {
         dataNews = new ArrayList<>();
         showAllNews = view.findViewById(R.id.showAllNews);
 
+        // Click change activity
+        showAllNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleClickAvatar();
+            }
+        });
+
         ApiNew.apiNew.convertUsdToVnd("283d7ecd8fc18b8a775b3feb651323c508943b922be9b5978fe299fe21f6f0d2").enqueue(new Callback<Discover>() {
             @Override
             public void onResponse(@NonNull Call<Discover> call, @NonNull Response<Discover> response) {
@@ -329,7 +338,7 @@ public class HomeFragment extends Fragment {
     public void compareNotify() {
         if (countAllNotify != null && countNotifyRead != null) {
             if (countAllNotify > countNotifyRead) {
-                img_notify.setImageResource(R.drawable.ic_notify_new);
+                img_notify.setImageResource(R.drawable.ic_notifications);
 
                 // get data for notify
                 int STTNotify;
@@ -344,7 +353,7 @@ public class HomeFragment extends Fragment {
                     // create auto notification with data from dataNotify
                     notificationManagerCompat = NotificationManagerCompat.from(requireActivity());
                     Notification notification = new NotificationCompat.Builder(requireActivity(), CHANNEL_ID)
-                            .setSmallIcon(R.drawable.ic_notify_new)
+                            .setSmallIcon(R.drawable.ic_notifications)
                             .setContentTitle(dataNotify.getTitle())
                             .setContentText(dataNotify.getDescription())
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -380,5 +389,11 @@ public class HomeFragment extends Fragment {
 
     //
 
+    private void handleClickAvatar() {
+        if (context instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) context;
+            mainActivity.changeNavItem();
+        }
+    }
 
 }
