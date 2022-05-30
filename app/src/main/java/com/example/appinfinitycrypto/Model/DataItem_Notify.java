@@ -9,6 +9,11 @@ public class DataItem_Notify {
     public DataItem_Notify() {
     }
 
+    public DataItem_Notify(String content, String title) {
+        this.title = title;
+        this.content = content;
+    }
+
     public DataItem_Notify(String content, String time, String title, Boolean isNotify) {
         this.title = title;
         this.content = content;

@@ -8,6 +8,7 @@ public class DataLocalManager {
     private static final String PREF_FIRST_PHONE = "PREF_FIRST_PHONE";
     private static final String PREF_FIRST_RULE_USER = "PREF_FIRST_RULE_USER";
     private static final String PREF_FIRST_RULE_ADMIN = "PREF_FIRST_RULE_ADMIN";
+    private static final Integer PREF_FIRST_IDKEY = 0;
     private static DataLocalManager instance;
     private SessionManager sessionManager;
 
@@ -54,5 +55,13 @@ public class DataLocalManager {
 
     public static boolean getRuleAdminInstall(){
         return DataLocalManager.getInstance().sessionManager.getBooleanRuleAdmin(PREF_FIRST_RULE_ADMIN);
+    }
+
+    public static void setKeyIDNotify(Integer isKeyID){
+        DataLocalManager.getInstance().sessionManager.putIntegerKeyID(PREF_FIRST_IDKEY, isKeyID);
+    }
+
+    public static Integer getKeyIDNotify(){
+        return DataLocalManager.getInstance().sessionManager.getIntegerKeyID(PREF_FIRST_IDKEY);
     }
 }
