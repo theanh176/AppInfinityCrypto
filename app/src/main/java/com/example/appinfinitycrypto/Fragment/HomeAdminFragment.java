@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,10 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.appinfinitycrypto.Adapter.AccountAdapter;
 import com.example.appinfinitycrypto.Adapter.HomeAdminAdapter;
-import com.example.appinfinitycrypto.Admin;
-import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.R;
 import com.example.appinfinitycrypto.my_interface.IClickShowProfile;
@@ -203,9 +199,45 @@ public class HomeAdminFragment extends Fragment {
         dialog.show();
     }
 
+    private void getTotalOnline(){
+        database = FirebaseDatabase.getInstance().getReference("Account");
+        database.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                int totaloff = 0;
+                int totalon = 0;
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    final Boolean getPhoneonline = snapshot.child(dataSnapshot.getKey()).child("isOnline").getValue(Boolean.class);
+                    if(getPhoneonline.equals(true)){
+                        totalon++;
+                    }
+                    else if (getPhoneonline.equals(false)) {
+                        totaloff++;
+                    } else {
+                        return;
+                    }
+
+                }
+                int total = totaloff + totalon;
+                textViewTotal.setText("Online " + totalon + "/" + total);
+
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast toast = Toast.makeText(getActivity(), "Get list data faile!!!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+    }
+
 
     private void event(){
         getListPhoneBooksRealtimeDB();
+        getTotalOnline();
         editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {

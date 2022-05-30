@@ -1,6 +1,9 @@
 package com.example.appinfinitycrypto.Fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,15 +13,23 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appinfinitycrypto.ChangeProfile;
 import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.MainActivity;
 import com.example.appinfinitycrypto.Model.Account;
+import com.example.appinfinitycrypto.Model.FeedBack;
 import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
 import com.example.appinfinitycrypto.SessionManager;
@@ -41,9 +52,11 @@ public class ProfileFragment extends Fragment {
 
     private DatabaseReference ref;
     TextView txtFullNamePro, txtPhonePro, txtPasswordPro, txtEmailPro, txtBirthdayPro, txtGender;
-    TextView txtLogOut, txtChangePass, txtChangeProfile, txtWatchList;
+    TextView txtLogOut, txtChangePass, txtChangeProfile;
     CountryCodePicker ccpCountryPro;
+    ImageView imgCreateFeedback;
     private DatabaseReference database;
+    String phone = DataLocalManager.getPhoneInstall();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -101,11 +114,69 @@ public class ProfileFragment extends Fragment {
         txtLogOut = view.findViewById(R.id.txtLogOut);
         txtChangePass = view.findViewById(R.id.txtChangePassPro);
         txtChangeProfile = view.findViewById(R.id.txtChangePro);
-        txtWatchList = view.findViewById(R.id.txtWatchlist_pro);
+
+        imgCreateFeedback = view.findViewById(R.id.imgCreateFeedback);
+
+        imgCreateFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openProfileDialog(Gravity.CENTER);
+            }
+        });
+
         LoadData();
         LoadListener();
         UpdateData();
         return view;
+    }
+
+    private void openProfileDialog(int gravity){
+        final Dialog dialog =new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_addfeedback);
+
+        Window window = dialog.getWindow();
+        if (window == null){
+            return;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+
+        if(Gravity.CENTER ==gravity){
+            dialog.setCancelable(true);
+        } else{
+            dialog.setCancelable(false);
+        }
+        EditText edtTitleFeedback = dialog.findViewById(R.id.edtTitleFeedback);
+        EditText edtDetailFeedback = dialog.findViewById(R.id.edtDescFeedback);
+        Button btnSendFeedback = dialog.findViewById(R.id.btnSendDialogFeedback);
+
+        btnSendFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Khai báo lên firebase
+                String title = edtTitleFeedback.getText().toString();
+                String description = edtDetailFeedback.getText().toString();
+                String date = java.time.LocalDate.now().toString();
+
+                database = FirebaseDatabase.getInstance().getReference("FeedBack");
+                if(!title.isEmpty() || !description.isEmpty()){
+                    FeedBack feedBack = new FeedBack(title,description,date);
+                    // Đưa lên firebase
+                    database.push().setValue(feedBack);
+                    dialog.dismiss();
+                }else {
+                    Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        dialog.show();
     }
 
     private void LoadListener(){
@@ -134,19 +205,12 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        txtWatchList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         txtLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 // The Anh
-                String phone = DataLocalManager.getPhoneInstall();
+
                 database = FirebaseDatabase.getInstance().getReference("Account").child(phone);
                 database.child("isOnline").setValue(false);
                 Log.d("MainActivity Lifecycle", "===== onStop =====");

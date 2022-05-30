@@ -1,9 +1,8 @@
-package com.example.appinfinitycrypto.Fragment;
+package com.example.appinfinitycrypto;
 
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,27 +17,31 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.appinfinitycrypto.Adapter.HomeAdminAdapter;
+import com.example.appinfinitycrypto.Adapter.NotificationAdapter;
 import com.example.appinfinitycrypto.Model.Account;
-import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.Model.FeedBack;
+import com.example.appinfinitycrypto.Model.Notification;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.hbb20.CountryCodePicker;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StatisticalFragment#newInstance} factory method to
+ * Use the {@link NotificationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StatisticalFragment extends Fragment {
+public class NotificationFragment extends Fragment {
+    ImageView imgCreateNoti;
     private DatabaseReference database;
-    EditText edtTitle, edtContent;
-    Button btnSendNotification;
-    ImageView imgViewCreate;
+    private List<Notification> notificationList;
+    private NotificationAdapter notificationAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,7 +52,7 @@ public class StatisticalFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public StatisticalFragment() {
+    public NotificationFragment() {
         // Required empty public constructor
     }
 
@@ -59,11 +62,11 @@ public class StatisticalFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StatisticalFragment.
+     * @return A new instance of fragment NotificationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StatisticalFragment newInstance(String param1, String param2) {
-        StatisticalFragment fragment = new StatisticalFragment();
+    public static NotificationFragment newInstance(String param1, String param2) {
+        NotificationFragment fragment = new NotificationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -84,18 +87,15 @@ public class StatisticalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_statistical, container, false);
-        edtTitle = view.findViewById(R.id.edtTitleNotifi);
-        edtContent = view.findViewById(R.id.edtDescNotifi);
-        imgViewCreate = view.findViewById(R.id.imgCreateNotifcation);
+        View view = inflater.inflate(R.layout.fragment_notification, container, false);
+        imgCreateNoti = view.findViewById(R.id.imgCreateNotifcation);
 
-        imgViewCreate.setOnClickListener(new View.OnClickListener() {
+        imgCreateNoti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openProfileDialog(Gravity.CENTER);
             }
         });
-
         return view;
     }
 
@@ -121,42 +121,35 @@ public class StatisticalFragment extends Fragment {
         } else{
             dialog.setCancelable(false);
         }
-//        TextView textViewName = dialog.findViewById(R.id.txtNameDialog);
-//        TextView textViewEmail = dialog.findViewById(R.id.txtEmailDialog);
-//        TextView textViewPhone = dialog.findViewById(R.id.txtPhoneDialog);
-//        TextView textViewBirth = dialog.findViewById(R.id.txtBirthDayDialog);
-//        TextView textViewGender = dialog.findViewById(R.id.txtGenderDialog);
-//        CountryCodePicker countryDialog = dialog.findViewById(R.id.ccpCountryDialog);
-//
-//        Button btnClose = dialog.findViewById(R.id.btnCloseDialog);
-//
-//        database = FirebaseDatabase.getInstance().getReference("Account").child(phone);
-//        database.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Account account = snapshot.getValue(Account.class);
-//                textViewName.setText(account.getName());
-//                textViewEmail.setText(account.getEmail());
-//                textViewPhone.setText(account.getPhone());
-//                textViewBirth.setText(account.getDate());
-//                textViewGender.setText(account.getSex());
-//                countryDialog.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//        btnClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
+        EditText edtTitleNoti = dialog.findViewById(R.id.edtTitleNotifi);
+        EditText edtDetailNoti = dialog.findViewById(R.id.edtDescNotifi);
+        Button btnSendNoti = dialog.findViewById(R.id.btnSendDialogNotifi);
+
+        btnSendNoti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Khai báo lên firebase
+                String title = edtTitleNoti.getText().toString();
+                String description = edtDetailNoti.getText().toString();
+
+                if(!title.isEmpty() || !description.isEmpty()){
+                    Integer keyIdOld = ((MyApplication) getActivity().getApplication()).getSomeVariable1();
+                    Integer keyId = keyIdOld+1;
+                    database = FirebaseDatabase.getInstance().getReference("Notification");
+                    Notification notification = new Notification(title,description);
+                    // Đưa lên firebase
+                    database.child(""+keyId).setValue(notification);
+                    ((MyApplication) getActivity().getApplication()).setSomeVariable1(keyId);
+                    dialog.dismiss();
+                }else {
+                    Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         dialog.show();
     }
+
+
 }

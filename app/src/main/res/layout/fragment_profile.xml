@@ -269,29 +269,7 @@
         </TableLayout>
 
         <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="32dp"
-            android:background="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/layoutTablePro"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <TextView
-            android:id="@+id/txtWatchlist_pro"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="30dp"
-            android:paddingTop="5dp"
-            android:text="Watch list"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-15dp" />
-
-        <View
+            android:layout_marginTop="15dp"
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -363,6 +341,25 @@
             android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/txtLogOut"
             tools:layout_editor_absoluteX="0dp" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:gravity="right">
+
+            <ImageView
+                android:id="@+id/imgCreateFeedback"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.047"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.051"
+                app:srcCompat="@drawable/ic_add_notifi" />
+        </TableRow>
 
     </TableLayout>
 
