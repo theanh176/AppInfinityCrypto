@@ -30,13 +30,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull NotificationAdapter.MyViewHolder holder, int position) {
         DataItem_Notify dataItem_notify = notifyList.get(position);
-        String content = dataItem_notify.getContent();
-        String time = dataItem_notify.getTime();
+        String description = dataItem_notify.getDescription();
         String title = dataItem_notify.getTitle();
-        Boolean isNotify = dataItem_notify.getNotify();
-
-        holder.txt_content.setText(content);
-        holder.txt_time.setText(time);
+        holder.txt_description.setText(description);
         holder.txt_title.setText(title);
     }
 
@@ -50,12 +46,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txt_content, txt_time, txt_title;
+        TextView txt_description, txt_title;
 
         public  MyViewHolder (@NonNull View itemView){
             super(itemView);
-            txt_content = itemView.findViewById(R.id.notification_content);
-            txt_time = itemView.findViewById(R.id.notification_date);
+            txt_description = itemView.findViewById(R.id.notification_description);
             txt_title = itemView.findViewById(R.id.notification_title);
         }
     }

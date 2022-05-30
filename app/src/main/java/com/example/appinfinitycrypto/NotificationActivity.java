@@ -19,10 +19,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appinfinitycrypto.Adapter.NotificationAdapter;
+import com.example.appinfinitycrypto.Fragment.HomeFragment;
 import com.example.appinfinitycrypto.Model.DataItem_Notify;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +43,7 @@ public class NotificationActivity extends AppCompatActivity {
     private NotificationAdapter notificationAdapter;
     private RecyclerView notificationRecyclerView;
     private NotificationManagerCompat notificationManagerCompat;
+    private ImageView backHome;
 
     //    Change the status bar color
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -70,10 +73,13 @@ public class NotificationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        backHome = findViewById(R.id.notification_back);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         setTranslucentStatusBar();
         LoadData();
+//        BackHome();
 
 
         // Show data on recycler view
@@ -84,21 +90,21 @@ public class NotificationActivity extends AppCompatActivity {
         notificationAdapter = new NotificationAdapter(notificationList);
         notificationRecyclerView.setAdapter(notificationAdapter);
 
-//        //auto show notification
-        Intent fullScreenIntent = new Intent(this, NotificationActivity.class);
-        PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(this, 0,
-                fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        notificationManagerCompat = NotificationManagerCompat.from(NotificationActivity.this);
-        Notification notification = new NotificationCompat.Builder(NotificationActivity.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.facebook_icon)
-                .setContentTitle("Notification")
-                .setContentText("This is notification")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setFullScreenIntent(fullScreenPendingIntent, true)
-                .build();
-        notificationManagerCompat.notify(1, notification);
+        //auto show notification
+//        Intent fullScreenIntent = new Intent(this, NotificationActivity.class);
+//        PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(this, 0,
+//                fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        notificationManagerCompat = NotificationManagerCompat.from(NotificationActivity.this);
+//        Notification notification = new NotificationCompat.Builder(NotificationActivity.this, CHANNEL_ID)
+//                .setSmallIcon(R.drawable.facebook_icon)
+//                .setContentTitle("Notification")
+//                .setContentText("This is notification")
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+//                .setFullScreenIntent(fullScreenPendingIntent, true)
+//                .build();
+//        notificationManagerCompat.notify(1, notification);
     }
 
     private void LoadData() {
@@ -122,29 +128,18 @@ public class NotificationActivity extends AppCompatActivity {
         });
     }
 
-//    // Create notification channel
-//    public void createNotificationChannel() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            NotificationChannel channel = new NotificationChannel(
-//                    CHANNEL_ID,
-//                    "Channel Name",
-//                    NotificationManager.IMPORTANCE_DEFAULT
-//            );
-//
-//            channel.setDescription("Channel Description");
-//            channel.enableLights(true);
-//            channel.enableVibration(true);
-//            channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-//
-//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-//            notificationManager.createNotificationChannel(channel);
-//        }
+    // click backHome to go to home
+//    public void BackHome() {
+//        backHome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(NotificationActivity.this, "Back Home", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(NotificationActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 //    }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        createNotificationChannel();
-//    }
+
 
 }

@@ -1,13 +1,19 @@
 package com.example.appinfinitycrypto.Fragment;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,11 +25,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.appinfinitycrypto.Adapter.DiscoverAdapter;
+import com.example.appinfinitycrypto.Adapter.NotificationAdapter;
 import com.example.appinfinitycrypto.Adapter.TopCoinAdapter;
 import com.example.appinfinitycrypto.Adapter.TopGainerAdapter;
 import com.example.appinfinitycrypto.Adapter.TopLoserAdapter;
@@ -32,19 +40,28 @@ import com.example.appinfinitycrypto.Api.ApiNew;
 import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.Home;
 import com.example.appinfinitycrypto.MainActivity;
+import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.DataItem_Gainer;
 import com.example.appinfinitycrypto.Model.DataItem_Loser;
+import com.example.appinfinitycrypto.Model.DataItem_Notify;
 import com.example.appinfinitycrypto.Model.DataNews;
 import com.example.appinfinitycrypto.Model.Discover;
 import com.example.appinfinitycrypto.Model.Market;
 import com.example.appinfinitycrypto.Model.TopGainer;
 import com.example.appinfinitycrypto.Model.TopLoser;
+import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.NewsActivity;
+import com.example.appinfinitycrypto.NotificationActivity;
 import com.example.appinfinitycrypto.R;
 import com.example.appinfinitycrypto.SignIn;
 import com.example.appinfinitycrypto.my_interface.IClickItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,25 +75,35 @@ import retrofit2.Response;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
     private IClickItem iClickItem;
+    private static final String CHANNEL_ID = "channel_01";;
+    private NotificationManagerCompat notificationManagerCompat;
 
     private List<DataItem> dataItems;
     private List<DataItem_Gainer> dataItem_Gainers;
     private List<DataItem_Loser> dataItem_Losers;
     private List<DataNews> dataNews;
+    private List<DataItem_Notify> dataItem_notifies;
 
     private TopCoinAdapter topCoinAdapter;
     private TopGainerAdapter topGainerAdapter;
     private TopLoserAdapter topLoserAdapter;
     private DiscoverAdapter discoverAdapter;
+    private NotificationAdapter notificationAdapter;
 
     private TextView showAllNews;
     private Context context;
+    public ImageView img_notify;
+
+    public Integer countNotifyRead;
+    public Integer countAllNotify;
 
     //    Change the status bar color
 
+    private DatabaseReference refAccount;
+    private DatabaseReference refNotify = FirebaseDatabase.getInstance().getReference("Notification");
     private RecyclerView topCoinRecyclerView, topGainerRecyclerView, topLoserRecyclerView, discoverHomeRecyclerView;
 
 
@@ -256,21 +283,102 @@ public class HomeFragment extends Fragment{
             }
         });
 
-        // Click change activity
-        showAllNews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                NewsFragment fragment = new NewsFragment();
-//                getFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
-//                navigationView.setSelectedItemId(R.id.newspaper11);
-
-                MainActivity mainActivity = (MainActivity) context;
-                mainActivity.changeNavItem();
-            }
-        });
-
+        // change notification logo
+        img_notify = view.findViewById(R.id.btn_notification);
+        ChangeNotifyLogo();
+        goToNotify();
 
         return view;
-
     }
+
+    // Click notify to count notification
+    private void ChangeNotifyLogo() {
+        // get count notification read
+        String phone = DataLocalManager.getPhoneInstall();
+        refAccount = FirebaseDatabase.getInstance().getReference("Account").child(phone);
+        refAccount.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Account account = snapshot.getValue(Account.class);
+                countNotifyRead = snapshot.child("notify").getValue(Integer.class);
+                compareNotify();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        System.out.println("countNotifyRead: " + countNotifyRead); // countNotifyRead: null
+
+        // get count all notification
+        refNotify.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                countAllNotify = (int) snapshot.getChildrenCount();
+                compareNotify();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    // compare count notify read and count all notify
+    public void compareNotify() {
+        if (countAllNotify != null && countNotifyRead != null) {
+            if (countAllNotify > countNotifyRead) {
+                img_notify.setImageResource(R.drawable.ic_notify_new);
+
+                // get data for notify
+                int STTNotify;
+                for (STTNotify = countAllNotify; STTNotify > countNotifyRead; STTNotify--) {
+                    System.out.println("i: " + STTNotify);
+                    int finalSTTNotify = STTNotify;
+                    refNotify.child(String.valueOf(STTNotify)).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    DataItem_Notify dataNotify = snapshot.getValue(DataItem_Notify.class);
+
+                    // create auto notification with data from dataNotify
+                    notificationManagerCompat = NotificationManagerCompat.from(requireActivity());
+                    Notification notification = new NotificationCompat.Builder(requireActivity(), CHANNEL_ID)
+                            .setSmallIcon(R.drawable.ic_notify_new)
+                            .setContentTitle(dataNotify.getTitle())
+                            .setContentText(dataNotify.getDescription())
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                            .build();
+                    notificationManagerCompat.notify(finalSTTNotify, notification);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
+            } else {
+                img_notify.setImageResource(R.drawable.ic_notifications);
+            }
+        }
+    }
+
+    // click notify to go to notification
+    private void goToNotify() {
+        img_notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(requireActivity(), NotificationActivity.class);
+//                startActivity(intent);
+                // set count notification read
+                refAccount.child("notify").setValue(countAllNotify);
+                compareNotify();
+            }
+        });
+    }
+
+    //
+
+
 }
