@@ -24,9 +24,10 @@
 
             <ImageView
                 android:id="@+id/notification_back"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_caret_up" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_notify_new" />
 
             <LinearLayout
                 android:layout_width="match_parent"
