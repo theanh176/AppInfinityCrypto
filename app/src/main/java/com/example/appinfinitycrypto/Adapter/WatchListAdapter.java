@@ -1,5 +1,6 @@
 package com.example.appinfinitycrypto.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,8 @@ import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.R;
 import com.example.appinfinitycrypto.WatchListActivity;
+import com.example.appinfinitycrypto.my_interface.ITransmitData;
+import com.example.appinfinitycrypto.my_interface.ItemClickListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,11 +38,13 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
     private final List<String> myList;
     private String phone;
     private List<DataItem> mDataItem;
+    private ITransmitData iTransmitData;
 
-    public WatchListAdapter(List<DataItem> mDataItem, String phone, List<String> myList) {
+    public WatchListAdapter(List<DataItem> mDataItem, String phone, List<String> myList, ITransmitData iTransmitData) {
         this.mDataItem = mDataItem;
         this.phone = phone;
         this.myList = myList;
+        this.iTransmitData = iTransmitData;
     }
 
     @NonNull
@@ -50,7 +55,7 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WatchListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WatchListViewHolder holder, @SuppressLint("RecyclerView") int position) {
         DataItem dataItem = mDataItem.get(position);
         if (dataItem == null) {
             return;
@@ -84,6 +89,16 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
                 notifyDataSetChanged();
             }
         });
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongCLick) {
+
+                iTransmitData.senData(mDataItem.get(position).getId());
+//                Toast.makeText(context, "" + mDataItem.get(position).getId() + " " + mDataItem.get(position).getSymbol(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     @Override
@@ -98,7 +113,7 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
         return mDataItem.indexOf(mDataItem);
     }
 
-    public class WatchListViewHolder extends RecyclerView.ViewHolder {
+    public class WatchListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView symbol;
         private TextView price;
@@ -107,6 +122,8 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
         private TextView change;
         private ImageView mImageViewChange;
         private ImageView star;
+
+        private ItemClickListener itemClickListener;
 
         public WatchListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -118,6 +135,17 @@ public class WatchListAdapter extends RecyclerView.Adapter<WatchListAdapter.Watc
             change = itemView.findViewById(R.id.watchlist_change);
             mImageViewChange = itemView.findViewById(R.id.watchlist_changelogo);
             star = itemView.findViewById(R.id.watchlist_star);
+
+            itemView.setOnClickListener((View.OnClickListener) this);
+        }
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view, getAdapterPosition(), false);
         }
     }
 

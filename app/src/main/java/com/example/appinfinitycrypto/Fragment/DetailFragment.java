@@ -126,6 +126,7 @@ public class DetailFragment extends Fragment {
                     loadData(item);
                     loadImage(imgDetail);
                     checkStar(ckStar, item.getData().get(getArguments().getString("id")));
+                    loadChartDetail(item.getData().get(getArguments().getString("id")));
                 } else {
                     Toast.makeText(DetailFragment.this.getContext(), "Không có dữ liệu", Toast.LENGTH_SHORT).show();
                 }
@@ -179,6 +180,34 @@ public class DetailFragment extends Fragment {
                         }
                     }
                 });
+
+                btn1h.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        loadChartDetailTime(item.getData().get(getArguments().getString("id")), "1H");
+                    }
+                });
+
+                btn7d.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        loadChartDetailTime(item.getData().get(getArguments().getString("id")), "W");
+                    }
+                });
+
+                btn24h.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        loadChartDetailTime(item.getData().get(getArguments().getString("id")), "D");
+                    }
+                });
+
+                btn30d.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        loadChartDetailTime(item.getData().get(getArguments().getString("id")), "M");
+                    }
+                });
             }
 
             @Override
@@ -190,10 +219,6 @@ public class DetailFragment extends Fragment {
         imgBackDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Fragment fragment = new MarketFragment();
-//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.add(R.id.fragment_detail, fragment);
-//                fm.commit();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new MarketFragment()).commit();
             }
         });
@@ -266,5 +291,17 @@ public class DetailFragment extends Fragment {
 
             }
         });
+    }
+
+    private void loadChartDetailTime(DataItem dataItem, String time) {
+        webViewChart.getSettings().setJavaScriptEnabled(true);
+        webViewChart.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        webViewChart.loadUrl("https://s.tradingview.com/widgetembed/?frameElementId=tradingview_76d87&symbol=" + dataItem.getSymbol() + "USD&interval=" + time + "&hidesidetoolbar=1&hidetoptoolbar=1&symboledit=1&saveimage=1&toolbarbg=F1F3F6&studies=[]&hideideas=1&theme=Dark&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en&utm_source=coinmarketcap.com&utm_medium=widget&utm_campaign=chart&utm_term=BTCUSDT");
+    }
+
+    private void loadChartDetail(DataItem dataItem) {
+        webViewChart.getSettings().setJavaScriptEnabled(true);
+        webViewChart.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        webViewChart.loadUrl("https://s.tradingview.com/widgetembed/?frameElementId=tradingview_76d87&symbol=" + dataItem.getSymbol() + "USD&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&symboledit=1&saveimage=1&toolbarbg=F1F3F6&studies=[]&hideideas=1&theme=Dark&style=1&timezone=Etc%2FUTC&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=en&utm_source=coinmarketcap.com&utm_medium=widget&utm_campaign=chart&utm_term=BTCUSDT");
     }
 }

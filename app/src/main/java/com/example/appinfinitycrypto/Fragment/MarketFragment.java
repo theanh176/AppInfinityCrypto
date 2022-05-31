@@ -128,8 +128,6 @@ public class MarketFragment extends Fragment {
                     rcvCurrency.setLayoutManager(linearLayoutManager);
                     rcvCurrency.setAdapter(currencyAdapter);
                 }
-
-
             }
 
             @Override

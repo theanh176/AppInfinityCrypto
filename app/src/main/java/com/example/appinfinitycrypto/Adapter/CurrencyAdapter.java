@@ -220,8 +220,6 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
 //        Khai báo interface xử lý sự kiện click recyclerview
         private ItemClickListener itemClickListener;
 
-        private ITransmitData iTransmitData;
-
         public CurrencyViewHolder(View itemView) {
             super(itemView);
 

@@ -1,5 +1,6 @@
 package com.example.appinfinitycrypto.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,11 +16,13 @@ import android.widget.Toast;
 import com.example.appinfinitycrypto.Adapter.WatchListAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
 import com.example.appinfinitycrypto.DataLocalManager;
+import com.example.appinfinitycrypto.MainActivity;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.Market;
 import com.example.appinfinitycrypto.Model.WatchList;
 import com.example.appinfinitycrypto.Model.getWatchlist;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.my_interface.ITransmitData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,6 +50,7 @@ public class WatchListFragment extends Fragment {
     private DatabaseReference database;
     private WatchListAdapter accountAdapter;
     private List<WatchList> accountList;
+    private ITransmitData iTransmitData;
 
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Account");
 
@@ -140,7 +144,7 @@ public class WatchListFragment extends Fragment {
                             }
                         }
                     }
-                    watchListAdapter = new WatchListAdapter(dataItems, phone, myList);
+                    watchListAdapter = new WatchListAdapter(dataItems, phone, myList, iTransmitData);
                     watchListRecyclerView.setAdapter(watchListAdapter);
                 }
             }
@@ -166,5 +170,14 @@ public class WatchListFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity)
+            this.iTransmitData = (ITransmitData) context;
+        else
+            throw new RuntimeException(context.toString() + "must implement onViewSelected!");
     }
 }

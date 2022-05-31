@@ -51,7 +51,7 @@ public class ChangeProfileFragment extends Fragment {
 
         ccpCountryProfileChange = view.findViewById(R.id.ccpCountryProfileChange);
 
-        imgBack = view.findViewById(R.id.btnBackPassProChange);
+        imgBack = view.findViewById(R.id.imgBackProChange);
         btnSave = view.findViewById(R.id.btnSaveProChange);
 
 
