@@ -19,6 +19,7 @@ import com.example.appinfinitycrypto.Fragment.ListUserFragment;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.R;
 import com.example.appinfinitycrypto.my_interface.IClickShowProfile;
+import com.example.appinfinitycrypto.my_interface.ItemClickListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -124,4 +125,5 @@ public class HomeAdminAdapter extends RecyclerView.Adapter<HomeAdminAdapter.MyVi
             imgCheck = itemView.findViewById(R.id.check);
         }
     }
+
 }

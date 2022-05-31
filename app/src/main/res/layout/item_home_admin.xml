@@ -22,9 +22,10 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/fullname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="349dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/svn_gilroy_medium"
                     android:text="Full Name"
