@@ -348,7 +348,7 @@ public class HomeFragment extends Fragment {
                     // create auto notification with data from dataNotify
                     notificationManagerCompat = NotificationManagerCompat.from(requireActivity());
                     Notification notification = new NotificationCompat.Builder(requireActivity(), CHANNEL_ID)
-                            .setSmallIcon(R.drawable.ic_notifications)
+                            .setSmallIcon(R.drawable.ic_notify_new)
                             .setContentTitle(dataNotify.getTitle())
                             .setContentText(dataNotify.getDescription())
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
