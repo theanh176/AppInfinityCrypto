@@ -51,7 +51,7 @@ import com.hbb20.CountryCodePicker;
 public class ProfileFragment extends Fragment {
 
     private DatabaseReference ref;
-    TextView txtFullNamePro, txtPhonePro, txtPasswordPro, txtEmailPro, txtBirthdayPro, txtGender;
+    TextView txtFullNamePro, txtPhonePro, txtEmailPro, txtBirthdayPro, txtGender;
     CountryCodePicker ccpCountryPro;
     ImageView imgCreateFeedback, imgEditProfile, imgEditPass, imgLogOut;
     Button btnContact;
@@ -105,7 +105,6 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         txtFullNamePro = view.findViewById(R.id.txtFullNameProfile);
         txtEmailPro = view.findViewById(R.id.txtEmailProfile);
-        txtPasswordPro = view.findViewById(R.id.txtPasswordProfile);
         txtPhonePro = view.findViewById(R.id.txtPhoneProfile);
         txtBirthdayPro = view.findViewById(R.id.txtBirthDayProfile);
         txtGender = view.findViewById(R.id.txtGenderProfile);
@@ -246,8 +245,7 @@ public class ProfileFragment extends Fragment {
                 System.out.println(snapshot.child("name").getValue());
                 txtFullNamePro.setText(account.getName());
                 txtEmailPro.setText(account.getEmail());
-                txtPasswordPro.setText(account.getPass());
-                txtPhonePro.setText("*******" + account.getPhone().substring(7));
+                txtPhonePro.setText(account.getPhone());
                 txtBirthdayPro.setText(account.getDate());
                 txtGender.setText(account.getSex());
                 ccpCountryPro.setCountryForPhoneCode(Integer.parseInt(account.getCountry()));

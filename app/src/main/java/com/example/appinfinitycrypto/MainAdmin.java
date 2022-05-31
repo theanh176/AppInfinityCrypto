@@ -84,7 +84,7 @@ public class MainAdmin extends AppCompatActivity {
                         fragment = new NotificationFragment();
                         break;
                     case R.id.accountadmin11:
-                        fragment = new ProfileFragment();
+                        fragment = new GoUserFragment();
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.body_admin_container, fragment).commit();

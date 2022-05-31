@@ -9,8 +9,8 @@
 
     <TableLayout
         android:id="@+id/tableLayout2"
-        android:layout_width="367dp"
-        android:layout_height="632dp"
+        android:layout_width="365dp"
+        android:layout_height="662dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
@@ -22,76 +22,77 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.091">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:orientation="vertical">
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="72dp"
-                        android:orientation="vertical">
+        <LinearLayout>
 
-                        <ImageView
-                            android:id="@+id/imageView8"
-                            android:layout_width="70dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="30dp"
-                            android:src="@drawable/infinity_crypto_logo" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/textView2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginRight="2dp"
-                            android:baselineAligned="false"
-                            android:fontFamily="@font/svn_gilroy_heavy"
-                            android:gravity="center"
-                            android:text="Infinity Crypto"
-                            android:textColor="@color/black"
-                            android:textSize="24dp" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="77dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.047"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.051"
+                    app:srcCompat="@drawable/infinity_crypto_logo" />
 
-                    </TableRow>
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="2dp"
+                    android:baselineAligned="false"
+                    android:fontFamily="@font/svn_gilroy_heavy"
+                    android:gravity="center"
+                    android:text="Infinity Crypto"
+                    android:textColor="@color/black"
+                    android:textSize="24dp" />
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/imageView"-->
-<!--                        android:layout_width="50dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintHorizontal_bias="0.047"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent"-->
-<!--                        app:layout_constraintVertical_bias="0.051"-->
-<!--                        app:srcCompat="@drawable/infinity_crypto_logo" />-->
+            </TableRow>
+        </LinearLayout>
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/textView2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_marginLeft="45dp"-->
-<!--                        android:layout_marginRight="2dp"-->
-<!--                        android:baselineAligned="false"-->
-<!--                        android:fontFamily="@font/svn_gilroy_heavy"-->
-<!--                        android:gravity="center"-->
-<!--                        android:text="Infinity Crypto"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="24dp" />-->
+        <TableRow
+            android:id="@+id/headerNews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="fill_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-                </TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="120dp"
+                android:fontFamily="@font/svn_gilroy_bold"
+                android:paddingHorizontal="10dp"
+                android:text="Feedback"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
 
 
+        </TableRow>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewFeedback"
                 android:layout_width="match_parent"
-                android:layout_height="277dp" />
+                android:layout_height="match_parent" />
         </FrameLayout>
 
     </TableLayout>

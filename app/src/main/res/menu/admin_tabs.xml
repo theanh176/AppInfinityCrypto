@@ -15,5 +15,5 @@
     <item
         android:id="@+id/accountadmin11"
         android:icon="@drawable/ic_account"
-        android:title="@string/account_admin" />
+        android:title="@string/tab_user" />
 </menu>

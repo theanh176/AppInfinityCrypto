@@ -26,6 +26,7 @@
                     android:id="@+id/fullname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/svn_gilroy_medium"
                     android:text="Full Name"
                     android:textColor="#FFFFFF"
                     android:textSize="15dp" />
@@ -34,6 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0707261990"
+                    android:fontFamily="@font/svn_gilroy_medium"
                     android:textColor="#FFFFFF"
                     android:textSize="10dp" />
             </LinearLayout>

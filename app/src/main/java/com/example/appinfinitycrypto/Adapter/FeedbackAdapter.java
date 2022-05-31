@@ -39,11 +39,13 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
         FeedBack feedBack = feedBackList.get(position);
         String title = feedBack.getTitle();
         String description = feedBack.getDescription();
+        String time = feedBack.getDate();
         if(feedBack==null){
             return;
         }
         holder.textTitle.setText(title);
         holder.textDescription.setText(description);
+        holder.textTime.setText(time);
 
     }
 
@@ -57,13 +59,13 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textTitle, textDescription;
-        ImageView imageViewDelete;
+        TextView textTitle, textDescription, textTime;
 
         public  MyViewHolder (@NonNull View itemView){
             super(itemView);
             textTitle = itemView.findViewById(R.id.titlefeedback);
             textDescription = itemView.findViewById(R.id.descfeedback);
+            textTime = itemView.findViewById(R.id.timefeedback);
         }
     }
 }

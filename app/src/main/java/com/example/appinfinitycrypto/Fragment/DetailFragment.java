@@ -190,10 +190,11 @@ public class DetailFragment extends Fragment {
         imgBackDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new MarketFragment();
-                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-                fm.add(R.id.fragment_detail, fragment);
-                fm.commit();
+//                Fragment fragment = new MarketFragment();
+//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
+//                fm.add(R.id.fragment_detail, fragment);
+//                fm.commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new MarketFragment()).commit();
             }
         });
 

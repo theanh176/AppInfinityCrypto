@@ -32,8 +32,8 @@ public class ChangeProfileFragment extends Fragment {
     private EditText editFullName, editEmail, editBirthday;
     private RadioButton r_male, r_female, r_difference;
     private CountryCodePicker ccpCountryProfileChange;
-    private Button btnSave;
     private ImageView imgBack;
+    private Button btnSave;
 
     @Nullable
     @Override
@@ -92,7 +92,7 @@ public class ChangeProfileFragment extends Fragment {
                 }
                 Toast.makeText(ChangeProfileFragment.this.getContext(), "Change Successfully", Toast.LENGTH_SHORT).show();
 
-                getActivity().getSupportFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new ProfileFragment()).commit();
             }
         });
     }

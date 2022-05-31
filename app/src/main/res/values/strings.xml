@@ -29,7 +29,7 @@
     <string name="tab_statistical">Statistical</string>
     <string name="tab_notification">Notification</string>
     <string name="tab_feedback">FeedBack</string>
-    <string name="account_admin">Account</string>
+    <string name="tab_user">User</string>
 
     <string name="default_web_client_id1" />
     <string name="hello_blank_fragment">Hello blank fragment</string>
