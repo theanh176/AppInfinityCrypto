@@ -219,7 +219,13 @@ public class DetailFragment extends Fragment {
         imgBackDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new MarketFragment()).commit();
+                if(DataLocalManager.getKeyIDCheckDetail()==1){
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new MarketFragment()).commit();
+                    DataLocalManager.setKeyIDCheckDetail(0);
+                }else{
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new WatchListFragment()).commit();
+                }
+
             }
         });
 

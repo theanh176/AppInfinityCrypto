@@ -153,10 +153,8 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongCLick) {
-
                 iTransmitData.senData(mDataItem.get(position).getId());
-//                Toast.makeText(context, "" + mDataItem.get(position).getId() + " " + mDataItem.get(position).getSymbol(), Toast.LENGTH_SHORT).show();
-
+                DataLocalManager.setKeyIDCheckDetail(1);
             }
         });
 

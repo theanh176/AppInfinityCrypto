@@ -9,6 +9,7 @@ public class DataLocalManager {
     private static final String PREF_FIRST_RULE_USER = "PREF_FIRST_RULE_USER";
     private static final String PREF_FIRST_RULE_ADMIN = "PREF_FIRST_RULE_ADMIN";
     private static final Integer PREF_FIRST_IDKEY = 0;
+    private static final Integer PREF_FIRST_CHECK_DETAIL = 0;
     private static DataLocalManager instance;
     private SessionManager sessionManager;
 
@@ -63,5 +64,13 @@ public class DataLocalManager {
 
     public static Integer getKeyIDNotify(){
         return DataLocalManager.getInstance().sessionManager.getIntegerKeyID(PREF_FIRST_IDKEY);
+    }
+
+    public static void setKeyIDCheckDetail(Integer isKeyID){
+        DataLocalManager.getInstance().sessionManager.putIntegerCheckDetail(PREF_FIRST_CHECK_DETAIL, isKeyID);
+    }
+
+    public static Integer getKeyIDCheckDetail(){
+        return DataLocalManager.getInstance().sessionManager.getIntegerCheckDetail(PREF_FIRST_CHECK_DETAIL);
     }
 }

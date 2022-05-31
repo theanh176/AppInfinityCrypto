@@ -18,6 +18,7 @@ public class SessionManager {
         editor = preferences.edit();
     }
 
+    // Lưu lại sign in
     public static void putBooleanValue(String key, boolean value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -30,6 +31,7 @@ public class SessionManager {
         return sharedPreferences.getBoolean(key, false);
     }
 
+    // Lưu Phone
     public static void putStringPhone(String key, String value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -42,6 +44,7 @@ public class SessionManager {
         return sharedPreferences.getString(key, "");
     }
 
+    // Kiểm tra rule User
     public static void putBooleanRuleUser(String key, boolean value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -54,6 +57,7 @@ public class SessionManager {
         return sharedPreferences.getBoolean(key, false);
     }
 
+    // Kiểm tra rule Admin
     public static void putBooleanRuleAdmin(String key, boolean value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -66,6 +70,7 @@ public class SessionManager {
         return sharedPreferences.getBoolean(key, false);
     }
 
+    // Lấy id của trang notifi trên firebase
     public static void putIntegerKeyID(Integer key, Integer value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -74,6 +79,19 @@ public class SessionManager {
     }
 
     public static Integer getIntegerKeyID(Integer key){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(String.valueOf(key), 0);
+    }
+
+    // Check back detail --> watchlist or market
+    public static void putIntegerCheckDetail(Integer key, Integer value){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(String.valueOf(key), value);
+        editor.apply();
+    }
+
+    public static Integer getIntegerCheckDetail(Integer key){
         SharedPreferences sharedPreferences = context.getSharedPreferences(MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(String.valueOf(key), 0);
     }
