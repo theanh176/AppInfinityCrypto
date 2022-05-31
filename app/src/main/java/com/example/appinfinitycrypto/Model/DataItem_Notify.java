@@ -1,23 +1,43 @@
 package com.example.appinfinitycrypto.Model;
 
 public class DataItem_Notify {
-    private String description;
+    private String content;
+    private String time;
     private String title;
+    private Boolean isNotify;
 
     public DataItem_Notify() {
     }
 
-    public DataItem_Notify(String description, String title) {
+    public DataItem_Notify(String content, String time, String title, Boolean isNotify) {
         this.title = title;
-        this.description = description;
+        this.content = content;
+        this.isNotify = isNotify;
+        this.time = time;
     }
 
-    public String getDescription() {
-        return description;
+    public Boolean getNotify() {
+        return isNotify;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNotify(Boolean notify) {
+        isNotify = notify;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getTitle() {

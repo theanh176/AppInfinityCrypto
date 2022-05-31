@@ -9,13 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appinfinitycrypto.Model.DataItem_Notify;
+import com.example.appinfinitycrypto.Model.Notification;
 import com.example.appinfinitycrypto.R;
 
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder>{
     List<DataItem_Notify> notifyList;
-
     public NotificationAdapter(List<DataItem_Notify> notifyList) {
         this.notifyList = notifyList;
     }
