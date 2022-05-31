@@ -5,6 +5,7 @@ import static androidx.navigation.Navigation.findNavController;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.FragmentNavigator;
 
 import android.app.Activity;
@@ -16,18 +17,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.example.appinfinitycrypto.Fragment.DetailFragment;
 import com.example.appinfinitycrypto.Fragment.HomeFragment;
 import com.example.appinfinitycrypto.Fragment.MarketFragment;
 import com.example.appinfinitycrypto.Fragment.NewsFragment;
 import com.example.appinfinitycrypto.Fragment.NotSignInFragment;
 import com.example.appinfinitycrypto.Fragment.ProfileFragment;
 import com.example.appinfinitycrypto.Fragment.WatchListFragment;
+import com.example.appinfinitycrypto.my_interface.ITransmitData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ITransmitData {
 
     BottomNavigationView navigationView;
     FragmentNavigator fragmentNavigator;
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.market11:
                         fragment = new MarketFragment();
+
                         break;
 
                     case R.id.watchlist11:
@@ -133,5 +138,18 @@ public class MainActivity extends AppCompatActivity {
             database.child("isOnline").setValue(false);
             Log.d("MainActivity Lifecycle", "===== onStop =====");
         }
+    }
+
+    @Override
+    public void senData(String id) {
+        Fragment detailFragment = new DetailFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("id", id);
+        detailFragment.setArguments(bundle);
+
+        FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+        fm.add(R.id.body_container, detailFragment).commit();
+
     }
 }

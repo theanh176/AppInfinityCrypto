@@ -9,18 +9,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Build;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -28,7 +27,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.appinfinitycrypto.Adapter.DiscoverAdapter;
 import com.example.appinfinitycrypto.Adapter.NotificationAdapter;
@@ -38,7 +36,6 @@ import com.example.appinfinitycrypto.Adapter.TopLoserAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
 import com.example.appinfinitycrypto.Api.ApiNew;
 import com.example.appinfinitycrypto.DataLocalManager;
-import com.example.appinfinitycrypto.Home;
 import com.example.appinfinitycrypto.MainActivity;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.Model.DataItem;
@@ -54,7 +51,6 @@ import com.example.appinfinitycrypto.MyApplication;
 import com.example.appinfinitycrypto.NewsActivity;
 import com.example.appinfinitycrypto.NotificationActivity;
 import com.example.appinfinitycrypto.R;
-import com.example.appinfinitycrypto.SignIn;
 import com.example.appinfinitycrypto.my_interface.IClickItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -62,7 +58,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,31 +155,31 @@ public class HomeFragment extends Fragment {
         topCoinRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
         dataItems = new ArrayList<>();
 
-        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 5, "all", "USD").enqueue(new Callback<Market>() {
-            @Override
-            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
-
-                Market market = response.body();
-                DataItem item;
-
-                if (market == null) {
-                    System.out.println("market null size");
-                }
-
-                if (market != null) {
-                    for (int i = 0; i < market.getData().size(); i++) {
-                        dataItems.add((DataItem) market.getData().get(i));
-                    }
-                    topCoinAdapter = new TopCoinAdapter(dataItems);
-                    topCoinRecyclerView.setAdapter(topCoinAdapter);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
-                Toast.makeText(requireActivity(), "Call Api Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        ApiCoinMarket.apiCoinMarket.convertMarket("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 5, "all", "USD").enqueue(new Callback<Market>() {
+//            @Override
+//            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
+//
+//                Market market = response.body();
+//                DataItem item;
+//
+//                if (market == null) {
+//                    System.out.println("market null size");
+//                }
+//
+//                if (market != null) {
+//                    for (int i = 0; i < market.getData().size(); i++) {
+//                        dataItems.add((DataItem) market.getData().get(i));
+//                    }
+//                    topCoinAdapter = new TopCoinAdapter(dataItems);
+//                    topCoinRecyclerView.setAdapter(topCoinAdapter);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
+//                Toast.makeText(requireActivity(), "Call Api Error", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         // top gainer recycler view
         topGainerRecyclerView = view.findViewById(R.id.topGainerRecyclerView);
@@ -192,7 +187,7 @@ public class HomeFragment extends Fragment {
         topGainerRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
         dataItem_Gainers = new ArrayList<>();
 
-        ApiCoinMarket.apiCoinMarket.convertUsdToVndGainer("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", 1, 5, "all", "USD").enqueue(new Callback<TopGainer>() {
+        ApiCoinMarket.apiCoinMarket.convertGainer("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", 1, 5, "all", "USD").enqueue(new Callback<TopGainer>() {
             @Override
             public void onResponse(@NonNull Call<TopGainer> call, @NonNull Response<TopGainer> response) {
 
@@ -224,7 +219,7 @@ public class HomeFragment extends Fragment {
         topLoserRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
         dataItem_Losers = new ArrayList<>();
 
-        ApiCoinMarket.apiCoinMarket.convertUsdToVndLoser("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", "asc", 1, 5, "all", "USD").enqueue(new Callback<TopLoser>() {
+        ApiCoinMarket.apiCoinMarket.convertLoser("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", "asc", 1, 5, "all", "USD").enqueue(new Callback<TopLoser>() {
             @Override
             public void onResponse(@NonNull Call<TopLoser> call, @NonNull Response<TopLoser> response) {
 
@@ -329,7 +324,7 @@ public class HomeFragment extends Fragment {
     public void compareNotify() {
         if (countAllNotify != null && countNotifyRead != null) {
             if (countAllNotify > countNotifyRead) {
-                img_notify.setImageResource(R.drawable.ic_notify_new);
+//                img_notify.setImageResource(R.drawable.ic_notify_new);
 
                 // get data for notify
                 int STTNotify;
@@ -344,7 +339,7 @@ public class HomeFragment extends Fragment {
                     // create auto notification with data from dataNotify
                     notificationManagerCompat = NotificationManagerCompat.from(requireActivity());
                     Notification notification = new NotificationCompat.Builder(requireActivity(), CHANNEL_ID)
-                            .setSmallIcon(R.drawable.ic_notify_new)
+                            .setSmallIcon(R.drawable.ic_notifications)
                             .setContentTitle(dataNotify.getTitle())
                             .setContentText(dataNotify.getDescription())
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)

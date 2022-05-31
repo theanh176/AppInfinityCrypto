@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_detail"
+    android:background="#1b222f"
     tools:context=".Fragment.DetailFragment">
 
     <TableRow
@@ -58,7 +60,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
-            android:id="@+id/textView10"
+            android:id="@+id/imgBackDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -69,23 +71,24 @@
             app:srcCompat="@drawable/ic_back" />
 
         <TextView
+            android:id="@+id/txtNameDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NAME"
-
+            android:textColor="#ffffff"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+            app:layout_constraintEnd_toStartOf="@+id/ckStarDetail"
             app:layout_constraintHorizontal_bias="0.512"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintStart_toEndOf="@+id/imgBackDetail"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.529" />
 
         <CheckBox
-            android:id="@+id/imageView5"
+            android:id="@+id/ckStarDetail"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@drawable/checkbox_star"
+            android:button="@drawable/checkbox_star"
             android:checked="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +97,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imgDetail"
         android:layout_width="83dp"
         android:layout_height="64dp"
         android:layout_marginTop="4dp"
@@ -103,26 +106,31 @@
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/txtUSDDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="48dp"
         android:text="USD"
-        android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/imgDetail"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <TextView
-        android:layout_width="60dp"
-        android:layout_height="30dp"
+        android:id="@+id/percent24hDetail"
+        android:layout_width="85dp"
+        android:layout_height="29dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_radius"
+        android:background="#1b222f"
+        android:padding="5dp"
         android:text="percent"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.811"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/txtSymbolDetail"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <HorizontalScrollView
@@ -133,7 +141,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6">
+        app:layout_constraintTop_toBottomOf="@+id/imgDetail">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -182,6 +190,7 @@
     </HorizontalScrollView>
 
     <WebView
+        android:id="@+id/webViewChart"
         android:layout_width="match_parent"
         android:layout_height="243dp"
         android:layout_marginTop="4dp"
@@ -189,5 +198,17 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+    <TextView
+        android:id="@+id/txtSymbolDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="20dp"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:text="symbol"
+        app:layout_constraintStart_toEndOf="@+id/imgDetail"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

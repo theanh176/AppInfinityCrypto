@@ -1,6 +1,7 @@
 package com.example.appinfinitycrypto.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -20,12 +21,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appinfinitycrypto.DataLocalManager;
+import com.example.appinfinitycrypto.Fragment.DetailFragment;
 import com.example.appinfinitycrypto.Model.Account;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.R;
+import com.example.appinfinitycrypto.my_interface.ITransmitData;
 import com.example.appinfinitycrypto.my_interface.ItemClickListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,11 +57,13 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
     private List<DataItem> mDataItemOld;
     private Context context;
     private DatabaseReference ref;
+    private ITransmitData iTransmitData;
 
-    public CurrencyAdapter(List<DataItem> mDataItem, Context context) {
+    public CurrencyAdapter(List<DataItem> mDataItem, Context context, ITransmitData iTransmitData) {
         this.mDataItem = mDataItem;
         this.mDataItemOld = mDataItem;
         this.context = context;
+        this.iTransmitData = iTransmitData;
     }
 
     @NonNull
@@ -77,11 +86,11 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
 
         if (dataItem.getQuote().getUsd().getPercent_change_24h() < 0) {
             holder.currencyChangeTextView.setTextColor(Color.RED);
-            holder.currencyChangeTextView.setText("-" + String.format("$%.2f",dataItem.getQuote().getUsd().getPercent_change_24h()) + "%");
+            holder.currencyChangeTextView.setText(String.format("$%.2f",dataItem.getQuote().getUsd().getPercent_change_24h()) + "%");
             holder.currencyChangeImageView.setImageResource(R.drawable.caret_down_red);
         } else{
             holder.currencyChangeTextView.setTextColor(Color.GREEN);
-            holder.currencyChangeTextView.setText("+" + String.format("$%.2f",dataItem.getQuote().getUsd().getPercent_change_24h()) + "%");
+            holder.currencyChangeTextView.setText(String.format("$%.2f",dataItem.getQuote().getUsd().getPercent_change_24h()) + "%");
             holder.currencyChangeImageView.setImageResource(R.drawable.caret_up_green);
         }
 
@@ -145,11 +154,16 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             @Override
             public void onClick(View view, int position, boolean isLongCLick) {
 
-                Toast.makeText(context, "" + mDataItem.get(position).getId() + " " + mDataItem.get(position).getSymbol(), Toast.LENGTH_SHORT).show();
+                iTransmitData.senData(mDataItem.get(position).getId());
+//                Toast.makeText(context, "" + mDataItem.get(position).getId() + " " + mDataItem.get(position).getSymbol(), Toast.LENGTH_SHORT).show();
 
             }
         });
+
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -202,8 +216,11 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         private CheckBox ckStar;
         private ImageView currencyImageView, currencyChartImageView, currencyChangeImageView;
 
+
 //        Khai báo interface xử lý sự kiện click recyclerview
         private ItemClickListener itemClickListener;
+
+        private ITransmitData iTransmitData;
 
         public CurrencyViewHolder(View itemView) {
             super(itemView);
@@ -219,7 +236,6 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             ckStar = itemView.findViewById(R.id.ckStar);
 
             itemView.setOnClickListener(this);
-
 
 
         }
@@ -278,6 +294,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
