@@ -9,7 +9,7 @@ public class DataItem {
     private String slug;
     private int num_market_pairs;
     private String date_added;
-    private List<String> tags;
+//    private List<String> tags;
     private double max_supply;
     private double circulating_supply;
     private double total_supply;
@@ -68,13 +68,13 @@ public class DataItem {
         this.date_added = date_added;
     }
 
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
+//    public List<String> getTags() {
+//        return tags;
+//    }
+//
+//    public void setTags(List<String> tags) {
+//        this.tags = tags;
+//    }
 
     public double getMax_supply() {
         return max_supply;

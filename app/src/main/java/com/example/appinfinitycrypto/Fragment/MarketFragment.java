@@ -1,5 +1,7 @@
 package com.example.appinfinitycrypto.Fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,9 +23,10 @@ import com.example.appinfinitycrypto.Adapter.CurrencyAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
 import com.example.appinfinitycrypto.MainActivity;
 import com.example.appinfinitycrypto.Model.DataItem;
+import com.example.appinfinitycrypto.Model.DetailItem;
 import com.example.appinfinitycrypto.Model.Market;
 import com.example.appinfinitycrypto.R;
-import com.example.appinfinitycrypto.activity_market;
+import com.example.appinfinitycrypto.my_interface.ITransmitData;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +49,8 @@ public class MarketFragment extends Fragment {
     private RecyclerView rcvCurrency;
     private List<DataItem> dataItems;
     private CurrencyAdapter currencyAdapter;
+
+    private ITransmitData iTransmitData;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,6 +92,7 @@ public class MarketFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -102,13 +108,13 @@ public class MarketFragment extends Fragment {
         dataItems = new ArrayList<>();
 
 
+
 //        https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=fac03ee8-101c-4a60-86c3-b38e63d5f955&sort=market_cap&start=1&limit=100&cryptocurrency_type=tokens&convert=USD
-        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap", 1,10,"tokens","USD").enqueue(new Callback<Market>() {
+        ApiCoinMarket.apiCoinMarket.convertMarket("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap", 1,10,"tokens","USD").enqueue(new Callback<Market>() {
             @Override
             public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
 
                 Market market = response.body();
-//                DataItem item;
                 if (market != null) {
                     Log.w("Source code",market.getData().get(1).getName());
 
@@ -116,7 +122,7 @@ public class MarketFragment extends Fragment {
                     for (int i = 0; i < market.getData().size(); i++) {
                         dataItems.add((DataItem) market.getData().get(i));
                     }
-                    currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
+                    currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext(), iTransmitData);
 //                    RecyclerView cần có một LayoutManager, ta tạo một LayoutManager
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
                     rcvCurrency.setLayoutManager(linearLayoutManager);
@@ -133,6 +139,8 @@ public class MarketFragment extends Fragment {
             }
         });
 
+
+
         btnArrangeName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,7 +153,7 @@ public class MarketFragment extends Fragment {
 
                 Collections.reverse(dataItems);
 
-                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
+                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext(), iTransmitData);
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
@@ -160,7 +168,7 @@ public class MarketFragment extends Fragment {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
+                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext(), iTransmitData);
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
@@ -175,7 +183,7 @@ public class MarketFragment extends Fragment {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
+                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext(), iTransmitData);
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
@@ -190,7 +198,7 @@ public class MarketFragment extends Fragment {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext());
+                currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext(), iTransmitData);
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
@@ -211,6 +219,16 @@ public class MarketFragment extends Fragment {
 
             }
         });
+
         return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity)
+            this.iTransmitData = (ITransmitData) context;
+        else
+            throw new RuntimeException(context.toString() + "must implement onViewSelected!");
     }
 }

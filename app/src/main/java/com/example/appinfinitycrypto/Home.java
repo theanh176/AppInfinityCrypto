@@ -92,31 +92,31 @@ public class Home extends AppCompatActivity {
         topCoinRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
         dataItems = new ArrayList<>();
 
-        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 5, "all", "USD").enqueue(new Callback<Market>() {
-            @Override
-            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
-
-                Market market = response.body();
-                DataItem item;
-
-                if (market == null) {
-                    System.out.println("market null size");
-                }
-
-                if (market != null) {
-                    for (int i = 0; i < market.getData().size(); i++) {
-                        dataItems.add((DataItem) market.getData().get(i));
-                    }
-                    topCoinAdapter = new TopCoinAdapter(dataItems);
-                    topCoinRecyclerView.setAdapter(topCoinAdapter);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
-                Toast.makeText(Home.this, "Call Api Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        ApiCoinMarket.apiCoinMarket.convertMarket("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 5, "all", "USD").enqueue(new Callback<Market>() {
+//            @Override
+//            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
+//
+//                Market market = response.body();
+//                DataItem item;
+//
+//                if (market == null) {
+//                    System.out.println("market null size");
+//                }
+//
+//                if (market != null) {
+//                    for (int i = 0; i < market.getData().size(); i++) {
+//                        dataItems.add((DataItem) market.getData().get(i));
+//                    }
+//                    topCoinAdapter = new TopCoinAdapter(dataItems);
+//                    topCoinRecyclerView.setAdapter(topCoinAdapter);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
+//                Toast.makeText(Home.this, "Call Api Error", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         // top gainer recycler view
         topGainerRecyclerView = findViewById(R.id.topGainerRecyclerView);
@@ -124,7 +124,7 @@ public class Home extends AppCompatActivity {
         topGainerRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
         dataItem_Gainers = new ArrayList<>();
 
-        ApiCoinMarket.apiCoinMarket.convertUsdToVndGainer("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", 1, 5, "all", "USD").enqueue(new Callback<TopGainer>() {
+        ApiCoinMarket.apiCoinMarket.convertGainer("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", 1, 5, "all", "USD").enqueue(new Callback<TopGainer>() {
             @Override
             public void onResponse(@NonNull Call<TopGainer> call, @NonNull Response<TopGainer> response) {
 
@@ -156,7 +156,7 @@ public class Home extends AppCompatActivity {
         topLoserRecyclerView.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
         dataItem_Losers = new ArrayList<>();
 
-        ApiCoinMarket.apiCoinMarket.convertUsdToVndLoser("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", "asc", 1, 5, "all", "USD").enqueue(new Callback<TopLoser>() {
+        ApiCoinMarket.apiCoinMarket.convertLoser("fac03ee8-101c-4a60-86c3-b38e63d5f955", "percent_change_24h", "asc", 1, 5, "all", "USD").enqueue(new Callback<TopLoser>() {
             @Override
             public void onResponse(@NonNull Call<TopLoser> call, @NonNull Response<TopLoser> response) {
 
