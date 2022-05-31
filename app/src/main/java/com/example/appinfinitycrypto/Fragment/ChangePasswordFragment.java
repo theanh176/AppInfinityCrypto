@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.appinfinitycrypto.DataLocalManager;
@@ -25,7 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 public class ChangePasswordFragment extends Fragment {
     private DatabaseReference ref;
     private EditText editOldPassword, editNewPassword, editReenterPassword;
-    private Button btnBack, btnSave;
+    private ImageView imgBack;
+    private Button btnSave;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +39,7 @@ public class ChangePasswordFragment extends Fragment {
         editOldPassword = view.findViewById(R.id.editOldPasswordProfile);
         editReenterPassword = view.findViewById(R.id.editReenterPasswordProfile);
 
-        btnBack = view.findViewById(R.id.btnBackPassProChange);
+        imgBack = view.findViewById(R.id.btnBackPassProChange);
         btnSave = view.findViewById(R.id.btnSavePassProChange);
 
         LoadListenerEvent();
@@ -83,7 +85,7 @@ public class ChangePasswordFragment extends Fragment {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().popBackStack();

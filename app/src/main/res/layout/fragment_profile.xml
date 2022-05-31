@@ -50,6 +50,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.061" />
+        <ImageView
+            android:id="@+id/imgCreateFeedback"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.051"
+            app:srcCompat="@drawable/ic_feedback" />
 
 
     </TableRow>
@@ -69,23 +81,54 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="155dp"
             android:fontFamily="@font/svn_gilroy_bold"
             android:paddingHorizontal="10dp"
             android:text="Profile"
             android:textColor="#ffffff"
             android:textSize="24sp" />
+        <ImageView
+            android:id="@+id/imgchangeProfile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.051"
+            app:srcCompat="@drawable/ic_baseline_edit_note_24" />
+        <ImageView
+            android:id="@+id/imgchangePassword"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.051"
+            app:srcCompat="@drawable/ic_changee_password" />
+
 
     </TableRow>
 
     <TableLayout
+        android:id="@+id/tableLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerNews">
+        app:layout_constraintTop_toBottomOf="@+id/headerNews"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/txtFullNameProfile"
@@ -112,14 +155,15 @@
             tools:ignore="MissingConstraints">
 
             <TableRow>
+
                 <TextView
                     android:id="@+id/labelEmailProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/svn_gilroy_bold"
                     android:text="Email:"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:fontFamily="@font/svn_gilroy_bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.072"
                     app:layout_constraintStart_toStartOf="parent"
@@ -130,8 +174,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:textColor="@color/white"
                     android:fontFamily="@font/svn_gilroy_medium"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.075"
@@ -141,16 +185,15 @@
 
             </TableRow>
 
-            <TableRow
-                android:layout_marginTop="10dp"
-                >
+            <TableRow android:layout_marginTop="10dp">
+
                 <TextView
                     android:id="@+id/labelPhoneProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/svn_gilroy_bold"
                     android:text="Phone:"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/svn_gilroy_bold"
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.074"
@@ -163,8 +206,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
 
-                    android:textColor="@color/white"
                     android:fontFamily="@font/svn_gilroy_medium"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.06"
@@ -172,18 +215,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtEmailProfile" />
             </TableRow>
 
-            <TableRow
-                android:layout_marginTop="10dp"
-                >
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/labelPasswordProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/svn_gilroy_bold"
                     android:text="Password:"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:fontFamily="@font/svn_gilroy_bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.08"
                     app:layout_constraintStart_toStartOf="parent"
@@ -195,8 +236,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
 
-                    android:inputType="textPassword"
                     android:fontFamily="@font/svn_gilroy_medium"
+                    android:inputType="textPassword"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -205,18 +246,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtPhoneProfile" />
             </TableRow>
 
-            <TableRow
-                android:layout_marginTop="10dp"
-                >
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/labelBirthDayProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/svn_gilroy_bold"
                     android:text="BirthDay:"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:fontFamily="@font/svn_gilroy_bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.077"
                     app:layout_constraintStart_toStartOf="parent"
@@ -227,27 +266,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/svn_gilroy_medium"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:fontFamily="@font/svn_gilroy_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.084"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtPasswordProfile" />
             </TableRow>
 
-            <TableRow
-                android:layout_marginTop="10dp"
-                >
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/labelGenderProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/svn_gilroy_bold"
                     android:text="Gender:"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:fontFamily="@font/svn_gilroy_bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.074"
                     app:layout_constraintStart_toStartOf="parent"
@@ -258,27 +295,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/svn_gilroy_medium"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:fontFamily="@font/svn_gilroy_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.079"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtBirthDayProfile" />
             </TableRow>
 
-            <TableRow
-                android:layout_marginTop="10dp"
-                >
+            <TableRow android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/labelCountryProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/svn_gilroy_bold"
                     android:text="Country:"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:fontFamily="@font/svn_gilroy_bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.076"
                     app:layout_constraintStart_toStartOf="parent"
@@ -307,92 +342,54 @@
 
         </TableLayout>
 
-        <TextView
-            android:id="@+id/txtChangePro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/svn_gilroy_heavy"
-            android:text="Change Profile"
-            android:background="@drawable/coin_radius"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/txtWatchlist_pro"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/txtChangePassPro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Change Password"
-            android:textAlignment="center"
-            android:background="@drawable/coin_radius"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:fontFamily="@font/svn_gilroy_heavy"
-            app:layout_constraintTop_toBottomOf="@+id/txtChangePro"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/txt_contact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Contact Us"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:background="@drawable/coin_radius"
-            android:fontFamily="@font/svn_gilroy_heavy"
-            app:layout_constraintTop_toBottomOf="@+id/txtChangePassPro"
-            tools:ignore="MissingConstraints" />
-
-
-        <TextView
-            android:id="@+id/txtLogOut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Log Out"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:background="@drawable/coin_radius"
-            android:fontFamily="@font/svn_gilroy_heavy"
-            app:layout_constraintTop_toBottomOf="@+id/txtChangePassPro"
-            tools:ignore="MissingConstraints" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:gravity="right">
-
-            <ImageView
-                android:id="@+id/imgCreateFeedback"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.047"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.051"
-                app:srcCompat="@drawable/ic_add_notifi" />
-        </TableRow>
 
     </TableLayout>
+
+    <TableRow
+        android:id="@+id/headerNews1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout3">
+
+        <Button
+            android:id="@+id/btnContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/border_radius"
+            android:backgroundTint="@color/colorBlueLogin"
+            android:fontFamily="@font/svn_gilroy_medium"
+            android:text="Contact Us"
+            android:textColor="@color/white"
+            android:textSize="20dp">
+
+        </Button>
+
+
+        <ImageView
+            android:id="@+id/imgLogOut"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.051"
+            app:srcCompat="@drawable/ic_baseline_logout_24" />
+
+
+    </TableRow>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

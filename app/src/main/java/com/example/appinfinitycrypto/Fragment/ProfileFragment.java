@@ -52,9 +52,9 @@ public class ProfileFragment extends Fragment {
 
     private DatabaseReference ref;
     TextView txtFullNamePro, txtPhonePro, txtPasswordPro, txtEmailPro, txtBirthdayPro, txtGender;
-    TextView txtLogOut, txtChangePass, txtChangeProfile;
     CountryCodePicker ccpCountryPro;
-    ImageView imgCreateFeedback;
+    ImageView imgCreateFeedback, imgEditProfile, imgEditPass, imgLogOut;
+    Button btnContact;
     private DatabaseReference database;
     String phone = DataLocalManager.getPhoneInstall();
 
@@ -111,11 +111,12 @@ public class ProfileFragment extends Fragment {
         txtGender = view.findViewById(R.id.txtGenderProfile);
         ccpCountryPro = view.findViewById(R.id.ccpCountryProfile);
 
-        txtLogOut = view.findViewById(R.id.txtLogOut);
-        txtChangePass = view.findViewById(R.id.txtChangePassPro);
-        txtChangeProfile = view.findViewById(R.id.txtChangePro);
+        btnContact = view.findViewById(R.id.btnContact);
 
         imgCreateFeedback = view.findViewById(R.id.imgCreateFeedback);
+        imgEditProfile = view.findViewById(R.id.imgchangeProfile);
+        imgEditPass = view.findViewById(R.id.imgchangePassword);
+        imgLogOut = view.findViewById(R.id.imgLogOut);
 
         imgCreateFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +182,7 @@ public class ProfileFragment extends Fragment {
 
     private void LoadListener(){
 
-        txtChangeProfile.setOnClickListener(new View.OnClickListener() {
+        imgEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -194,7 +195,7 @@ public class ProfileFragment extends Fragment {
 
         });
 
-        txtChangePass.setOnClickListener(new View.OnClickListener() {
+        imgEditPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new ChangePasswordFragment();
@@ -205,7 +206,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        txtLogOut.setOnClickListener(new View.OnClickListener() {
+        imgLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -224,6 +225,13 @@ public class ProfileFragment extends Fragment {
                 intent.putExtra("checkSignIn","");
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        btnContact.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
