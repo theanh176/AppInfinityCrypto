@@ -15,8 +15,8 @@ public class Account {
     public String country;
     public String sex;
     public String rule;
-    public Boolean isOnline;
     public Integer notify;
+    public Boolean isOnline;
     public HashMap<String, Boolean> watchlist;
 
     public Account(DataSnapshot snapshot) {
@@ -31,14 +31,6 @@ public class Account {
         this.sex = (String) hashMap.get("sex");
         this.rule = (String) hashMap.get("rule");
         this.notify = (Integer) hashMap.get("notify");
-    }
-
-    public Integer getNotify() {
-        return notify;
-    }
-
-    public void setNotify(Integer notify) {
-        this.notify = notify;
     }
 
     public HashMap<String, Boolean> getWatchlist() {
@@ -121,7 +113,15 @@ public class Account {
         this.phone = phone;
     }
 
-    public Account(String name, String phone, String email, String date, String pass, String country, String sex, String rule) {
+    public Integer getNotify() {
+        return notify;
+    }
+
+    public void setNotify(Integer notify) {
+        this.notify = notify;
+    }
+
+    public Account(String name, String phone, String email, String date, String pass, String country, String sex, String rule, Integer notify) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -130,6 +130,7 @@ public class Account {
         this.country = country;
         this.sex = sex;
         this.rule = rule;
+        this.notify = notify;
     }
 
     public Account(String name, String email, String date, String country, String sex) {

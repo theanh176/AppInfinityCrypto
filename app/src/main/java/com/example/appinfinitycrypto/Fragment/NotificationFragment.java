@@ -1,4 +1,4 @@
-package com.example.appinfinitycrypto;
+package com.example.appinfinitycrypto.Fragment;
 
 import android.app.Dialog;
 import android.graphics.Color;
@@ -7,6 +7,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,17 +22,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.appinfinitycrypto.Adapter.HomeAdminAdapter;
+import com.example.appinfinitycrypto.Adapter.FeedbackAdapter;
 import com.example.appinfinitycrypto.Adapter.NotificationAdapter;
-import com.example.appinfinitycrypto.Model.Account;
+import com.example.appinfinitycrypto.Adapter.NotifyAdapter;
+import com.example.appinfinitycrypto.DataLocalManager;
 import com.example.appinfinitycrypto.Model.FeedBack;
 import com.example.appinfinitycrypto.Model.Notification;
+import com.example.appinfinitycrypto.MyApplication;
+import com.example.appinfinitycrypto.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,10 +45,11 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class NotificationFragment extends Fragment {
-    ImageView imgCreateNoti;
+    private RecyclerView recyclerViewNotification;
+    private ImageView imgCreateNoti;
     private DatabaseReference database;
     private List<Notification> notificationList;
-    private NotificationAdapter notificationAdapter;
+    private NotifyAdapter notificationAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,6 +97,7 @@ public class NotificationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
         imgCreateNoti = view.findViewById(R.id.imgCreateNotifcation);
+        recyclerViewNotification = view.findViewById(R.id.recyclerViewNotification);
 
         imgCreateNoti.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +105,16 @@ public class NotificationFragment extends Fragment {
                 openProfileDialog(Gravity.CENTER);
             }
         });
+
+
+        notificationList = new ArrayList<>();
+        notificationAdapter = new NotifyAdapter(notificationList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        recyclerViewNotification.setLayoutManager(linearLayoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        recyclerViewNotification.addItemDecoration(dividerItemDecoration);
+        recyclerViewNotification.setAdapter(notificationAdapter);
+        event();
         return view;
     }
 
@@ -133,13 +152,13 @@ public class NotificationFragment extends Fragment {
                 String description = edtDetailNoti.getText().toString();
 
                 if(!title.isEmpty() || !description.isEmpty()){
-                    Integer keyIdOld = ((MyApplication) getActivity().getApplication()).getSomeVariable1();
+                    Integer keyIdOld = DataLocalManager.getKeyIDNotify();
                     Integer keyId = keyIdOld+1;
                     database = FirebaseDatabase.getInstance().getReference("Notification");
                     Notification notification = new Notification(title,description);
                     // Đưa lên firebase
                     database.child(""+keyId).setValue(notification);
-                    ((MyApplication) getActivity().getApplication()).setSomeVariable1(keyId);
+                    DataLocalManager.setKeyIDNotify(keyId);
                     dialog.dismiss();
                 }else {
                     Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
@@ -150,6 +169,29 @@ public class NotificationFragment extends Fragment {
 
         dialog.show();
     }
+    private void getListFeedBacksRealtimeDB() {
+        database = FirebaseDatabase.getInstance().getReference("Notification");
+        database.addValueEventListener(new ValueEventListener() {
 
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                notificationList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Notification notification = dataSnapshot.getValue(Notification.class);
+                    notificationList.add(notification);
+                }
+                notificationAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast toast = Toast.makeText(getActivity(), "Get list data faile!!!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+    }
+    private void event(){
+        getListFeedBacksRealtimeDB();
+
+    }
 
 }

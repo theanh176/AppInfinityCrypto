@@ -3,19 +3,19 @@ package com.example.appinfinitycrypto.Model;
 import java.util.HashMap;
 
 public class DetailItem {
-    private HashMap<Integer, DataItem> data;
+    private HashMap<String, DataItem> data;
     private Status status;
 
-    public DetailItem(HashMap<Integer, DataItem> data, Status status) {
+    public DetailItem(Status status, HashMap<String, DataItem> data) {
         this.data = data;
         this.status = status;
     }
 
-    public HashMap<Integer, DataItem> getData() {
+    public HashMap<String, DataItem> getData() {
         return data;
     }
 
-    public void setData(HashMap<Integer, DataItem> data) {
+    public void setData(HashMap<String, DataItem> data) {
         this.data = data;
     }
 

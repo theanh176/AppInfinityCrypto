@@ -8,24 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appinfinitycrypto.Adapter.CurrencyAdapter;
 import com.example.appinfinitycrypto.Api.ApiCoinMarket;
-import com.example.appinfinitycrypto.Fragment.MarketFragment;
 import com.example.appinfinitycrypto.Model.DataItem;
 import com.example.appinfinitycrypto.Model.Market;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -56,26 +50,26 @@ public class activity_market extends AppCompatActivity {
 
 
 //        https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=fac03ee8-101c-4a60-86c3-b38e63d5f955&sort=market_cap&start=1&limit=100&cryptocurrency_type=tokens&convert=USD
-        ApiCoinMarket.apiCoinMarket.convertUsdToVnd("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap", 1,10,"tokens","USD").enqueue(new Callback<Market>() {
-            @Override
-            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
-                Market market = response.body();
-                if (market != null) {
-                    for (int i = 0; i < market.getData().size(); i++) {
-                        dataItems.add((DataItem) market.getData().get(i));
-                    }
-                    currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
-//                    RecyclerView cần có một LayoutManager, ta tạo một LayoutManager
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_market.this);
-                    rcvCurrency.setLayoutManager(linearLayoutManager);
-                    rcvCurrency.setAdapter(currencyAdapter);
-                }
-            }
-            @Override
-            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
-                Toast.makeText(activity_market.this, "Call Api Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        ApiCoinMarket.apiCoinMarket.convertMarket("fac03ee8-101c-4a60-86c3-b38e63d5f955","market_cap", 1,10,"tokens","USD").enqueue(new Callback<Market>() {
+//            @Override
+//            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
+//                Market market = response.body();
+//                if (market != null) {
+//                    for (int i = 0; i < market.getData().size(); i++) {
+//                        dataItems.add((DataItem) market.getData().get(i));
+//                    }
+////                    currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
+////                    RecyclerView cần có một LayoutManager, ta tạo một LayoutManager
+//                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity_market.this);
+//                    rcvCurrency.setLayoutManager(linearLayoutManager);
+//                    rcvCurrency.setAdapter(currencyAdapter);
+//                }
+//            }
+//            @Override
+//            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
+//                Toast.makeText(activity_market.this, "Call Api Error", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         btnArrangeName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +81,7 @@ public class activity_market extends AppCompatActivity {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
+//                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
@@ -102,7 +96,7 @@ public class activity_market extends AppCompatActivity {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
+//                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
                 rcvCurrency.setAdapter(currencyAdapter);
             }
         });
@@ -117,8 +111,8 @@ public class activity_market extends AppCompatActivity {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
-                rcvCurrency.setAdapter(currencyAdapter);
+//                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
+//                rcvCurrency.setAdapter(currencyAdapter);
             }
         });
 
@@ -132,8 +126,8 @@ public class activity_market extends AppCompatActivity {
                     }
                 });
                 Collections.reverse(dataItems);
-                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
-                rcvCurrency.setAdapter(currencyAdapter);
+//                currencyAdapter = new CurrencyAdapter(dataItems, activity_market.this.getBaseContext());
+//                rcvCurrency.setAdapter(currencyAdapter);
             }
         });
 

@@ -28,4 +28,3 @@ public class DataItem_Notify {
         this.title = title;
     }
 }
-

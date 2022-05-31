@@ -14,13 +14,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.appinfinitycrypto.Fragment.AccountAdminFragment;
 import com.example.appinfinitycrypto.Fragment.FeedbackFragment;
 import com.example.appinfinitycrypto.Fragment.HomeAdminFragment;
-import com.example.appinfinitycrypto.Fragment.ListAdminFragment;
-import com.example.appinfinitycrypto.Fragment.ListUserFragment;
+import com.example.appinfinitycrypto.Fragment.NotificationFragment;
 import com.example.appinfinitycrypto.Fragment.ProfileFragment;
-import com.example.appinfinitycrypto.Fragment.StatisticalFragment;
 import com.example.appinfinitycrypto.Fragment.ViewHomeAdminFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -79,9 +76,6 @@ public class MainAdmin extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.homeadmin11:
                         fragment = new ViewHomeAdminFragment();
-                        break;
-                    case R.id.listUser11:
-                        fragment = new HomeAdminFragment();
                         break;
                     case R.id.feedback:
                         fragment = new FeedbackFragment();

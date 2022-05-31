@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blackBackground"
+    android:background="@color/white"
     tools:context=".Admin">
 
     <TableLayout
@@ -50,7 +50,7 @@
                 android:fontFamily="@font/svn_gilroy_heavy"
                 android:gravity="center"
                 android:text="Infinity Crypto"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="24dp" />
 
         </TableRow>
