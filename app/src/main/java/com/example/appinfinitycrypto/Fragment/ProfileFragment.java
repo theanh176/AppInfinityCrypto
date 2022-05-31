@@ -231,7 +231,7 @@ public class ProfileFragment extends Fragment {
         btnContact.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new ContactFragment()).commit();
             }
         });
     }
