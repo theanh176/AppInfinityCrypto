@@ -121,35 +121,35 @@ public class WatchListFragment extends Fragment {
             }
         });
 
-//        ApiCoinMarket.apiCoinMarket.convertMarket("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 100, "all", "USD").enqueue(new Callback<Market>() {
-//            @Override
-//            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
-//
-//                Market market = response.body();
-//
-//                if (market == null) {
-//                    System.out.println("Market null size");
-//                }
-//
-//                if (market != null) {
-//                    for (int i = 0; i < market.getData().size(); i++) {
-//                        // check if my list contains the coin
-//                        for (int j = 0; j < myList.size(); j++) {
-//                            if (market.getData().get(i).getSymbol().equals(myList.get(j))) {
-//                                dataItems.add((DataItem) market.getData().get(i));
-//                            }
-//                        }
-//                    }
-//                    watchListAdapter = new WatchListAdapter(dataItems, phone, myList);
-//                    watchListRecyclerView.setAdapter(watchListAdapter);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
-//                Toast.makeText(getActivity(), "Call Api Error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        ApiCoinMarket.apiCoinMarket.convertMarket("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 100, "all", "USD").enqueue(new Callback<Market>() {
+            @Override
+            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
+
+                Market market = response.body();
+
+                if (market == null) {
+                    System.out.println("Market null size");
+                }
+
+                if (market != null) {
+                    for (int i = 0; i < market.getData().size(); i++) {
+                        // check if my list contains the coin
+                        for (int j = 0; j < myList.size(); j++) {
+                            if (market.getData().get(i).getSymbol().equals(myList.get(j))) {
+                                dataItems.add((DataItem) market.getData().get(i));
+                            }
+                        }
+                    }
+                    watchListAdapter = new WatchListAdapter(dataItems, phone, myList);
+                    watchListRecyclerView.setAdapter(watchListAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
+                Toast.makeText(getActivity(), "Call Api Error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }

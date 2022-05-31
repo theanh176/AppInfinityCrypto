@@ -373,6 +373,7 @@ public class HomeFragment extends Fragment {
         img_notify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new NotificationUserFragment()).commit();
 //                Intent intent = new Intent(requireActivity(), NotificationActivity.class);
 //                startActivity(intent);
                 // set count notification read
