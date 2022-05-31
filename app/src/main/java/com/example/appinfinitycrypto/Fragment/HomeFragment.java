@@ -348,11 +348,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new NotificationUserFragment()).commit();
-//                Intent intent = new Intent(requireActivity(), NotificationActivity.class);
-//                startActivity(intent);
                 // set count notification read
                 refAccount.child("notify").setValue(countAllNotify);
-                compareNotify();
             }
         });
     }

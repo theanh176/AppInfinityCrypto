@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -31,7 +32,8 @@ public class ChangeProfileFragment extends Fragment {
     private EditText editFullName, editEmail, editBirthday;
     private RadioButton r_male, r_female, r_difference;
     private CountryCodePicker ccpCountryProfileChange;
-    private Button btnBack, btnSave;
+    private Button btnSave;
+    private ImageView imgBack;
 
     @Nullable
     @Override
@@ -49,7 +51,7 @@ public class ChangeProfileFragment extends Fragment {
 
         ccpCountryProfileChange = view.findViewById(R.id.ccpCountryProfileChange);
 
-        btnBack = view.findViewById(R.id.btnBackProChange);
+        imgBack = view.findViewById(R.id.btnBackPassProChange);
         btnSave = view.findViewById(R.id.btnSaveProChange);
 
 
@@ -60,7 +62,7 @@ public class ChangeProfileFragment extends Fragment {
     }
 
     private void LoadListener() {
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().popBackStack();
