@@ -44,16 +44,6 @@
                     android:textColor="#ffffff"
                     android:textSize="24sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="133dp"
-                    android:fontFamily="@font/svn_gilroy_medium"
-                    android:paddingHorizontal="10dp"
-                    android:text="Show More"
-                    android:textColor="#0168ff"
-                    android:textSize="16sp" />
-
             </TableRow>
 
             <TableRow
@@ -76,16 +66,6 @@
                     android:text="Top Gainers"
                     android:textColor="#ffffff"
                     android:textSize="24sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="117dp"
-                    android:fontFamily="@font/svn_gilroy_medium"
-                    android:paddingHorizontal="10dp"
-                    android:text="Show More"
-                    android:textColor="#0168ff"
-                    android:textSize="16sp" />
 
             </TableRow>
 
@@ -110,16 +90,6 @@
                     android:text="Top Coins"
                     android:textColor="#ffffff"
                     android:textSize="24sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="140dp"
-                    android:fontFamily="@font/svn_gilroy_medium"
-                    android:paddingHorizontal="10dp"
-                    android:text="Show More"
-                    android:textColor="#0168ff"
-                    android:textSize="16sp" />
 
             </TableRow>
 

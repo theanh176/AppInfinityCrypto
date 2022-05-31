@@ -18,7 +18,7 @@
 
             <ImageView
                 android:id="@+id/watchlist_img"
-                android:layout_width="45dp"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/bitcoin" />
 
@@ -33,10 +33,10 @@
                     android:id="@+id/watchlist_symbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/svn_gilroy_medium"
+                    android:fontFamily="@font/svn_gilroy_bold"
                     android:text="BTC"
                     android:textColor="#FFFFFF"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/watchlist_name"
@@ -72,7 +72,7 @@
                         android:fontFamily="@font/svn_gilroy_medium"
                         android:text="99%"
                         android:textColor="#FFFFFF"
-                        android:textSize="18dp" />
+                        android:textSize="16dp" />
                 </LinearLayout>
 
 
@@ -84,7 +84,7 @@
                     android:orientation="vertical"
                     android:text="$699"
                     android:textColor="#FFFFFF"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
             </LinearLayout>
 
 <!--            <ImageView-->
@@ -99,7 +99,7 @@
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:src="@drawable/ic_star_fill" />
         </LinearLayout>
 

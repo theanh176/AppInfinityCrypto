@@ -32,10 +32,11 @@
                     android:id="@+id/watchlist_symbol"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/svn_gilroy_medium"
+                    android:maxLength="8"
+                    android:fontFamily="@font/svn_gilroy_bold"
                     android:text="ETH"
                     android:textColor="#FFFFFF"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/watchlist_price"
@@ -45,7 +46,7 @@
                     android:orientation="vertical"
                     android:text="$699669"
                     android:textColor="#FFFFFF"
-                    android:textSize="18dp" />
+                    android:textSize="14dp" />
             </LinearLayout>
         </LinearLayout>
 
