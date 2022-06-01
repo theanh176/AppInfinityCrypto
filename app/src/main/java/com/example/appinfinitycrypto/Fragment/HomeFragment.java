@@ -156,6 +156,32 @@ public class HomeFragment extends Fragment {
         topCoinRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
         dataItems = new ArrayList<>();
 
+                ApiCoinMarket.apiCoinMarket.convertMarket("fac03ee8-101c-4a60-86c3-b38e63d5f955", "market_cap", 1, 5, "all", "USD").enqueue(new Callback<Market>() {
+            @Override
+            public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
+
+                Market market = response.body();
+                DataItem item;
+
+                if (market == null) {
+                    System.out.println("market null size");
+                }
+
+                if (market != null) {
+                    for (int i = 0; i < market.getData().size(); i++) {
+                        dataItems.add((DataItem) market.getData().get(i));
+                    }
+                    topCoinAdapter = new TopCoinAdapter(dataItems);
+                    topCoinRecyclerView.setAdapter(topCoinAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Market> call, @NonNull Throwable t) {
+                Toast.makeText(requireActivity(), "Call Api Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // top gainer recycler view
         topGainerRecyclerView = view.findViewById(R.id.topGainerRecyclerView);
         topGainerRecyclerView.setHasFixedSize(true);
