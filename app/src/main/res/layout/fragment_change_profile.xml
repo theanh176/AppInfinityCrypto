@@ -50,6 +50,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tableRow5"
@@ -232,24 +233,36 @@
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
             </TableRow>
+
+            <TableLayout android:layout_height="231dp">
+                <TableRow
+                    android:id="@+id/tableRow41"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tableRow2">
+
+                    <Button
+                        android:id="@+id/btnSaveProChange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_radius"
+                        android:fontFamily="@font/svn_gilroy_bold"
+                        android:paddingLeft="50dp"
+                        android:paddingRight="50dp"
+                        android:text="Save"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+
+                </TableRow>
+            </TableLayout>
         </TableLayout>
 
-        <Button
-            android:id="@+id/btnSaveProChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/border_radius"
-            android:fontFamily="@font/svn_gilroy_bold"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="Save"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutTbChangePro" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>
