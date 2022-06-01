@@ -114,20 +114,26 @@ public class MarketFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<Market> call, @NonNull Response<Market> response) {
 
-                Market market = response.body();
-                if (market != null) {
-                    Log.w("Source code",market.getData().get(1).getName());
+                Activity activity = getActivity();
+                if(activity != null){
+
+                    Market market = response.body();
+                    if (market != null) {
+                        Log.w("Source code",market.getData().get(1).getName());
 
 
-                    for (int i = 0; i < market.getData().size(); i++) {
-                        dataItems.add((DataItem) market.getData().get(i));
-                    }
-                    currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext(), iTransmitData);
+                        for (int i = 0; i < market.getData().size(); i++) {
+                            dataItems.add((DataItem) market.getData().get(i));
+                        }
+                        currencyAdapter = new CurrencyAdapter(dataItems, MarketFragment.this.getContext(), iTransmitData);
 //                    RecyclerView cần có một LayoutManager, ta tạo một LayoutManager
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
-                    rcvCurrency.setLayoutManager(linearLayoutManager);
-                    rcvCurrency.setAdapter(currencyAdapter);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
+                        rcvCurrency.setLayoutManager(linearLayoutManager);
+                        rcvCurrency.setAdapter(currencyAdapter);
+                    }
+
                 }
+
             }
 
             @Override
